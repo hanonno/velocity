@@ -1,0 +1,11 @@
+<ol class="slats">
+<br />
+{{#articles}}
+    <li class="group">
+        {{>article/view}}
+    </li>
+{{/articles}}
+{{^articles}}
+    Nothing to see here
+{{/articles}}
+</ol>

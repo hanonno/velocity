@@ -1,0 +1,14 @@
+{
+    "name": "node-example",
+    "version": "0.0.1",
+    "dependencies": {
+        "optimist": "0.3.1",
+        "express": "2.2.0",
+        "async": "0.1.16",
+        "sha1": "0.0.1",
+        "hogan": "1.0.5-dev",
+        "moment": "1.4.0",
+        "redis": "0.7.1",
+        "request": "2.9.100"
+    }
+}

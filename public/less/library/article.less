@@ -1,0 +1,100 @@
+article {
+    margin: 0 0 0 60px;
+}
+
+    article div.score {
+        width: 30px;
+        height: 20px;
+        
+        float: left;
+    
+        font-size: 18px;
+        font-weight: bold;
+        
+        padding: 10px;
+    
+        color: #fff;
+        background-color: red;
+        
+        text-align: right;
+        
+        margin: 0 0 0 -61px;
+    }
+    
+    article div.content {
+        padding: 5px 10px 10px 0;
+    }
+    
+    article div.content h1 {
+        font-weight: bold;
+        font-size: 22px;
+        padding: 0 0 6px 0;
+        
+        line-height: 1.4em;
+    }
+
+    article div.content p.meta {
+        color: #aaa;
+    
+        font-size: 13px;
+        font-weight: lighter;
+    }
+        
+    article img {
+        display: none;
+    }
+    
+        article div.content div.description {
+            font-family: "Palatino";
+            line-height: 1.4em;
+            padding-right: 30px;
+        }
+
+
+        article div.content div.description {
+            
+                p, li {
+                    margin: 8px 0 8px 0;
+                }
+                
+                blockquote {
+                    font-style: italic;                
+                    padding: 0 0 0 30px;
+                }
+                
+                em, b, strong {
+                    font-weight: bold;
+                }
+            
+                img {
+                    max-width: 100%;
+                    height: auto;
+                }
+                
+                br {
+                    display: none;
+                }
+                
+                img[src^="http://feeds."] {
+                    display: none;
+                }
+                
+                /* Site Specific Hacks */
+                
+                img[src^="http://www.techmeme.com"], img[src^="http://www.blogsmithmedia.com"], img[src^="http://tctechcrunch"] {
+                    display: none;
+                }
+                
+                a[href^="http://res.feedsportal.com"] {
+                    display: none;
+                }
+                
+                img.alignright {
+                    display: none;
+                }
+                
+                /* Feedsportal */
+                .mf-related {
+                    display: none;
+                }
+            }

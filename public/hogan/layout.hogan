@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>{{title}}</title>
+        <link rel="stylesheet/less" type="text/css" href="/less/desktop.less">
+        <script src="/javascript/library/less/less-1.2.1.min.js" type="text/javascript"></script>
+    </head>
+    <body>
+    
+        <div class="header">
+           <span class="button disclosure">Overview</span>	       
+           <span class="button disclosure">Velocity</span>
+           <span class="button cta">Sign Up</span>	       
+        </div>
+
+        <div id="page">        
+
+            <ul id="navigation">
+                <li><h3>Categories</h3></li>
+            {{#categories}}
+                <li class="{{active}}"><a href="/{{active_locale}}/{{name}}/{{active_sort}}">{{display_name}}</a></li>
+            {{/categories}}
+                <li><h3>Sort</h3></li>
+            {{#sorts}}
+                <li class="{{active}}"><a href="/{{active_locale}}/{{active_category}}/{{name}}">{{display_name}}</a></li>
+            {{/sorts}}
+                <li><h3>Country</h3></li>
+            {{#locales}}
+                <li class="{{active}}"><a href="/{{locale}}/{{active_category}}/{{active_sort}}">{{display_name}}</a></li>
+            {{/locales}}            
+<!--
+                <li><a href="/{{active_category}}/velocity">Velocity</a></li>
+                <li><a href="/{{active_category}}/popular">Popular</a></li>
+                <li><a href="/{{active_category}}/recent">Recent</a></li>            
+-->
+
+
+<!--
+                <li><a href="/articles/popular/{{yesterday}}/{{category}}">Yesterday</a></li>
+                <li><a href="/articles/popular/{{today}}/{{category}}">Today</a></li>
+                <li><a href="/articles/popular/{{tomorrow}}/{{category}}">Tomorrow</a></li>            
+-->
+            </ul>
+    
+            <div id="content">
+                {{{contents}}}
+            </div>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,108 @@
+@import "library/reset.less";
+
+@application-height: 300px;
+
+body {
+    font-family: "Helvetica Neue";
+
+    background-color: #000000;
+    
+    line-height: 1.4em;
+}
+
+a {
+    color: #3588d5;
+    text-decoration: none;
+}
+
+#screen {
+    background-color: #000000;
+}
+
+.load {
+    padding: 18px; 
+    text-align: center;
+}
+
+.tappable-active {
+    background-color: red;
+}
+
+.result {
+    height: 418px;
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+.page {
+    background-color: #ffffff;
+
+    .button {
+        color: #ffffff;
+        padding: 10px 12px;
+        
+        border: 1px solid #000000;
+    }
+
+    .header {
+        background-color: #1f1f1f;
+        height: 42px;
+    }
+    
+    .content {
+        height: 420px;
+        
+        &.visible {
+            overflow: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+                
+        &.hidden {
+            display: none;
+        }
+        
+        ul {
+            -webkit-touch-callout: none;
+               
+            li {
+                -webkit-touch-callout: none;
+            
+                padding: 14px 12px;        
+                
+                border-bottom: 1px solid #d4d4d4;
+                
+                &.active {
+                    color: #ffffff;
+                    background-color: blue;
+                }
+                
+                .rank {
+                    color: #ffffff;
+                    width: 24px;
+                    float: left;
+                    text-align: right;
+                    
+                    margin: -6px 0 0 -12px;
+                    padding: 6px 10px;
+                }
+                
+                .text {
+                    margin: -4px 0 0 42px;
+                }                
+            }
+            
+            &.categories {
+                li {
+                    color: #3588d5;
+                    padding: 14px 12px;
+                }
+            }
+            
+            div.more {
+                text-align: center;
+                padding: 20px;
+            }            
+        }
+    }
+}
+

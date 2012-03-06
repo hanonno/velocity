@@ -1,0 +1,61 @@
+@import "library/reset.less";
+@import "library/lists.less";
+@import "library/article.less";
+@import "library/header.less";
+
+body {
+    font-family: "Helvetica Neue";
+    
+    background-color: #333;
+}
+
+a {
+    text-decoration: none;
+    color: #3588d5;
+}
+
+#page {
+    background-color: #fff;
+
+    width: 820px;
+    margin: 0 auto;
+}
+
+#navigation {
+    font-size: 14px;
+    width: 160px;
+    
+    margin-top: 100px;
+    
+    float: left;
+    
+    li {
+        padding: 6px;
+        color:#fff;
+        
+        h3 {
+            margin-top: 12px;
+            font-weight: bold;
+        }
+        
+        a {
+            color: #fff;
+        }
+        
+        &.active a {
+            color: red;
+        }
+    }
+}
+
+#content {
+    margin: 60px 0 0 0;
+
+    background-color: #fff;
+
+    width: 640px;
+    
+    float: right;
+    
+    -webkit-box-shadow: 0px 10px 20px rgb(0, 0, 0);
+}
