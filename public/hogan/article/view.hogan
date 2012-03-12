@@ -4,7 +4,6 @@
         <h1><a href="{{url}}" target="_blank">{{title}}</a></h1>
         <p class="meta">{{relative_date}} in <a href="/articles/popular/{{active_day}}/{{category}}">{{category}}</a> from <a href="{{source_url}}">{{source_name}}</a> via {{feed}}</p>
         <div class="description">
-
         </div>
     </div>
 </article>

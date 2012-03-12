@@ -1,0 +1,220 @@
+@import "./library/normalize.less";
+
+* { -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box; }
+
+@light-blue: rgb(53, 136, 213);
+
+@meta-gray: hsl(0, 0%, 94%);
+@light-gray: hsl(0, 0%, 60%);
+@dark-gray: hsl(0, 0%, 42%);
+
+@white-color: #ffffff;
+
+
+body {
+    font-size: 14px;
+    line-height: 1.2em;
+    
+    font-family: "Helvetica Neue";
+    font-weight: lighter;
+    
+    color: @dark-gray;
+}
+
+a {
+    color: @light-blue;
+    text-decoration: none;
+}
+
+p, blockquote {
+    font-family: "Georgia";
+    font-size: 1.1em;
+    line-height: 1.5em;
+}
+
+blockquote {
+    border-left: 1px solid @dark-gray;
+    margin: 10px 0;
+    padding: 4px 10px;
+}    
+
+
+ul, ol, li {
+    list-style-type: none;
+    
+    margin: 0; padding: 0;
+}
+
+input, .input {
+    color: @light-gray;
+
+    border: 1px solid hsl(0, 0%, 90%);
+    
+    -webkit-border-radius: 4px;
+    padding: 6px 6px;
+    
+    margin: 2px 0 8px 0;
+    
+    width: 100%;
+    
+    background-color: @white-color;
+    
+    a {
+        color: @light-gray;                    
+        text-decoration: underline;                        
+    }
+
+    &:hover {
+        a {
+            color: @light-blue;
+        }
+    }
+}
+
+nav {
+    position: fixed;
+    
+    margin: 30px 0 0 30px;
+
+    ul {
+        padding: 20px;
+    
+        li {
+            padding: 4px 0;
+            
+            h3 {
+                color: @light-gray;
+                font-size: 0.9em;
+                padding: 30px 0 0 0; margin: 0;
+            }
+            
+            a {
+                color: @light-gray;
+
+                &.active, &:hover {
+                    color: @dark-gray;
+                }
+            }            
+        }
+    }
+}
+
+.container {
+    min-width: 320px;
+    max-width: 540px;
+    margin: 0 auto;
+    
+    padding: 40px;
+    
+    background-color: hsl(0, 0%, 98%);
+
+    > header {
+        border-bottom: 1px solid @meta-gray;
+    
+        h1 {
+            font-size: 1.3em;
+        }
+    }
+    
+    > article:first-child {
+        border-top: 1px solid @white-color;
+    }
+}
+
+article {
+    margin: 60px 0 120px 0;
+
+    > header {
+        border-bottom: 1px solid @meta-gray;
+    
+        > .meta {
+            color: @light-gray;
+            font-style: italic;
+            font-size: 0.9em;
+
+            a {
+                color: @light-gray;
+                font-style: normal;
+            }
+        }
+        
+        > h1 {
+            font-size: 1.4em;
+            margin: 8px 0 12px 0;
+            line-height: 1.3em;
+        }
+        
+        &:hover {
+        
+            > .meta a {
+                color: @light-blue;
+            }
+        }        
+    }
+    
+    > section.summary {
+        border-bottom: 1px solid @meta-gray;
+        
+        img {
+            max-width: 100%;
+            height: auto;
+            
+            border: 1px solid @meta-gray;
+            border-top: none;
+            
+            padding: 10px;
+            
+            background-color: @white-color;
+        }
+    }
+    
+    > section.comments {
+        border-top: 1px solid @white-color;
+    
+        > ol {
+            margin: 4px 80px 0 10px;
+            
+            > li {
+                font-size: 0.9em;
+                
+                border-top: 1px solid @white-color;
+                border-bottom: 1px solid @meta-gray;
+                
+                padding: 8px 0 2px 0;
+            
+                > div.actors {
+                    color: @light-gray;
+                    
+                    a.sender {
+                        font-weight: bold;
+                    }
+                    
+                    a.recipient {
+                        color: @light-gray;
+                    }
+                }
+
+                > p {
+                    margin: 6px 0;
+                    line-height: 1.6em;                    
+                }
+                
+                &:hover {
+                    > div.actors {
+                        a.recipient {
+                            color: @light-blue;
+                        }
+                    }
+                }
+                
+                &:first-child {
+                    border-top: none;
+                }
+                
+                &:last-child {
+                    border-bottom: none;
+                }
+            }
+        }
+    }    
+}

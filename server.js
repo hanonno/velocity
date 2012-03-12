@@ -8,7 +8,6 @@ redis = require('redis').createClient()
 Feedparser = require('feedparser')
 
 app.configure(function(){
-    app.compiler({ src: __dirname + '/public/less', enable: ['less'] })
 	app.use(express.static(__dirname + '/public'))
 /* 	app.use(express.logger()); */
 	app.use(express.bodyParser())
@@ -52,9 +51,6 @@ function fetchArticles(req, res, next) {
     
     if(req.param('page')) { page = parseInt(req.param('page')) }
     if(req.param('per_page')) { per_page = parseInt(req.param('per_page')) }
-    
-    console.log(page)
-    console.log(per_page)
     
     var category = req.param('category')
     var sort = req.param('sort')

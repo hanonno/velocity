@@ -55,6 +55,11 @@ module.exports = categories = [
         'locale': 'us',
         'feeds': [ 'http://adaptivepath.com/rss', 'http://feeds.feedburner.com/FunctioningForm', 'http://littlebigdetails.com/rss', 'http://dribbble.com/hanonno/shots/following.rss', 'http://feeds.feedburner.com/mdo', 'http://blog.yummygum.com/rss', 'http://rss.businessweek.com/bw_rss/nussbaumondesign', 'http://feeds.feedburner.com/iosicongallery' ]
     }, {
+        'name': 'html5',
+        'display_name': 'HTML5',
+        'locale': 'us',
+        'feeds': [ 'http://feeds.feedburner.com/SenchaBlog', 'http://feeds.webkitbits.com/WebKitBits', 'http://tjholowaychuk.com/rss', 'http://feeds.feedburner.com/thechangelog' ]            
+    }, {
         'name': 'comics',
         'display_name': 'Comics',
         'locale': 'us',
