@@ -8,13 +8,15 @@
     </head>
     <body>
     
+<!--
         <div class="header">
            <span class="button disclosure">Overview</span>	       
            <span class="button disclosure">Velocity</span>
            <span class="button cta">Sign Up</span>	       
         </div>
+-->
 
-        <div id="page">        
+        <div id="page">
 
             <ul id="navigation">
                 <li><h3>Categories</h3></li>

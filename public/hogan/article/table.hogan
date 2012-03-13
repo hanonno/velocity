@@ -1,0 +1,21 @@
+<table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Title</th>
+        <th>Source</th>
+        <th><a href="/{{active_locale}}/{{active_category}}/popular">Shares</a></th>        
+        <th><a href="/{{active_locale}}/{{active_category}}/recent">Time</a></th>
+      </tr>
+    </thead>
+    <tbody>
+        {{#articles}}
+        <tr>
+            <td><a href="{{url}}" target="_blank">{{title}}</a></td>
+<!--             <td><a href="{{source_url}}">{{source_name}}</a></td> -->
+            <td>{{source_name}}</td>
+            <td class="number">{{rank}}</td>
+            <td>{{relative_date}}</td>
+        </tr>
+        {{/articles}}
+    </tbody>
+</table>

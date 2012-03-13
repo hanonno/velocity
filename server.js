@@ -47,7 +47,7 @@ locales = [
 function fetchArticles(req, res, next) {
 
     var page = 0
-    var per_page = 50
+    var per_page = 1000
     
     if(req.param('page')) { page = parseInt(req.param('page')) }
     if(req.param('per_page')) { per_page = parseInt(req.param('per_page')) }
@@ -178,6 +178,26 @@ app.get('/api/:locale/:category/:sort', [fetchArticles], function(req, res) {
     }
 
     res.send(response)
+})
+
+app.get('/:locale/:category/:sort', [fetchCategories, fetchSorts, fetchLocales, fetchArticles], function(req, res) {
+    var active_category = req.param('category')
+    var active_sort = req.param('sort')
+    var active_locale = req.param('locale')
+
+    res.render("article/table.hogan", {
+        layout: 'bootstrap.hogan',
+        locals: {
+            'title': "Velocity",
+            'articles': req.articles,
+            'categories': req.categories,
+            'active_category': active_category,
+            'sorts': req.sorts,
+            'active_sort': active_sort,
+            'locales': req.locales,
+            'active_locale': active_locale
+        }
+    })
 })
 
 app.get('/:locale/:category/:sort', [fetchCategories, fetchSorts, fetchLocales, fetchArticles], function(req, res) {

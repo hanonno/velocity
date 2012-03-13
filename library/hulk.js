@@ -6,8 +6,6 @@ var hulk = {},
 
 hulk.compile = function(source, options) {
     views = (options.settings.views) ? options.settings.views : views;
-    
-    console.log(views)
 
     if (typeof source == 'string') {
         return function(options) {
