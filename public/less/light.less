@@ -2,6 +2,7 @@
 
 * { -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box; }
 
+@meta-blue: #a1c8ef;
 @light-blue: rgb(53, 136, 213);
 
 @meta-gray: hsl(0, 0%, 94%);
@@ -9,7 +10,6 @@
 @dark-gray: hsl(0, 0%, 42%);
 
 @white-color: #ffffff;
-
 
 body {
     font-size: 14px;
@@ -45,28 +45,69 @@ ul, ol, li {
     margin: 0; padding: 0;
 }
 
-input, .input {
+input, .composer, .input {
     color: @light-gray;
 
     border: 1px solid hsl(0, 0%, 90%);
-    
-    -webkit-border-radius: 4px;
-    padding: 6px 6px;
-    
+        
     margin: 2px 0 8px 0;
     
     width: 100%;
     
     background-color: @white-color;
     
-    a {
-        color: @light-gray;                    
-        text-decoration: underline;                        
-    }
+    height: 32px;
+    -webkit-transition: all 0.12s ease-in-out;
+        
+    .placeholder {
+        padding: 7px 6px;
 
+        > a {
+            color: @light-gray;                    
+            text-decoration: underline;                        
+        }        
+    }
+    
+    textarea, input {
+        padding: 7px 6px;
+        display: none;    
+
+        border: none;
+        outline: none;
+        
+        margin: 0;  
+    }
+    
+    textarea {
+        width: 100%;
+        height: 100%;        
+    }
+    
+    input {
+        border-bottom: 1px solid @meta-blue;
+    }
+    
     &:hover {
+        cursor: pointer;
+    
         a {
             color: @light-blue;
+        }
+    }
+    
+    &.active {
+        border-color: @meta-blue;
+    }    
+    
+    &.expanded {
+        height: 100px;    
+        
+        .placeholder {
+            display: none;
+        }
+        
+        textarea, input {
+            display: block;
         }
     }
 }

@@ -3,8 +3,47 @@
 		<title></title>
         <link rel="stylesheet/less" type="text/css" href="./public/less/light.less">
         <script src="./public/javascript/library/less/less-1.2.1.min.js" type="text/javascript"></script>
+        <script src="./public/javascript/library/zepto/zepto.min.js" type="text/javascript"></script>
+        <script>
         
+            $('document').ready(function() {
+                $('.composer').live('mousedown', function(event) {
+                    var composer = $(event.currentTarget)
+                    var input = composer.children('input')
+                    var textarea = composer.children('textarea')
+                    
+                    if(composer.hasClass('active')) {
+                        return
+                    } else {
+                        textarea.bind('blur', function(event) {
+                            composer.unbind('webkitTransitionEnd')
+                            
+                            if(textarea.val().length == 0) {
+                                composer.removeClass('expanded')
+                            }
+                            
+                            composer.removeClass('active')                        
+                            textarea.removeClass('active')
+                        })
+                        
+                        textarea.bind('keydown', function(event) {
+                            if(event.ctrlKey && event.keyIdentifier == "Enter") {
+                                console.log(textarea.val())
+                            }
+                        })
+                        
+                        composer.bind('webkitTransitionEnd', function(event) {
+                            textarea.addClass('active')
+                            textarea.focus()
+                        })
+                        
+                        composer.addClass('expanded')
+                        composer.addClass('active')
+                    }
+                })
+            })
         
+        </script>
 	</head>
 	<body>
 	
@@ -53,7 +92,10 @@
                             <p>I'm not sure, what do you think, David?</p>                        
                         </li>
                         <li>
-                            <div class="input">Click here to <a href="#">Reply</a> or <a href="#">Add friends</a></div>
+                            <div class="composer">
+                                <div class="placeholder">Click here to <a>Reply</a> or <a>Add friends</a></div>
+                                <textarea></textarea>
+                            </div>                            
                         </li>
                     </ol>
                 </section>
@@ -67,7 +109,10 @@
                 <section class="comments">
                     <ol>
                         <li>
-                            <div class="input">Click here to <a href="#">Reply</a> or <a href="#">Add friends</a></div>
+                            <div class="composer">
+                                <div class="placeholder">Click here to <a href="#">Reply</a> or <a href="#">Add friends</a></div>
+                                <textarea></textarea>
+                            </div>
                         </li>
                     </ol>
                 </section>
@@ -85,7 +130,10 @@
                             <p>I expect major-new-version adoption rates for iOS to get even better now that Apple has implemented over-the-air software updates.</p>
                         </li>
                         <li>
-                            <div class="input">Click here to <a href="#">Reply</a> or <a href="#">Add friends</a></div>
+                            <div class="composer">
+                                <div class="placeholder">Click here to <a href="#">Reply</a> or <a href="#">Add friends</a></div>
+                                <textarea></textarea>
+                            </div>
                         </li>
                     </ol>
                 </section>

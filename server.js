@@ -180,7 +180,7 @@ app.get('/api/:locale/:category/:sort', [fetchArticles], function(req, res) {
     res.send(response)
 })
 
-app.get('/:locale/:category/:sort', [fetchCategories, fetchSorts, fetchLocales, fetchArticles], function(req, res) {
+app.get('/table/:locale/:category/:sort', [fetchCategories, fetchSorts, fetchLocales, fetchArticles], function(req, res) {
     var active_category = req.param('category')
     var active_sort = req.param('sort')
     var active_locale = req.param('locale')
