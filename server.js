@@ -166,6 +166,10 @@ function fetchLocales(req, res, next) {
 
 app.get('/templates.js', hulk.templates)
 
+app.get('/', function(req, res) {
+    res.redirect('/nl/overview/recent')
+})
+
 app.get('/api/:locale/categories', [fetchCategories], function(req, res) {
     res.send(req.categories)
 })
