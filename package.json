@@ -10,5 +10,6 @@
         "moment": "1.4.0",
         "redis": "0.7.1",
         "request": "2.9.100"
+        "feedparser": "0.9.5"
     }
 }
