@@ -51,7 +51,7 @@ basket
         },
 
         events: _.extend({
-            'click': 'openCategory',
+            'tap': 'openCategory',
         }, ListItem.prototype.events),
 
         openCategory: function(event) {
@@ -145,7 +145,7 @@ basket
         },
         
         events: _.extend({
-            'click': 'openArticle',
+            'tap': 'openArticle',
         }, ListItem.prototype.events),
         
         openArticle: function(event) {
@@ -167,7 +167,7 @@ basket
         },
         
         events: {
-            'click .load': 'loadMore'
+            'tap .load': 'loadMore'
         },
         
         loadMore: function() {
