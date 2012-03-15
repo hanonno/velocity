@@ -1,5 +1,5 @@
 var hulk = {},
-    hogan = require('hogan.js'),
+    hogan = require('hogan'),
     fs = require('fs'),
     path = require("path"),
     views = __dirname + '/../public/hogan';
