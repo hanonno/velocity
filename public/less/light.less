@@ -7,9 +7,12 @@
 
 @meta-gray: hsl(0, 0%, 94%);
 @light-gray: hsl(0, 0%, 60%);
+@gray-color: hsl(0, 0%, 82%);
 @dark-gray: hsl(0, 0%, 42%);
 
-@white-color: #ffffff;
+@off-white-color: hsl(0, 0%, 99%);
+@white-color: hsl(0, 0%, 100%);
+@black-color: hsl(0, 0%, 12%);
 
 body {
     font-size: 14px;
@@ -27,7 +30,6 @@ a {
 }
 
 p, blockquote {
-    font-family: "Georgia";
     font-size: 1.1em;
     line-height: 1.5em;
 }
@@ -64,8 +66,8 @@ input, .composer, .input {
 
         > a {
             color: @light-gray;                    
-            text-decoration: underline;                        
-        }        
+            text-decoration: underline;
+        }
     }
     
     textarea, input {
@@ -113,24 +115,47 @@ input, .composer, .input {
 }
 
 .button {
-    color: hsla(0, 0%, 100%, 0.9);
-    font-weight: bold;
-    
-    position: relative;
+    font-size: 14px;
 
-    padding: 5px 16px 6px 16px;
-
-    background-image: -webkit-linear-gradient(bottom, rgb(165,36,34) 00%, rgb(202,41,41) 100%);
-    
-    border: 1px solid #911d1d;
+    padding: 5px 10px 6px 10px;
     -webkit-border-radius: 5px;
-    
-    -webkit-box-shadow: inset 0 0 4px hsla(0, 0%, 100%, 0.6), 0 1px 1px hsl(0, 0%, 50%);
-    
-    text-shadow: 0 -1px 0 hsla(0, 0%, 0%, 0.35);
-    
+        
     -webkit-user-select: none;
     cursor: pointer;
+    
+    border: 1px solid hsla(0, 0%, 0%, 0);
+
+    color: hsl(0, 0%, 90%);
+/*     background-image: -webkit-linear-gradient(bottom, hsl(0, 0%, 12%) 0%, hsl(0, 0%, 26%) 100%); */
+    
+    &:hover, &.active {
+        border: 1px solid hsl(0, 0%, 17%);
+        background-color: hsl(0, 0%, 20%);
+        -webkit-box-shadow: 0 1px 0 hsla(0, 0%, 100%, 0.1);
+    }
+    
+    &:active, &.active {
+        color: #ffffff;
+    }
+
+    &.cta {
+        font-weight: bold;
+        color: hsla(0, 0%, 100%, 0.9);
+        border: 1px solid #911d1d;
+        background-image: -webkit-linear-gradient(bottom, rgb(165,36,34) 00%, rgb(202,41,41) 100%);
+        
+        text-shadow: 0 -1px 0 hsla(0, 0%, 0%, 0.35);
+        -webkit-box-shadow: inset 0 0 1px hsla(0, 0%, 100%, 0.4), 0 1px 1px hsl(0, 0%, 50%);        
+        
+        &:hover {
+            -webkit-box-shadow: inset 0 0 4px hsla(0, 0%, 100%, 0.9), 0 1px 1px hsl(0, 0%, 50%);
+        }
+        
+        &:active {
+            top: 1px;
+            -webkit-box-shadow: inset 0 0 4px hsla(0, 0%, 100%, 0.9);    
+        }        
+    }
 
     &.large {
         font-weight: bold;
@@ -152,17 +177,54 @@ input, .composer, .input {
         padding: 3px 8px 4px 8px;
         -webkit-border-radius: 3px;
     }
+}
+
+header.site {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: -1000;
     
-    &:hover {
-        -webkit-box-shadow: inset 0 0 4px hsla(0, 0%, 100%, 0.9), 0 1px 1px hsl(0, 0%, 50%);
+    background-image: -webkit-linear-gradient(bottom, hsl(0, 0%, 19%) 0%, hsl(0, 0%, 27%) 100%);
+    border-bottom: 1px solid hsl(0, 0%, 0%);
+    
+
+    padding: 22px;
+    
+    > div {
+        display: -webkit-box;
     }
     
-    &:active {
-        top: 1px;
-        -webkit-box-shadow: inset 0 0 4px hsla(0, 0%, 100%, 0.9);    
+    .button {
+        padding: 7px 10px 7px 10px;
+    }
+    
+    .cta {
+        border: 1px solid hsl(0, 80%, 20%);    
+        -webkit-box-shadow: 0 1px 0 hsla(0, 0%, 100%, 0.1);
+        
+        &:hover {
+            -webkit-box-shadow: inset 0 0 4px hsla(0, 0%, 100%, 0.6);
+        }
+        
+        &:active {
+            top: 1px;
+            -webkit-box-shadow: inset 0 0 4px hsla(0, 0%, 100%, 0.9);    
+        }        
+    }
+    
+    div {
+        > a {
+            color: hsl(0, 0%, 80%);
+            font-weight: normal;
+        }
+        
+        &.flex {
+            -webkit-box-flex: 1;
+        }
     }
 }
 
+/*
 nav {
     position: fixed;
     
@@ -190,31 +252,80 @@ nav {
         }
     }
 }
+*/
+
+#page {
+    z-index: 1000;
+    margin: 62px auto 0 auto;
+    padding: 10 0;
+    background-color: @off-white-color;
+}
 
 .container {
     min-width: 320px;
-    max-width: 540px;
+    max-width: 1200px;
     margin: 0 auto;
     
-    padding: 40px;
-    
-    background-color: hsl(0, 0%, 98%);
+    &.articles {
+        max-width: 700px;
+        margin: 0 auto;
+        
+        padding: 0 40px;
+            
+/*     background-color: hsl(0, 0%, 98%); */
+
+    }
 
     > header {
         border-bottom: 1px solid @meta-gray;
     
         h1 {
-            font-size: 1.3em;
+            color: @black-color;
+            font-family: "Georgia";
+            font-size: 32px;
+            font-weight: normal;
+            
+            text-align: center;
+            padding: 10px;
+            line-height: 40px;
+            margin: 0 10px 10px 10px;
         }
-    }
-    
-    > article:first-child {
-        border-top: 1px solid @white-color;
+        
+        section {
+            border-top: 1px solid @meta-gray;        
+            display: -webkit-box;
+            padding: 18px 0 20px 0;
+            
+            .author, .subscribers {
+                width: 120px;
+                a {
+                    color: @dark-gray;
+                }
+            }
+            
+            .author, .subscribers a {
+                font-weight: bold;
+            }
+            
+            .subscribers {
+                text-align: right;
+            }
+
+            > .flex {
+                -webkit-box-flex: 1;
+                text-align: center;
+            }
+        }
     }
 }
 
 article {
-    margin: 60px 0 120px 0;
+    background-color: @white-color;
+
+    margin: 40px 0 120px 0;
+    padding: 80px;
+    border: 1px solid #dedede;
+    -webkit-box-shadow: 0px 1px 1px @meta-gray;
 
     > header {
         border-bottom: 1px solid @meta-gray;
@@ -222,7 +333,6 @@ article {
         > .meta {
             color: @light-gray;
             font-style: italic;
-            font-size: 0.9em;
 
             a {
                 color: @light-gray;
@@ -234,6 +344,10 @@ article {
             font-size: 1.4em;
             margin: 8px 0 12px 0;
             line-height: 1.3em;
+            
+            a {
+                color: @black-color;
+            }
         }
         
         &:hover {
@@ -247,7 +361,11 @@ article {
     > section.summary {
         border-bottom: 1px solid @meta-gray;
         
-        img {
+        > p {
+            font-family: "Georgia";
+        }
+        
+        > img {
             max-width: 100%;
             height: auto;
             
@@ -257,6 +375,8 @@ article {
             padding: 10px;
             
             background-color: @white-color;
+            
+            display: none;
         }
     }
     
@@ -264,7 +384,7 @@ article {
         border-top: 1px solid @white-color;
     
         > ol {
-            margin: 4px 80px 0 10px;
+            margin: 4px 0 0 20px;
             
             > li {
                 font-size: 0.9em;
@@ -275,15 +395,18 @@ article {
                 padding: 8px 0 2px 0;
             
                 > div.actors {
-                    color: @light-gray;
-                    
-                    a.sender {
+                    > a {
+                        color: @black-color;
                         font-weight: bold;
-                    }
-                    
-                    a.recipient {
-                        color: @light-gray;
-                    }
+                        
+                        &.sender {
+
+                        }
+                        
+                        &.recipient {
+                            color: @dark-gray;
+                        }
+                    }                    
                 }
 
                 > p {
@@ -293,7 +416,7 @@ article {
                 
                 &:hover {
                     > div.actors {
-                        a.recipient {
+                        a {
                             color: @light-blue;
                         }
                     }

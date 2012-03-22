@@ -4,6 +4,7 @@ hulk = require('./library/hulk.js')
 async = require('async')
 moment = require('moment')
 redis = require('redis').createClient()
+rss = require('rss')
 
 Feedparser = require('feedparser')
 
@@ -184,6 +185,37 @@ app.get('/api/:locale/:category/:sort', [fetchArticles], function(req, res) {
     res.send(response)
 })
 
+app.get('/rss/:locale/:category/:sort', [fetchArticles], function(req, res) {
+    
+    var active_category = req.param('category')
+    var active_sort = req.param('sort')
+    var active_locale = req.param('locale')
+
+    var feed_title = active_category + ' / ' + active_sort + ' / ' + active_locale
+    var feed_url = 'http://hanno.hyves.org/rss/' + active_category + ' / ' + active_sort + ' / ' + active_locale
+    
+    var feed = new rss({
+        'title': feed_title,
+        'feed_url': feed_url,
+        'site_url': 'http://hanno.hyves.org',
+        'author': 'Hanno ten Hoor'
+    })
+    
+    async.forEach(req.articles, function(article, article_added) {
+        feed.item({
+            'title': article.title,
+            'description': article.description,
+            'url': article.url,
+            'date': article.published
+        })
+        
+        article_added()
+    }, function(error) {
+        res.send(feed.xml())
+    })
+})
+
+
 app.get('/table/:locale/:category/:sort', [fetchCategories, fetchSorts, fetchLocales, fetchArticles], function(req, res) {
     var active_category = req.param('category')
     var active_sort = req.param('sort')
@@ -230,4 +262,4 @@ app.get('/mobile', function(req, res) {
     })
 })
 
-app.listen(80)
+app.listen(3000)
