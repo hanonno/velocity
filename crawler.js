@@ -56,7 +56,7 @@ async.forEach(categories, function(category, category_parsed) {
                 if(!article.link) {
                     console.log("----- No Link ----- : " + article.title); article_parsed(); return;
                 }
-                                
+
                 resolveUrl(article.link, function(error, url) {
                 
                     if(error) { console.log("----- Resolve URL Error: " + error); article_parsed(); return }
@@ -87,6 +87,14 @@ async.forEach(categories, function(category, category_parsed) {
                                 'facebook_count': counts.Facebook.total_count,
                                 'linkedin_count': counts.LinkedIn
                             }
+                            
+                            if(article.enclosures.length > 0) {
+                                if(article.enclosures[0].type == 'image/png' || article.enclosures[0].type == 'image/jpeg') {
+                                    article_item.image_url = article.enclosures[0].url
+                                }
+                            } else {
+                                redis.hdel(article_key, 'image_url')
+                            }
             
                             redis.hmset(article_key, article_item, function(error, result) {
                             
@@ -104,7 +112,7 @@ async.forEach(categories, function(category, category_parsed) {
                                     redis.sadd('articles:hourly:' + hour, article_key, function(error, result) {
                                         if(error) { console.log("----- Add to list Error: " + error); article_parsed(); return }
                                         else { /* console.log(result) */ }                                    
-                                    })                                    
+                                    })
                                     
 /*                                     console.log("============================== ARTICLE SAVED: " + article.title) */       
                                     article_counter--; console.log(article_counter + " : saved : " + moment(article_published).fromNow() + " : " + article.title)

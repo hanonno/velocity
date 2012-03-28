@@ -48,7 +48,7 @@ locales = [
 function fetchArticles(req, res, next) {
 
     var page = 0
-    var per_page = 1000
+    var per_page = 200
     
     if(req.param('page')) { page = parseInt(req.param('page')) }
     if(req.param('per_page')) { per_page = parseInt(req.param('per_page')) }
@@ -64,7 +64,7 @@ function fetchArticles(req, res, next) {
         async.map(article_keys, function(article_key, callback) {
         
             redis.hgetall(article_key, function(error, result) {
-                
+                            
                 var delta = new Date().getTime() - result.published
                 var velocity = result.rank / delta
                 
@@ -80,7 +80,6 @@ function fetchArticles(req, res, next) {
         }, function(error, articles) {
             req.articles = articles
             
-
             async.filter(req.articles, function(article, callback) {
             
                 if(category == 'overview') { callback(true) }
@@ -88,6 +87,19 @@ function fetchArticles(req, res, next) {
                 
             }, function(filtered_articles) {
                 async.sortBy(filtered_articles, function(article, callback) {
+                
+                    /* remove some values for testing */
+/*                     delete article.description */
+                    delete article.rank
+                    delete article.locale
+                    delete article.feed
+                    delete article.velocity
+                    delete article.color
+                    delete article.rank
+                    delete article.twitter_count
+                    delete article.facebook_count
+                    delete article.linkedin_count                    
+                                    
                     if(sort == 'popular') {
                         callback(null, -article.rank)
                     }
@@ -215,7 +227,6 @@ app.get('/rss/:locale/:category/:sort', [fetchArticles], function(req, res) {
     })
 })
 
-
 app.get('/table/:locale/:category/:sort', [fetchCategories, fetchSorts, fetchLocales, fetchArticles], function(req, res) {
     var active_category = req.param('category')
     var active_sort = req.param('sort')
@@ -258,8 +269,22 @@ app.get('/:locale/:category/:sort', [fetchCategories, fetchSorts, fetchLocales, 
 
 app.get('/mobile', function(req, res) {
     res.render('mobile/index.hogan', {
-        layout: 'mobile/layout.hogan'
+        layout: 'mobile/layout.hogan',
+        locals: {
+            title: 'Telegraaf'
+        }
     })
 })
 
-app.listen(3000)
+app.get('/mobile/:section', function(req, res) {
+    res.render('mobile/index.hogan', {
+        layout: 'mobile/layout.hogan',
+        locals: {
+            title: 'Telegraaf'
+        }
+    })
+})
+
+app.get('/templates.js', hulk.templates)
+
+app.listen(80)

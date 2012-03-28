@@ -1,0 +1,224 @@
+@header-font-size: 16px;
+@body-text-font-size: 14px;
+@body-text-font-family: "Georgia";
+@body-text-line-height: 20px;
+@body-text-color: hsl(0, 0%, 12%);
+
+@meta-text-font-size: 13px;
+@meta-text-color: hsl(0, 0%, 60%);
+
+@white-color: hsl(0, 0%, 100%);
+@light-gray-color: hsl(0, 0%, 99%);
+@divider-color: hsl(0, 0%, 88%);
+@link-color: #3280C9;
+
+.media {
+    max-width: 100%;
+    height: auto;
+    margin: 10px 0 10px 0;
+    padding: 4px 4px 0 4px;
+    border: 1px solid @divider-color;
+    background-color: @white-color;
+
+    > img {                
+        max-width: 100%;
+        height: auto;
+    }
+    
+    > p {
+        font-family: @body-text-font-family;
+        font-size: @body-text-font-size;
+        margin: 0;
+        padding: 3px 0 6px 4px;
+    }
+}
+
+a {
+    color: @link-color;
+    text-decoration: none;
+}
+
+ul, ol, li {
+    list-style-type: none;    
+    margin: 0; padding: 0;
+}
+
+.icon {
+    &.icon-comments {
+        background: 0px 0px url('../../../application/client/images/icon-comments-outline.png') no-repeat;
+        padding-left: 21px;        
+    }
+    
+    &.icon-respect {
+        background: 0px 0px url('../../../application/client/images/icon-respect-outline.png') no-repeat;
+        padding-left: 19px;
+    }
+}
+
+.container {
+    min-width: 320px;
+    max-width: 480px;
+    margin: 0 auto;
+    background-color: @light-gray-color;
+    
+    > header {
+        text-align: center;
+        
+        img {    
+            display: block;
+            margin: 10px auto;
+        }
+    }
+}
+
+section {
+    > header {
+        text-align: center;
+        font-size: 20px;
+        font-weight: bold;
+        font-variant: small-caps;
+        background-color: @divider-color;
+        padding: 4px 0 5px 0;
+    }
+}
+
+.articles {    
+    article {
+        overflow: hidden;
+        padding: 10px;
+    
+        border-top: 1px solid @divider-color;
+    
+        > header {
+            margin: 0 0 10px 0;
+        
+            > h1 {
+                font-size: @header-font-size;
+                line-height: 22px;
+                margin: 0;
+            }
+            
+            > .media {
+                float: right;
+                max-width: 59px;
+                
+                > p {
+                    display: none;                
+                }
+            }
+            
+            > p {
+                font-size: @meta-text-font-size;
+                margin: 8px 0 0 0;
+                color: @meta-text-color;
+                
+                > a {
+                    color: @meta-text-color;
+                    text-decoration: underline;
+                }                
+            }
+        }
+        
+        > section {
+            color: @body-text-color;
+            font-family: @body-text-font-family;
+            font-size: @body-text-font-size;
+            line-height: @body-text-line-height;
+            
+            img {
+                max-width: 100%;
+                height: auto;
+            }
+            
+            > p {
+                margin: 10px 0;
+                
+                &:first-of-type {
+                    font-weight: bold;
+                }                
+            }
+        }
+        
+        > footer {
+            clear: both;
+        
+            font-size: @meta-text-font-size;
+            
+            color: @meta-text-color;
+    
+            padding: 10px 0 0 0;
+            
+            > a {
+                padding: 4px 6px;
+                
+                &:first-of-type {
+                    padding-left: 0;
+                }
+            
+                &:hover {
+                    text-decoration: underline;
+                
+                    &.activity {
+                        text-decoration: none;
+                        background-color: @white-color;
+                    }
+                }
+            
+                > em {
+                    font-weight: bold;
+                    font-style: normal;
+                }
+            }
+        }
+    }
+        
+    &.condensed {
+        article {
+            > header {
+                margin: 0;
+            
+                > h1 {
+                
+                }
+            
+                > .media {
+                    margin: 0 0 0 10px;                
+                }
+                
+                > p {
+                    margin-top: 4px;
+                
+                }
+            }
+        
+            > section {
+                display: none;
+            }
+            
+            > footer {
+                display: none;
+            }
+        }
+    }
+    
+    &.expanded {
+        article {
+            > header {
+                > .media {
+                    max-width: 120px;
+                    margin: 0 0 10px 10px;
+                    
+                    > p {
+                        display: block;
+                    }
+                }            
+            }
+        
+            > section {
+                p {
+                    display: block;                    
+                }
+            }
+        }
+    }    
+}

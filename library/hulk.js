@@ -50,7 +50,7 @@ var async = require('async');
 
 // Utility functions
 hulk.precompile = function(callback) {
-  var results = "T={};";
+  var results = "Templates={};";
 
   fs.readdir(views, function(err, files) {
     if(err) return callback(err);
@@ -67,7 +67,7 @@ hulk.precompile = function(callback) {
                 var compiled = hogan.compile(contents.toString(), {asString : true});
                 var name = file.split('.')[0];
                 
-                results = results + "\nT['" + name + "']=" + compiled;
+                results = results + "\nTemplates['" + name + "']=" + compiled;
                 done();
               });            
             }

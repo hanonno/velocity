@@ -1,4 +1,5 @@
-@import "library/reset.less";
+@import "library/normalize.less";
+@import "library/news.less";
 
 @application-height: 300px;
 
@@ -54,16 +55,16 @@ a {
     .content {
         height: 420px;
         
-        &.visible {
+        &.scroll {
             overflow: auto;
-            -webkit-overflow-scrolling: touch;
+            -webkit-overflow-scrolling: touch; /* turn this off to improve scrolling performance */
         }
-                
+
         &.hidden {
-            display: none;
+            visibility: hidden;
         }
         
-        ul {
+        ul.list {
             -webkit-touch-callout: none;
                
             li {

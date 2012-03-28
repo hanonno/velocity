@@ -25,7 +25,7 @@ basket
     })
 
     var ListItem = Backbone.View.extend({
-        events: {    
+        events: {
             'touchstart': 'makeActive',
             'touchmove': 'resignActive',
             'touchend': 'resignActive'
@@ -45,6 +45,7 @@ basket
         templateName: '#category-template',
 
         initialize: function() {
+            this.template = new Hogan.Template(Templates['category'])            
             this.model.bind('change', this.render, this)
     
             self = this            
@@ -61,13 +62,13 @@ basket
         },
 
         render: function() {
-            $(this.el).append(this.model.get('display_name'))
+            $(this.el).append(this.template.render({ title: this.model.get('display_name') }))
         }
     })
 
     var CategoryListView = Backbone.View.extend({
         tagName: 'ul',
-        className: 'categories',
+        className: 'categories list',
         
         initialize: function() {   
             this.model.bind('reset', this.resetCategories, this)
@@ -97,7 +98,7 @@ basket
     /* ARTICLES */
     var Article = Backbone.Model.extend({
         idAttribute: 'article_id'
-    })    
+    })
     
     var ArticleList = Backbone.Collection.extend({
         model: Article,
@@ -106,7 +107,7 @@ basket
             this.category = options.category
             this.sort = options.sort
             this.page = 0
-            this.per_page = 50
+            this.per_page = 20
         },
         
         url: function() {        
@@ -123,8 +124,10 @@ basket
     
     var ArticleView = Backbone.View.extend({
         tagName: 'div',
+        className: 'articles expanded',
         
         initialize: function() {
+            this.template = new Hogan.Template(Templates['article'])
             this.model.bind('change', this.render, this)
         },
         
@@ -133,7 +136,7 @@ basket
         },
         
         render: function() {
-            $(this.el).append('<p>'+this.model.get('description')+'</p>')
+            $(this.el).append(this.template.render(this.model.toJSON()))
         }
     })
 
@@ -141,6 +144,7 @@ basket
         tagName: 'li',
         
         initialize: function() {
+            this.template = new Hogan.Template(Templates['article'])        
             this.model.bind('change', this.render, this)
         },
         
@@ -153,7 +157,8 @@ basket
         },
 
         render: function() {
-            $(this.el).append('<div class=\'rank\' style=\'background-color: '+this.model.get('color')+'\'>'+this.model.get('rank')+'</div><div class=\'text\'>'+this.model.get('title')+'</div>')
+/*             $(this.el).append('<div class=\'rank\' style=\'background-color: '+this.model.get('color')+'\'>'+this.model.get('rank')+'</div><div class=\'text\'>'+this.model.get('title')+'</div>') */
+            $(this.el).append(this.template.render(this.model.toJSON()))
         }
     })
 
@@ -194,7 +199,7 @@ basket
         },
 
         resetArticles: function() {
-            $(this.el).html("<ul class='articles'></ul><div class='load'>Load more..</div>")
+            $(this.el).html("<ul class='articles condensed'></ul><div class='load'>Load more..</div>")
             this.model.each(this.addArticle, this)
         }
     })
@@ -268,7 +273,7 @@ basket
 
             page.content = content; $(page.element).append(content)
                         
-            page.animationDuration = 160
+            page.animationDuration = 230
             page.animationTimingFunction = "ease-out"
             
             page.on('webkitTransitionEnd', function() {
@@ -276,16 +281,17 @@ basket
 
                 switch(role) {
                     case 'placeholder': 
-                        page.content.removeClass('hidden')
+/*                         page.content.addClass('hidden') */
                         break
 
                     case 'content':
+                        page.content.addClass('scroll')                    
                         page.view.viewDidAppear()
-                        page.content.removeClass('hidden')
+/*                         page.content.removeClass('hidden') */
                         break
                     
                     case 'history':
-                        page.content.addClass('hidden')
+/*                         page.content.addClass('hidden') */
                         break
                 }
             })
@@ -304,20 +310,20 @@ basket
                 if(position == 1) {
                     layer.frame.x = 320
                     layer.scale = 1
-                    layer.content.removeClass('hidden')
-                    layer.content.removeClass('visible')
+                    layer.content.addClass('hidden')
+                    layer.content.removeClass('scroll')
                     layer.role = 'placeholder'
                 } else if (position == 2) {
                     layer.frame.x = 0
                     layer.scale = 1
                     layer.content.removeClass('hidden')
-                    layer.content.addClass('visible')
                     layer.role = 'content'
                 } else if (position > 2) {
                     layer.frame.x = 0
                     layer.scale = 0.9
                     layer.role = 'history'
-                    layer.content.removeClass('visible')
+                    layer.content.addClass('hidden')
+                    layer.content.removeClass('scroll')
                 }
             })
         }
@@ -337,7 +343,7 @@ basket
         routes: {
             '': 'categories',
             ':category': 'category',
-            ':category/:article': 'article'
+            ':category/:article_id': 'article'
         },
 
         categories: function() {
@@ -347,7 +353,6 @@ basket
         },
 
         category: function(category) {
-
             window.articleListView = window.articleListViews[category]
             
             var sort = 'recent'
@@ -365,8 +370,11 @@ basket
         },
         
         article: function(category_name, article_id) {
-        
             articleListView = window.articleListViews[category_name]
+
+            if(!articleListView) {
+                articleListView = window.articleListViews['overview']
+            }
         
             var article = articleListView.getModel(article_id)
             
