@@ -53,7 +53,7 @@ ul, ol, li {
     text-align: center;
     
     &.tappable-active {
-        background-color: red;
+        background-color: @link-color;
     }
 }
 
@@ -81,7 +81,8 @@ div.section {
     background-color: @off-white-color;
 
     section {
-        padding: 28px 0px;
+        font-weight: bold;
+        padding: 50px 0px;
         text-align: center;
         
         a {
@@ -89,7 +90,12 @@ div.section {
         }
         
         &.tappable-active {
-            background-color: red;
+            color: @white-color;
+            background-color: @link-color;
+            
+            a {
+                color: @white-color;
+            }
         }
     }
 }
@@ -109,7 +115,9 @@ div.section {
         -webkit-border-radius: 4px;
         
         &.active, &.tappable-active {
-            background-color: red;
+            color: @white-color;
+            border-color: @link-color;
+            background-color: @link-color;
         }
     }
     

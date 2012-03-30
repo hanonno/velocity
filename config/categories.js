@@ -1,7 +1,7 @@
 module.exports = categories = [
     {  
         'name': 'overview',
-        'display_name': 'Overzicht',
+        'display_name': 'Voorpagina',
         'locale': 'nl'
     }, {
         'name': 'overview',
@@ -117,7 +117,8 @@ module.exports = categories = [
             'http://www.kindamuzik.net/feeds/23456t1257.rss',
             'http://www.jobdewit.nl/?feed=rss2'    
         ]
-    } , {
+    } , /*
+{
         'name': 'fashion',
         'display_name': 'Mode',        
         'locale': 'nl',
@@ -129,9 +130,9 @@ module.exports = categories = [
             'http://fashion.blog.nl/feed',
             'http://www.fashionmix.nl/readitems.php',
             'http://www.modefabriek.nl/feed',
-/*             'http://www.fashionweekdaily.com/index.rss' */
         ]
-    } , {
+    } ,
+*/ {
         'name': 'sports',
         'display_name': 'Sport',        
         'locale': 'nl',
