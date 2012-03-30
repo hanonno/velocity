@@ -1,9 +1,27 @@
 @import "library/normalize.less";
+
+@header-font-size: 16px;
+@body-text-font-size: 14px;
+@body-text-font-family: "Georgia";
+@body-text-line-height: 20px;
+@body-text-color: hsl(0, 0%, 12%);
+
+@meta-text-font-size: 13px;
+@meta-text-color: hsl(0, 0%, 60%);
+
+@white-color: hsl(0, 0%, 100%);
+@off-white-color: hsl(0, 0%, 99%);
+@light-gray-color: hsl(0, 0%, 88%);
+@medium-gray-color: hsl(0, 0%, 34%);
+@dark-gray-color: hsl(0, 0%, 12%);
+@black-color: hsl(0, 0%, 0%);
+
+@divider-color: hsl(0, 0%, 88%);
+@link-color: #3280C9;
+
 @import "library/news.less";
 
 @application-height: 300px;
-
-/* hmmm */
 
 body {
     font-family: "Helvetica Neue";
@@ -11,24 +29,37 @@ body {
     background-color: #000000;
     
     line-height: 1.4em;
+    
+    -webkit-tap-highlight-color: rgba(0,0,0,0);    
 }
 
 a {
-    color: #3588d5;
+    color: @link-color;
     text-decoration: none;
 }
+
+ul, ol, li {
+    list-style-type: none;    
+    margin: 0; padding: 0;
+}
+
 
 #screen {
     background-color: #000000;
 }
 
-.load {
+.load-more {
     padding: 18px; 
     text-align: center;
+    
+    &.tappable-active {
+        background-color: red;
+    }
 }
 
 .tappable-active {
-    background-color: red;
+    color: #ffffff;
+    background-color: @link-color;
 }
 
 .result {
@@ -37,23 +68,70 @@ a {
     -webkit-overflow-scrolling: touch;
 }
 
-.page {
-    background-color: #ffffff;
+.loading {
+    margin: 200px 0;
+    text-align: center;
+}
 
-    .button {
-        color: #ffffff;
-        padding: 10px 12px;
+.carousel {
+    background-color: @dark-gray-color;
+}
+
+div.section {
+    background-color: @off-white-color;
+
+    section {
+        padding: 28px 0px;
+        text-align: center;
         
-        border: 1px solid #000000;
+        a {
+            color: @dark-gray-color;
+        }
+        
+        &.tappable-active {
+            background-color: red;
+        }
     }
+}
+
+.page {
+    background-color: @off-white-color;
+
+    .button {    
+        color: @dark-gray-color;
+        margin: 4px;
+        padding: 4px 10px;
+        
+        font-size: 12px;
+        font-weight: bold;
+        
+        border: 1px solid @divider-color;
+        -webkit-border-radius: 4px;
+        
+        &.active, &.tappable-active {
+            background-color: red;
+        }
+    }
+    
+        .right .button {
+            float: right;
+        }
+        
+        .left .button {
+            float: left;
+        }    
 
     .header {
-        background-color: #1f1f1f;
+        background-color: @off-white-color;
         height: 42px;
+        
+        border-bottom: 1px solid @divider-color;
     }
     
     .content {
         height: 420px;
+
+        -webkit-touch-callout: none;
         
         &.scroll {
             overflow: auto;
@@ -64,46 +142,10 @@ a {
             visibility: hidden;
         }
         
-        ul.list {
-            -webkit-touch-callout: none;
-               
+        ul.list {               
             li {
-                -webkit-touch-callout: none;
-            
-                padding: 14px 12px;        
-                
+                -webkit-user-select: none;            
                 border-bottom: 1px solid #d4d4d4;
-                
-                &.active {
-                    color: #ffffff;
-                    background-color: blue;
-                }
-                
-                .rank {
-                    color: #ffffff;
-                    width: 24px;
-                    float: left;
-                    text-align: right;
-                    
-                    margin: -6px 0 0 -12px;
-                    padding: 6px 10px;
-                }
-                
-                .text {
-                    margin: -4px 0 0 42px;
-                }                
-            }
-            
-            &.categories {
-                li {
-                    color: #3588d5;
-                    padding: 14px 12px;
-                }
-            }
-            
-            div.more {
-                text-align: center;
-                padding: 20px;
             }            
         }
     }

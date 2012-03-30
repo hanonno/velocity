@@ -1,4 +1,4 @@
-<article data-article-id="{{article_id}}">
+<article data-article-id="{{article_id}}" data-category="{{category}}">
     <header>
         {{#image_url}}
         <div class="media">
