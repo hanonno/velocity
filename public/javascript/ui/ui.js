@@ -112,6 +112,7 @@ var UINavigationStack = Backbone.View.extend({
                 layer.content.removeClass('scroll')
                 layer.role = 'placeholder'
             } else if (position == 2) {
+                layer.view.viewWillAppear()
                 layer.frame.x = 0
                 layer.scale = 1
                 layer.content.removeClass('hidden')

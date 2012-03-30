@@ -73,6 +73,10 @@ basket
             $(this.el).html('<div class="loading">Loading…</div>')
         },
         
+        viewWillAppear: function() {
+        
+        },
+        
         viewDidAppear: function() {
             if(this.isLoaded) { return }
         
@@ -107,8 +111,12 @@ basket
             this.model.bind('change', this.render, this)
         },
         
+        viewWillAppear: function() {
+            this.render()        
+        },
+        
         viewDidAppear: function() {
-            this.render()
+
         },
         
         render: function() {
@@ -180,7 +188,6 @@ basket
 
         categories: function() {
             this.category('overview')
-            splitView.expand()
         },
 
         category: function(category) {
