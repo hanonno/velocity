@@ -180,6 +180,7 @@ basket
 
         categories: function() {
             this.category('overview')
+            splitView.expand()
         },
 
         category: function(category) {
