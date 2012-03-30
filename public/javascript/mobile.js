@@ -32,7 +32,7 @@ basket
             this.category = options.category
             this.sort = options.sort
             this.page = 0
-            this.per_page = 50
+            this.per_page = 10
         },
         
         url: function() {        
