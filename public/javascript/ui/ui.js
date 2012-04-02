@@ -67,9 +67,7 @@ var UINavigationStack = Backbone.View.extend({
         page.animationTimingFunction = "ease-out"
         
         page.on('webkitTransitionEnd', function() {
-            var role = page.role
-
-            switch(role) {
+            switch(page.role) {
                 case 'placeholder': 
                     break
 
@@ -135,7 +133,7 @@ var UICarousel = Backbone.View.extend({
         this.width = params.width
         this.height = params.height
         
-        this.pageWidth = 110
+        this.pageWidth = 100
         this.pageHeight = 120
         this.pageOffset = 10
     
@@ -200,10 +198,10 @@ var UICarousel = Backbone.View.extend({
             page.frame.z = 0
             page.frame.x = -t + offsetX
             page.opacity = 1
-        }            
+        }
     },
     
-    recalculateLayout: function(t) {  
+    recalculateLayout: function(t) {
     
         self = this
 

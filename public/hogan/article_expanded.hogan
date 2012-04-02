@@ -1,0 +1,19 @@
+<article class="expanded" data-article-id="{{article_id}}" data-category="{{category}}">
+    <header>
+        <h1>{{title}}</h1>
+        <p>{{relative_date}} in <a>{{category}}</a><!--  via {{source_name}}</p> -->
+    </header>
+    <section>
+        {{#large_image_url}}
+        <div class="media">
+            <img src="{{large_image_url}}" />
+        </div>
+        {{/large_image_url}}    
+        <p>{{{description}}}</p>
+    </section>
+<!--
+    <footer>
+        <a href="#" class="activity"><em class="icon icon-comments">232</em> &nbsp;<em class="icon icon-respect">45</em></a> · <a href="#">Reageer</a> · <a href="#">Respect</a>
+    </footer>
+-->
+</article>

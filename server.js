@@ -20,7 +20,7 @@ app.configure(function(){
     app.register('.hogan', hulk)
 })
 
-categories = require('./config/categories.js')
+categories = require('./config/volkskrant.js')
 sorts = [
     { 
         'name': 'velocity',
@@ -90,15 +90,18 @@ function fetchArticles(req, res, next) {
                 
                     /* remove some values for testing */
 /*                     delete article.description */
-                    delete article.rank
                     delete article.locale
                     delete article.feed
+/*
                     delete article.velocity
                     delete article.color
                     delete article.rank
+*/
                     delete article.twitter_count
                     delete article.facebook_count
-                    delete article.linkedin_count                    
+                    delete article.linkedin_count
+                    
+                    article.template = 'article_condensed'
                                     
                     if(sort == 'popular') {
                         callback(null, -article.rank)
@@ -128,6 +131,8 @@ function fetchArticles(req, res, next) {
 
                     var paged_articles = sorted_articles.slice(start, end)
                     
+                    paged_articles[0].template = 'article_expanded'
+                    
                     req.articles = paged_articles
                     
                     next()
@@ -140,9 +145,8 @@ function fetchArticles(req, res, next) {
 function fetchCategories(req, res, next) {
     var active_category = req.param('category')
     var active_locale = req.param('locale')
-
-    async.filter(categories, function(category, filter) {
     
+    async.filter(categories, function(category, filter) {
         category.active = (category.name == active_category) ? 'active' : 'inactive'
         filter(category.locale == active_locale)  
     
@@ -287,4 +291,4 @@ app.get('/mobile/:section', function(req, res) {
 
 app.get('/templates.js', hulk.templates)
 
-app.listen(80)
+app.listen(3000)

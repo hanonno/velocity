@@ -32,7 +32,7 @@ basket
             this.category = options.category
             this.sort = options.sort
             this.page = 0
-            this.per_page = 10
+            this.per_page = 40
         },
         
         url: function() {        
@@ -51,7 +51,10 @@ basket
         tagName: 'li',
         
         initialize: function() {
-            this.template = new Hogan.Template(Templates['article'])        
+        
+            var template = this.model.get('template')
+        
+            this.template = new Hogan.Template(Templates[template])        
             this.model.bind('change', this.render, this)
         },
 
@@ -84,7 +87,7 @@ basket
             this.isLoaded = true
         },
 
-        addArticle: function(article) {
+        addArticle: function(article, index) {
             var view = new ArticleListItem({ model: article })
 
             view.render()
@@ -97,17 +100,19 @@ basket
         },
 
         resetArticles: function() {
-            $(this.el).html("<section><header>" + this.model.category + "</header></section><ul class='articles list condensed'></ul><div class='load-more'>Load more..</div>")
+            $(this.el).html("<section><header>" + this.model.category + "</header></section><ul id='refresh' class='articles list condensed'></ul><div class='load-more'>Load more..</div>")
             this.model.each(this.addArticle, this)
+            
+            ScrollOver(document.getElementById('refresh'))
         }
     })
     
     var ArticleView = Backbone.View.extend({
         tagName: 'div',
-        className: 'articles expanded',
+        className: 'article',
         
         initialize: function() {
-            this.template = new Hogan.Template(Templates['article'])
+            this.template = new Hogan.Template(Templates['article_expanded'])
             this.model.bind('change', this.render, this)
         },
         
@@ -187,7 +192,7 @@ basket
         },
 
         categories: function() {
-            this.category('overview')
+            this.category('volkskrant_frontpage')
         },
 
         category: function(category) {
@@ -206,7 +211,7 @@ basket
             navigationStack.clear()
             navigationStack.push(window.articleListView, true)
             
-            window.articleListView.viewDidAppear() 
+            window.articleListView.viewDidAppear()
         },
         
         article: function(category_name, article_id) {
@@ -215,7 +220,7 @@ basket
             if(!articleListView) {
                 articleListView = window.articleListViews['overview']
             }
-        
+
             var article = articleListView.getModel(article_id)
             
             articleView = new ArticleView({ model: article })
@@ -249,7 +254,7 @@ basket
         }
     })
     
-    tappable('section', {
+    tappable('section.nav', {
         activeClassDelay: 60,
         inactiveClassDelay: 300,    
         onTap: function(event, target) {
@@ -258,7 +263,7 @@ basket
         }
     })
     
-    tappable('article', {
+    tappable('article.nav', {
         activeClassDelay: 60,    
         inactiveClassDelay: 300,
         onTap:function(event, target) {

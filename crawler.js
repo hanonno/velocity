@@ -19,18 +19,15 @@ process.addListener("uncaughtException", function (error) {
     console.trace();
 });
 
-var categories = require('./config/categories.js')
+var categories = require('./config/volkskrant.js')
 
 var active_category = argv.cat
 
 async.forEach(categories, function(category, category_parsed) {
 
-        if(active_category && (category.name != active_category)) {
-            category_parsed(); return
-        }
-
-/*     if(category.name != 'cars') { category_parsed(); return } */
-/*     console.log("============================== START CATEGORY: " + category.name) */
+    if(active_category && (category.name != active_category)) {
+        category_parsed(); return
+    }
 
     if(!category.feeds) { category_parsed(); return }
 
@@ -91,6 +88,12 @@ async.forEach(categories, function(category, category_parsed) {
                             if(article.enclosures.length > 0) {
                                 if(article.enclosures[0].type == 'image/png' || article.enclosures[0].type == 'image/jpeg') {
                                     article_item.image_url = article.enclosures[0].url
+                                    
+                                    var components = article_item.image_url.split('/')
+                                    var filename = components.pop().replace('media_s', 'media_xl')
+
+                                    
+                                    article_item.large_image_url = components.join('/') + '/' + filename
                                 }
                             } else {
                                 redis.hdel(article_key, 'image_url')
