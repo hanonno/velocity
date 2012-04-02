@@ -1,0 +1,8 @@
+var categories = [
+    {{#categories}}
+    {name:'{{name}}',
+        display_name:'{{display_name}}',
+        locale:'{{locale}}'
+    },
+    {{/categories}}
+]

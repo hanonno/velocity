@@ -49,6 +49,12 @@ basket
         
             return response.result
         },
+        
+        refresh: function() {
+            this.reset()
+            this.page = 0
+            this.fetch()
+        }
     })
     
     var ArticleListItem = Backbone.View.extend({
@@ -113,9 +119,6 @@ basket
         
         refresh: function() {
             this.model.refresh()
-            this.model.fetch()
-            
-            alert('refresh')
         },
         
         loadMore: function() {
@@ -133,13 +136,23 @@ basket
         },
         
         render: function() {
-            $(this.el).html("<section><header>" + this.model.category + "</header></section><div class='pull-to-refresh'></div><ul class='articles list scrollover-scrollable condensed'></ul><div class='load-more'>Load more..</div>")
+        
+            var category = categoryList.get(this.model.category) 
+            var category_name = 'test'
+
+            if(category != undefined) {
+                category_name = category.get('display_name')
+            } else {
+                
+            }
+            
+            $(this.el).html("<div class='pull-to-refresh'><div class='ptr-icon'></div></div><section><header>" + category_name + "</header></section><ul class='articles list scrollover-scrollable condensed'></ul><div class='load-more'>Load more..</div>")
+            
+            var self = this
             
             this.scrollview = ScrollOver(this.el, {
                 onPullToRefresh: function() {
-                    /* TODO: Refresh the list */
-                
-                    /* self.refresh() */ 
+                    self.refresh()
                 }
             })
             
@@ -170,6 +183,12 @@ basket
         
         render: function() {
             $(this.el).append(this.template.render(this.model.toJSON()))
+            
+            this.scrollview = ScrollOver(this.el, {
+                onPullToRefresh: function() {
+                    alert('test')
+                }
+            })
         }
     })
 
@@ -194,7 +213,7 @@ basket
             this.model.bind('add', this.addSection, this)
             this.model.bind('reset', this.resetSections, this)
             
-            this.model.fetch()
+            this.resetSections()
         },
         
         addSection: function(section) {
@@ -210,7 +229,7 @@ basket
         }
     })
 
-    var categoryList = new CategoryList()
+    var categoryList = new CategoryList(categories)
 
     var sectionStack = new UISectionCarousel({ model: categoryList, x: 0, y: 0, width: 320, height: 140 })
     var navigationStack = new UINavigationStack()
@@ -244,6 +263,8 @@ basket
             var sort = 'recent'
             
             if(category == 'overview') { sort = 'velocity' }
+            
+            console.log(category)
 
             if(!articleListView) {
                 articleList = new ArticleList({ category: category, sort: sort })
@@ -314,11 +335,13 @@ basket
         }
     })
 
+/*
     tappable('.load-more', {
         onTap:function(event, target) {
-            
+
         }
     })
+*/
 
     var applicationRouter = new ApplicationRouter()
 

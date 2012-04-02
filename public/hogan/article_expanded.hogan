@@ -1,4 +1,4 @@
-<article class="expanded" data-article-id="{{article_id}}" data-category="{{category}}">
+<article class="expanded scrollover-scrollable" data-article-id="{{article_id}}" data-category="{{category}}">
     <header>
         <h1>{{title}}</h1>
         <p>{{relative_date}} in <a>{{category}}</a><!--  via {{source_name}}</p> -->

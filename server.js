@@ -196,6 +196,18 @@ app.get('/api/:locale/categories', [fetchCategories], function(req, res) {
     res.send(req.categories)
 })
 
+app.get('/:locale/categories.js', [fetchCategories], function(req, res) {
+    res.contentType('application/javascript')
+    res.render("mobile/categories.hogan", {
+        locals: {
+            categories: req.categories
+        },
+        layout: false
+    })
+
+/*     res.send(categories) */
+})
+
 app.get('/api/:locale/:category/:sort', [fetchArticles], function(req, res) {
 
     var response = {

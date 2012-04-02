@@ -67,7 +67,6 @@ var UINavigationStack = Backbone.View.extend({
     
     createPage: function() {
         var page = new UILayer({ x: 320, y: 0, width: 320, height: 460, animated: true, className: 'page' })
-        
         var header = new UILayer({ x: 0, y: 0, width: 320, height: 42, className: 'header' })
         
 /*
@@ -274,14 +273,14 @@ var UISplitView = Backbone.View.extend({
     },
     
     expand: function() {
-        this.master.scale = 1
+/*         this.master.scale = 1 */
         this.master.opacity = 1
         this.detail.frame.y = 140
         this.expanded = true
     },
     
     collapse: function() {
-        this.master.scale = 0.9
+/*         this.master.scale = 0.9 */
         this.master.opacity = 0
         this.detail.frame.y = 0
         this.expanded = false            
