@@ -25,6 +25,8 @@ var UINavigationStack = Backbone.View.extend({
         page.view = view
         page.content.html(view.el)
         
+        page.header.removeAllSublayers()
+        
         if(layers.length > 1) {
         
             var self = this            
@@ -32,13 +34,13 @@ var UINavigationStack = Backbone.View.extend({
             var back = UILayer({ x: 0, y: 0, width: 160, height: 42, className: 'left' })
             $(back.element).html('<span class="button button-back">Back</span>')
         
-            page.addSublayer(back)
+            page.header.addSublayer(back)
         }
         
         var toggle = UILayer({ x: 160, y: 0, width: 160, height: 42, className: 'right' })
         $(toggle.element).html('<span class="button button-toggle">Sections</span>')
         
-        page.addSublayer(toggle)
+        page.header.addSublayer(toggle)
 
         this.container.addSublayer(page)
         this.createPage()
@@ -66,13 +68,27 @@ var UINavigationStack = Backbone.View.extend({
     createPage: function() {
         var page = new UILayer({ x: 320, y: 0, width: 320, height: 460, animated: true, className: 'page' })
         
+        var header = new UILayer({ x: 0, y: 0, width: 320, height: 42, className: 'header' })
+        
+/*
         var header = $("<div class=\'header\'></div>")
         
         page.header = header; $(page.element).append(header)
+*/
 
+        page.header = header
+        page.addSublayer(header)
+        
+        var content = new UILayer({ x: 0, y: 42, width: 320, height: 418, className: 'content' })
+
+        page.content = $(content.element)
+        page.addSublayer(content)
+
+/*
         var content = $("<div class=\'content\'></div>")
 
         page.content = content; $(page.element).append(content)
+*/
         page.animationTimingFunction = "ease-out"
         
         page.on('webkitTransitionEnd', function() {
@@ -81,7 +97,7 @@ var UINavigationStack = Backbone.View.extend({
                     break
 
                 case 'content':
-                    page.content.addClass('scroll')                    
+/*                     page.content.addClass('scroll') */
                     page.view.viewDidAppear()
                     break
                 
@@ -110,13 +126,15 @@ var UINavigationStack = Backbone.View.extend({
             
             if(animated) {
                 layer.animationDuration = 230
+            } else {
+                layer.animationDuration = 0
             }
 
             if(position == 1) {
                 layer.frame.x = 320
                 layer.scale = 1
                 layer.content.addClass('hidden')
-                layer.content.removeClass('scroll')
+/*                 layer.content.removeClass('scroll') */
                 layer.role = 'placeholder'
             } else if (position == 2) {
                 layer.view.viewWillAppear()
@@ -129,7 +147,7 @@ var UINavigationStack = Backbone.View.extend({
                 layer.scale = 0.9
                 layer.role = 'history'
                 layer.content.addClass('hidden')
-                layer.content.removeClass('scroll')
+/*                 layer.content.removeClass('scroll') */
             }
         })
     }
@@ -256,14 +274,14 @@ var UISplitView = Backbone.View.extend({
     },
     
     expand: function() {
-/*         this.master.scale = 1 */
+        this.master.scale = 1
         this.master.opacity = 1
         this.detail.frame.y = 140
         this.expanded = true
     },
     
     collapse: function() {
-/*         this.master.scale = 0.9 */
+        this.master.scale = 0.9
         this.master.opacity = 0
         this.detail.frame.y = 0
         this.expanded = false            

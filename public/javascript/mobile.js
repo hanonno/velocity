@@ -32,7 +32,7 @@ basket
             this.category = options.category
             this.sort = options.sort
             this.page = 0
-            this.per_page = 40
+            this.per_page = 10
         },
         
         url: function() {        
@@ -44,7 +44,7 @@ basket
             this.per_page = response.pager.per_page
         
             return response.result
-        }
+        },
     })
     
     var ArticleListItem = Backbone.View.extend({
@@ -65,15 +65,16 @@ basket
 
     var ArticleListView = Backbone.View.extend({
         tagName: 'div',
-        className: 'result',
 
         initialize: function() {
             this.model.bind('reset', this.resetArticles, this)
             this.model.bind('add', this.addArticle, this)
+            this.model.bind('remove', this.removeArticle, this)
             
-            console.log(this.model)
-            
+            $(this.el).attr('id', 'article-scroll-view')
             $(this.el).html('<div class="loading">Loading…</div>')
+            
+            this.render()
         },
         
         viewWillAppear: function() {
@@ -93,6 +94,23 @@ basket
             view.render()
 
             this.$('.articles').append(view.el)
+            
+            this.scrollview.pullToRefreshEnd()            
+        },
+        
+        removeArticle: function(article) {
+            alert('implement removeArticle')
+        },
+        
+        refresh: function() {
+            this.model.refresh()
+            this.model.fetch()
+            
+            alert('refresh')
+        },
+        
+        loadMore: function() {
+            this.model.fetch({ add: true })
         },
         
         getModel: function(id) {
@@ -100,10 +118,27 @@ basket
         },
 
         resetArticles: function() {
-            $(this.el).html("<section><header>" + this.model.category + "</header></section><ul id='refresh' class='articles list condensed'></ul><div class='load-more'>Load more..</div>")
+            this.$('.articles').empty()        
             this.model.each(this.addArticle, this)
+        },
+        
+        render: function() {
+            $(this.el).html("<section><header>" + this.model.category + "</header></section><div class='pull-to-refresh'></div><div class='ptr-icon'></div><ul class='articles list scrollover-scrollable condensed'></ul><div class='load-more'>Load more..</div>")
             
-            ScrollOver(document.getElementById('refresh'))
+            var self = this
+            
+/*             this.scrollview = ScrollOver(document.getElementById('article-scroll-view'), { */
+            this.scrollview = ScrollOver(this.el, {
+                onPullToRefresh: function() {
+                    /* TODO: Refresh the list */
+                
+                    /* self.refresh() */ 
+                }
+            })
+            
+            this.$('.load-more').bind('click', function() {
+                self.loadMore()
+            })
         }
     })
     
@@ -165,8 +200,7 @@ basket
             this.model.each(this.addSection, this)
         }
     })
-    
-    
+
     var categoryList = new CategoryList()
 
     var sectionStack = new UISectionCarousel({ model: categoryList, x: 0, y: 0, width: 320, height: 140 })
@@ -192,7 +226,7 @@ basket
 
         categories: function() {
             this.category('volkskrant_frontpage')
-            splitView.expand()
+/*             splitView.expand() */
         },
 
         category: function(category) {
@@ -209,7 +243,7 @@ basket
             }
 
             navigationStack.clear()
-            navigationStack.push(window.articleListView, true)
+            navigationStack.push(window.articleListView, false)
             
             window.articleListView.viewDidAppear()
         },
@@ -246,7 +280,7 @@ basket
             navigationStack.pop()
         }
     })
-                
+
     tappable('.button-toggle', {
         noScroll: true,
         onTap: function(event, target) {

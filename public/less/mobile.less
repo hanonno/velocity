@@ -20,6 +20,7 @@
 @link-color: #3280C9;
 
 @import "library/news.less";
+@import "library/pull-to-refresh.less";
 
 @application-height: 300px;
 
@@ -67,9 +68,8 @@ ul, ol, li {
     background-color: @link-color;
 }
 
-.result {
-    height: 418px;
-    overflow: auto;
+.content {
+    overflow: auto !important;
     -webkit-overflow-scrolling: touch;
 }
 
@@ -164,12 +164,7 @@ div.section {
     .content {
         height: 420px;
 
-        -webkit-touch-callout: none;
-        
-        &.scroll {
-            overflow: auto;
-            -webkit-overflow-scrolling: touch; /* turn this off to improve scrolling performance */
-        }
+        -webkit-touch-callout: none;        
 
         &.hidden {
             visibility: hidden;

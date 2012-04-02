@@ -1,0 +1,160 @@
+/*** In the wrapper content will be scrolled ***/
+.scrollover-wrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    overflow-y: scroll;
+    -webkit-overflow-scrolling: touch;
+    -webkit-transform: translateZ(0);
+
+    .has-page-footer & {
+        bottom: 0px;
+    }
+}
+
+    /*** Scrolling class for >= iOS5 & devices that support fixed positioning ***/
+    .touch-scroll {
+        overflow-x: hidden;
+        overflow-y: scroll;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .scrollover.has-page-footer {
+        .content {
+            padding-bottom: 0;
+        }
+    }
+
+/***
+
+    The pull to refresh
+
+***/
+
+.pull-to-refresh {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 250px;
+    -webkit-transform: translate3d(0, -250px, 0);
+
+    /*** Show a small strip of 5px while refreshing ***/
+    &.refreshing {
+        -webkit-transform: translate3d(0, -250px, 0);
+    }
+}
+
+    /*** Arrow ***/
+    .ptr-icon {
+        position: fixed;
+        bottom: 5px; left: 0; right: 0;
+        width:24px; height:26px;
+        margin: 0 auto;
+        background:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAAZiS0dEAAAAAAAA+UO7fwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAd0SU1FB9sKGwsgF2OHwPcAAACdSURBVFjD7ZZLDoAgDAV5xPtfGVcmWIF+rGVhWRmDzOSltqC1VnauWjav43oAMNzQJaSKCrMDybnbE0iBFEiBFEiBFIB12nmwaQIII3ejuo6souA3ge49ouCrIkQE/CFA9uBr+DABbwnublgnH7lIcPBlI3orIYGznRCA6e+QwsWtWCOhgVtnAbzgKgGuJixwdQKzmrDC6TT8533gBMtIEZnse8yOAAAAAElFTkSuQmCC) 0 0 no-repeat;
+        -webkit-background-size:24px 26px;
+        background-size:24px 26px;
+        -webkit-transform: rotate3d(0, 0, 0, 0deg);
+        -webkit-transition-duration: 250ms;
+
+        &.refresh {
+            -webkit-transition-duration: 250ms;
+            -webkit-transform: rotate3d(0, 0, 0, -180deg);
+        }
+
+        .pull-to-refresh.refreshing & {
+            display:none;
+        }
+    }
+
+/***
+
+    Originally from http://codepo8.github.com/CSS3-Rainbow-Dividers/
+
+***/
+
+@-moz-keyframes knightrider {
+    from {
+      background-position: 100% 0;
+    }
+
+    50% {
+      background-position: 0 0;
+    }
+
+    to {
+      background-position: 100% 0;
+    }
+}
+
+@-webkit-keyframes knightrider {
+    from {
+      background-position: 100% 0;
+    }
+
+    50% {
+      background-position: 0 0;
+    }
+
+    to {
+      background-position: 100% 0;
+    }
+}
+
+@-ms-keyframes knightrider {
+    from {
+      background-position: 100% 0;
+    }
+
+    50% {
+      background-position: 0 0;
+    }
+
+    to {
+      background-position: 100% 0;
+    }
+}
+
+@keyframes knightrider {
+    from {
+      background-position: 80% 0;
+    }
+
+    50% {
+      background-position: 20% 0;
+    }
+
+    to {
+      background-position: 80% 0;
+    }
+}
+
+
+.pull-to-refresh{
+/*     background-image: -webkit-linear-gradient(top, $black-color, $light-gray-color 50%, $overlay-3 98%, $overlay-1); */
+    background-color: @light-gray-color;
+
+    &.animate {
+        -moz-animation:knightrider 2s forwards linear infinite;
+        -webkit-animation:knightrider 2s forwards linear infinite;
+        -ms-animation:knightrider 2s forwards linear infinite;
+        animation:knightrider 2s forwards linear infinite;
+
+        background-color: blue;
+        background-image:
+            -webkit-linear-gradient(
+                left,
+                #000,
+                #777 45%,
+                #f00 47%,
+                #00f 50%,
+                #f00 52%,
+                #777 55%,
+                #000
+            );
+
+        background-size: 200% auto;
+    }
+}
