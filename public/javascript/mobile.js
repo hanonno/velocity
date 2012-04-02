@@ -127,21 +127,20 @@ basket
         render: function() {
             $(this.el).append(this.template.render(this.model.toJSON()))
         }
-    })    
+    })
 
     
-    var SectionView = Backbone.View.extend({
-        tagName: 'div',
-        className: 'section',
+    var UISectionView = UIView.extend({        
+        initialize: function(params) {
+            UIView.prototype.initialize.call(this, params)
         
-        initialize: function() {
             this.template = new Hogan.Template(Templates['section'])        
             this.model.bind('change', this.render, this)
         },
 
         render: function() {
-            $(this.el).append(this.template.render(this.model.toJSON()))
-        }    
+            $(this.el).html(this.template.render(this.model.toJSON()))
+        }
     })
     
     var UISectionCarousel = UICarousel.extend({
@@ -155,7 +154,7 @@ basket
         },
         
         addSection: function(section) {
-            var sectionView = new SectionView({ model: section })
+            var sectionView = new UISectionView({ model: section, className: 'section' })
             
             sectionView.render()
         
@@ -193,6 +192,7 @@ basket
 
         categories: function() {
             this.category('volkskrant_frontpage')
+            splitView.expand()
         },
 
         category: function(category) {

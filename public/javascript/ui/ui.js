@@ -1,5 +1,14 @@
 var UILayer = Move.require('UILayer')
 
+var UIView = Backbone.View.extend({
+    initialize: function(params) {
+        this.layer = new UILayer({x: params.x, y: params.y, width: params.width, height: params.height, className: params.className })
+        this.el = this.layer.element
+        
+        Backbone.View.prototype.initialize.call(this, params)
+    }
+})
+
 var UINavigationStack = Backbone.View.extend({
 
     initialize: function() {
@@ -174,14 +183,16 @@ var UICarousel = Backbone.View.extend({
     },
     
     addPage: function(view) {
-        var page = this.container.addSublayer(UILayer({ x: 10, y: 10, width: this.pageWidth, height: this.pageHeight, className: 'section' }))
-        
-        $(page.element).html(view.el)
+        view.layer.frame.y = this.pageOffset
+        view.layer.frame.width = this.pageWidth
+        view.layer.frame.height = this.pageHeight
+    
+        this.container.addSublayer(view.layer)
                     
         this.recalculateLayout(0)
         this.scroller.setDimensions(0, 0, (this.container.sublayers.length * (self.pageWidth + self.pageOffset)) - 310, this.pageHeight + (this.pageOffset * 2))
         
-        return page
+        return view
     },
     
     updatePosition: function(page, t) {  
@@ -219,7 +230,7 @@ var UICarousel = Backbone.View.extend({
 
 var UISplitView = Backbone.View.extend({
     initialize: function(params) {
-        this.container = new UILayer({ x: 0, y: 0, width: 320, height: 460, className: 'splitView' })
+        this.container = new UILayer({ x: 0, y: 0, width: 320, height: 460, masksToBounds: true, className: 'splitView' })
         this.el = this.container.element
         
         this.master = params.master.container
@@ -245,11 +256,15 @@ var UISplitView = Backbone.View.extend({
     },
     
     expand: function() {
+/*         this.master.scale = 1 */
+        this.master.opacity = 1
         this.detail.frame.y = 140
         this.expanded = true
     },
     
     collapse: function() {
+/*         this.master.scale = 0.9 */
+        this.master.opacity = 0
         this.detail.frame.y = 0
         this.expanded = false            
     }

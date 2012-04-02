@@ -49,7 +49,8 @@ ul, ol, li {
 }
 
 .header {
-    background: 96px 0px url('/images/logo-telegraaf.png') no-repeat;
+    background: 96px 0px url('/images/logo-telegraaf-2x.png') no-repeat;
+    background-size: 120px 42px;
 }
 
 .load-more {
@@ -78,7 +79,7 @@ ul, ol, li {
 }
 
 .carousel {
-    background-color: @dark-gray-color;
+    background-color: @black-color;
 }
 
 div.section {
@@ -86,19 +87,35 @@ div.section {
 
     section {
         font-weight: bold;
-        padding: 50px 0px;
         text-align: center;
         
         a {
             color: @dark-gray-color;
         }
         
-        &.tappable-active {
-            color: @white-color;
-            background-color: @link-color;
+        .image {
+            width: 100px;
+            height: 120px;
             
-            a {
+            img {
+                width: 100%;
+                height: auto;
+            }
+            
+            header {
+                padding: 4px 0px;
+                position: absolute;
+                top: 0; left: 0; right: 0;
                 color: @white-color;
+                background-color: @dark-gray-color;
+            }
+        }
+        
+        &.tappable-active {
+            .image {
+                header {
+                    color: @link-color;
+                }
             }
         }
     }
@@ -106,6 +123,8 @@ div.section {
 
 .page {
     background-color: @off-white-color;
+    -webkit-border-top-left-radius: 8px;
+    -webkit-border-top-right-radius: 8px;
 
     .button {    
         color: @dark-gray-color;
@@ -138,6 +157,8 @@ div.section {
         height: 42px;
         
         border-bottom: 1px solid @divider-color;
+        -webkit-border-top-left-radius: 8px;
+        -webkit-border-top-right-radius: 8px;
     }
     
     .content {

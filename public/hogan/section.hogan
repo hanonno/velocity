@@ -1,3 +1,6 @@
 <section class="nav" data-name="{{name}}">
-    <a href="#/{{name}}">{{display_name}}</a>
+    <div class="image">
+        <header>{{display_name}}</header>    
+        <img src="/images/placeholders/section-frontpage-2x.png">
+    </div>
 </section>

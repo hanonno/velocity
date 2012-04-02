@@ -66,7 +66,7 @@ async.forEach(categories, function(category, category_parsed) {
                         var article_published = new Date(article.pubDate).getTime()
                         var article_rank = counts.Twitter + counts.Facebook.total_count + counts.LinkedIn
 
-                        if(article_rank > 0) { // Only save articles with more than one share
+/*                         if(article_rank > 0) { // Only save articles with more than one share */
 
                             var article_item = {
                                 'article_id': article_key,
@@ -117,18 +117,18 @@ async.forEach(categories, function(category, category_parsed) {
                                         else { /* console.log(result) */ }                                    
                                     })
                                     
-/*                                     console.log("============================== ARTICLE SAVED: " + article.title) */       
                                     article_counter--; console.log(article_counter + " : saved : " + moment(article_published).fromNow() + " : " + article.title)
        
                                     article_parsed()
                                 }
                             })
+/*
                         } else {
-/*                             console.log("============================== ARTICLE SKIPPED: " + article.title) */
                             article_counter--; console.log(article_counter + " : skipped : " + moment(article_published).fromNow() + " : " + article.title)
                             
                             article_parsed()
                         }
+*/
                     })    
                 })
             }, function(error) {

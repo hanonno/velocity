@@ -39,11 +39,7 @@ section {
         font-variant: small-caps;
         background-color: @divider-color;
         padding: 4px 0 8px 0;
-    }
-    
-    &.nav {
-        -webkit-box-shadow: 0 0 10px @black-color;
-    }
+    }    
 }
 
 div.article {
@@ -139,7 +135,13 @@ article {
     &.tappable-active {
         header {
             h1 { color: @white-color; }
-            p { color: @white-color; }
+            p { 
+                color: @white-color; 
+                
+                a {
+                    color: @white-color;
+                }
+            }
         }
     }
     

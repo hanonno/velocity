@@ -131,7 +131,10 @@ function fetchArticles(req, res, next) {
 
                     var paged_articles = sorted_articles.slice(start, end)
                     
-                    paged_articles[0].template = 'article_expanded'
+                    // Show the first article expanded
+                    if(paged_articles.length > 0) {
+                        paged_articles[0].template = 'article_expanded'
+                    }
                     
                     req.articles = paged_articles
                     
