@@ -42,6 +42,10 @@ basket
         parse: function(response) {
             this.page = response.pager.page + 1
             this.per_page = response.pager.per_page
+            
+            if(response.result.length < response.pager.per_page) {
+                this.trigger('complete')
+            }
         
             return response.result
         },
@@ -51,7 +55,6 @@ basket
         tagName: 'li',
         
         initialize: function() {
-        
             var template = this.model.get('template')
         
             this.template = new Hogan.Template(Templates[template])        
@@ -70,6 +73,7 @@ basket
             this.model.bind('reset', this.resetArticles, this)
             this.model.bind('add', this.addArticle, this)
             this.model.bind('remove', this.removeArticle, this)
+            this.model.bind('complete', this.completed, this)
             
             $(this.el).attr('id', 'article-scroll-view')
             $(this.el).html('<div class="loading">Loading…</div>')
@@ -87,7 +91,11 @@ basket
             this.model.fetch()
             this.isLoaded = true
         },
-
+        
+        completed: function() {
+            this.$('.load-more').remove()
+        },
+        
         addArticle: function(article, index) {
             var view = new ArticleListItem({ model: article })
 
@@ -95,7 +103,8 @@ basket
 
             this.$('.articles').append(view.el)
             
-            this.scrollview.pullToRefreshEnd()            
+            this.scrollview.pullToRefreshEnd()
+            this.$('.load-more').text("Load more..")
         },
         
         removeArticle: function(article) {
@@ -110,6 +119,7 @@ basket
         },
         
         loadMore: function() {
+            this.$('.load-more').text("Loading..")
             this.model.fetch({ add: true })
         },
         
@@ -118,16 +128,13 @@ basket
         },
 
         resetArticles: function() {
-            this.$('.articles').empty()        
+            this.$('.articles').empty()
             this.model.each(this.addArticle, this)
         },
         
         render: function() {
-            $(this.el).html("<section><header>" + this.model.category + "</header></section><div class='pull-to-refresh'></div><div class='ptr-icon'></div><ul class='articles list scrollover-scrollable condensed'></ul><div class='load-more'>Load more..</div>")
+            $(this.el).html("<section><header>" + this.model.category + "</header></section><div class='pull-to-refresh'></div><ul class='articles list scrollover-scrollable condensed'></ul><div class='load-more'>Load more..</div>")
             
-            var self = this
-            
-/*             this.scrollview = ScrollOver(document.getElementById('article-scroll-view'), { */
             this.scrollview = ScrollOver(this.el, {
                 onPullToRefresh: function() {
                     /* TODO: Refresh the list */
@@ -136,7 +143,9 @@ basket
                 }
             })
             
-            this.$('.load-more').bind('click', function() {
+            var self = this
+            
+            this.$('.load-more').on('click', function() {
                 self.loadMore()
             })
         }
