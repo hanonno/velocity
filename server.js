@@ -5,6 +5,7 @@ async = require('async')
 moment = require('moment')
 redis = require('redis').createClient()
 rss = require('rss')
+argv = require('optimist').argv
 
 Feedparser = require('feedparser')
 
@@ -308,4 +309,13 @@ app.get('/mobile/:section', function(req, res) {
 
 app.get('/templates.js', hulk.templates)
 
-app.listen(3000)
+
+var port = 3000
+
+if(argv.port) {
+    port = argv.port
+}
+
+app.listen(port)
+
+console.log('server is listening on port ' + port)
