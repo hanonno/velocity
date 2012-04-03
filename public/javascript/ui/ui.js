@@ -9,6 +9,13 @@ var UIView = Backbone.View.extend({
     }
 })
 
+var UIScreen = UIView.extend({
+    initialize: function() {
+        this.layer = new UILayer({ x: 0, y: 0, width: screen.width, height: screen.height, className: 'screen' })
+        this.el = this.layer.element
+    }
+})
+
 var UINavigationStack = Backbone.View.extend({
 
     initialize: function() {

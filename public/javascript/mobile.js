@@ -1,14 +1,7 @@
-/* $('document').ready(function() { */
-
-function application() {
-
-basket
-    .require('/javascript/library/scroller/Raf.js')
-    .require('/javascript/library/scroller/Animate.js')
-    .require('/javascript/library/scroller/Scroller.js')
-    .require('/javascript/library/tappable/tappable.js')
-    .wait(function() {
+$('document').ready(function() {
     
+    var host = 'http://hanno.hyves.org'
+
     var Category = Backbone.Model.extend({
         idAttribute: 'name'
     })
@@ -17,7 +10,7 @@ basket
         model: Category,
         
         url: function() {
-            return '/api/nl/categories'
+            return host + '/api/nl/categories'
         }
     })
     
@@ -36,7 +29,7 @@ basket
         },
         
         url: function() {        
-            return '/api/nl/' + this.category + '/' + this.sort + '?page=' + this.page + '&per_page=' + this.per_page
+            return host + '/api/nl/' + this.category + '/' + this.sort + '?page=' + this.page + '&per_page=' + this.per_page
         },
         
         parse: function(response) {
@@ -346,5 +339,7 @@ basket
     var applicationRouter = new ApplicationRouter()
 
     Backbone.history.start({ pushState:true, root: '/mobile/' })
+    
+    applicationRouter.category('overview')
+    
 })
-}
