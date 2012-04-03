@@ -1,6 +1,7 @@
 var categories = [
     {{#categories}}
-    {name:'{{name}}',
+    {   
+        name:'{{name}}',
         display_name:'{{display_name}}',
         locale:'{{locale}}'
     },
