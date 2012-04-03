@@ -11,7 +11,7 @@
 					<key>kind</key>
 					<string>software-package</string>
 					<key>url</key>
-					<string>http://light.hyveshq:3000/apps/Telegraaf.ipa</string>
+					<string>http://hanno.hyves.org/apps/Telegraaf.ipa</string>
 				</dict>
 			</array>
 			<key>metadata</key>
@@ -21,7 +21,7 @@
 				<key>kind</key>
 				<string>software</string>
 				<key>subtitle</key>
-				<string>De nummer 1 in nieuws.</string>
+				<string>De nummer 1 in nieuws!</string>
 				<key>title</key>
 				<string>Telegraaf</string>
 			</dict>
