@@ -131,7 +131,7 @@ $('document').ready(function() {
         render: function() {
         
             var category = categoryList.get(this.model.category) 
-            var category_name = 'test'
+            var category_name = 'Voorpagina'
 
             if(category != undefined) {
                 category_name = category.get('display_name')
