@@ -20,7 +20,11 @@
     -webkit-overflow-scrolling: touch;
     -webkit-transform: translateZ(0);
 
-    .has-page-footer & {
+    &.has-header {
+        top: 30px;
+    }
+
+    &.has-footer {
         bottom: 0px;
     }
 }
@@ -145,7 +149,7 @@
 
 .pull-to-refresh{
 /*     background-image: -webkit-linear-gradient(top, $black-color, $light-gray-color 50%, $overlay-3 98%, $overlay-1); */
-    background-color: @light-gray-color;
+/*     background-color: @light-gray-color; */
 
     &.animate {
         -moz-animation:knightrider 2s forwards linear infinite;

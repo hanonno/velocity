@@ -1,6 +1,7 @@
 $('document').ready(function() {
     
-    var host = 'http://hanno.hyves.org'
+/*     var host = 'http://hanno.hyves.org' */
+    var host = 'http://light.hyveshq:3000' 
 
     var Category = Backbone.Model.extend({
         idAttribute: 'name'
@@ -74,7 +75,7 @@ $('document').ready(function() {
             this.model.bind('remove', this.removeArticle, this)
             this.model.bind('complete', this.completed, this)
             
-            $(this.el).attr('id', 'article-scroll-view')
+/*             $(this.el).attr('id', 'article-scroll-view') */
             $(this.el).html('<div class="loading">Loading…</div>')
             
             this.render()
@@ -131,7 +132,7 @@ $('document').ready(function() {
         render: function() {
         
             var category = categoryList.get(this.model.category) 
-            var category_name = 'Voorpagina'
+            var category_name = 'voorpagina'
 
             if(category != undefined) {
                 category_name = category.get('display_name')
@@ -139,11 +140,15 @@ $('document').ready(function() {
                 
             }
             
-            $(this.el).html("<div class='pull-to-refresh'><div class='ptr-icon'></div></div><section><header>" + category_name + "</header></section><ul class='articles list scrollover-scrollable condensed'></ul><div class='load-more'>Load more..</div>")
+            $(this.el).html("<section><header>" + category_name + "<span class='date'>woensdag, 4 april</span></header></section><div class='scroll-view has-header'><div class='pull-to-refresh'><div class='ptr-icon'></div></div><ul class='articles list scrollover-scrollable condensed'></ul><div class='load-more'>Load more..</div></div>")
             
             var self = this
             
-            this.scrollview = ScrollOver(this.el, {
+            var element = this.$('.scroll-view')[0]
+            
+            console.log(element)
+            
+            this.scrollview = ScrollOver(element, {
                 onPullToRefresh: function() {
                     self.refresh()
                 }
@@ -184,7 +189,6 @@ $('document').ready(function() {
             })
         }
     })
-
     
     var UISectionView = UIView.extend({        
         initialize: function(params) {
@@ -224,7 +228,7 @@ $('document').ready(function() {
 
     var categoryList = new CategoryList(categories)
 
-    var sectionStack = new UISectionCarousel({ model: categoryList, x: 0, y: 0, width: 320, height: 140 })
+    var sectionStack = new UISectionCarousel({ model: categoryList, x: 0, y: 0, width: 320, height: 100 })
     var navigationStack = new UINavigationStack()
     
     var splitView = new UISplitView({ master: sectionStack, detail: navigationStack })
@@ -247,7 +251,7 @@ $('document').ready(function() {
 
         categories: function() {
             this.category('volkskrant_frontpage')
-/*             splitView.expand() */
+            splitView.expand()
         },
 
         category: function(category) {

@@ -91,8 +91,11 @@ async.forEach(categories, function(category, category_parsed) {
                                     
                                     var components = article_item.image_url.split('/')
                                     var filename = components.pop().replace('media_s', 'media_xl')
-
                                     
+                                    var category_image_key = article_item.category + ':image'
+                                    
+                                    redis.set(category_image_key, article_item.image_url)
+
                                     article_item.large_image_url = components.join('/') + '/' + filename
                                 }
                             } else {

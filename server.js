@@ -198,15 +198,28 @@ app.get('/api/:locale/categories', [fetchCategories], function(req, res) {
 })
 
 app.get('/:locale/categories.js', [fetchCategories], function(req, res) {
-    res.contentType('application/javascript')
-    res.render("mobile/categories.hogan", {
-        locals: {
-            categories: req.categories
-        },
-        layout: false
-    })
 
-/*     res.send(categories) */
+    async.map(req.categories, function(category, callback) {
+    
+        var category_image_key = category.name + ':image'
+        
+        redis.get(category_image_key, function(error, result) {
+            category.image_url = result        
+            
+            callback(null, category)
+        })
+    }, function(error, fixed_categories) {
+    
+        console.log(fixed_categories)
+    
+        res.contentType('application/javascript')
+        res.render("mobile/categories.hogan", {
+            locals: {
+                categories: fixed_categories
+            },
+            layout: false
+        })
+    })
 })
 
 app.get('/api/:locale/:category/:sort', [fetchArticles], function(req, res) {

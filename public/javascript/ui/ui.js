@@ -9,12 +9,14 @@ var UIView = Backbone.View.extend({
     }
 })
 
+/*
 var UIScreen = UIView.extend({
     initialize: function() {
         this.layer = new UILayer({ x: 0, y: 0, width: screen.width, height: screen.height, className: 'screen' })
         this.el = this.layer.element
     }
 })
+*/
 
 var UINavigationStack = Backbone.View.extend({
 
@@ -28,7 +30,7 @@ var UINavigationStack = Backbone.View.extend({
     push: function(view, animated) {
         var layers = this.container.sublayers
         var page = layers[layers.length - 1]
-
+        
         page.view = view
         page.content.html(view.el)
         
@@ -166,9 +168,9 @@ var UICarousel = Backbone.View.extend({
         this.width = params.width
         this.height = params.height
         
+        this.pageOffset = 10        
         this.pageWidth = 100
-        this.pageHeight = 120
-        this.pageOffset = 10
+        this.pageHeight = this.height
     
         this.container = UILayer({ x: this.x, y: this.y, width: this.width, height: (this.pageHeight * 2), perspective: 1000, className: 'carousel', masksToBounds: true })
         
