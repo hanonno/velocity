@@ -62,7 +62,13 @@ div.article {
     padding: 10px;
 }
 
+ul.articles {
+    min-height: 390px;
+}
+
 article {
+
+    -webkit-transform: translateZ(0); /* This prevents the list from flickering when loading more articles */
     overflow: hidden;
     padding: 10px;
 

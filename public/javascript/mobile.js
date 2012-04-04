@@ -1,7 +1,7 @@
 $('document').ready(function() {
     
-/*     var host = 'http://hanno.hyves.org' */
-    var host = 'http://light.hyveshq:3000' 
+    var host = 'http://hanno.hyves.org'
+/*     var host = 'http://light.hyveshq:3000' */
 
     var Category = Backbone.Model.extend({
         idAttribute: 'name'
