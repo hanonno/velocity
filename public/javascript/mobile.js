@@ -1,7 +1,7 @@
 $('document').ready(function() {
     
-    var host = 'http://hanno.hyves.org'
-/*     var host = 'http://light.hyveshq:3000'  */
+/*     var host = 'http://hanno.hyves.org' */
+    var host = 'http://light.hyveshq:3000' 
 
     var Category = Backbone.Model.extend({
         idAttribute: 'name'
@@ -140,7 +140,7 @@ $('document').ready(function() {
                 
             }
             
-            $(this.el).html("<section><header>" + category_name + "<span class='date'>woensdag, 4 april</span></header></section><div class='scroll-view has-header'><div class='pull-to-refresh'><div class='ptr-icon'></div></div><ul class='articles list scrollover-scrollable condensed'></ul><div class='load-more'>Load more..</div></div>")
+            $(this.el).html("<section><header>" + category_name + "<span class='date'></span></header></section><div class='scroll-view has-header'><div class='pull-to-refresh'><div class='ptr-icon'></div></div><ul class='articles list scrollover-scrollable condensed'></ul><div class='load-more'>Load more..</div></div>")
             
             var self = this
             
