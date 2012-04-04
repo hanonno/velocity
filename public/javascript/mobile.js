@@ -228,7 +228,7 @@ $('document').ready(function() {
 
     var categoryList = new CategoryList(categories)
 
-    var sectionStack = new UISectionCarousel({ model: categoryList, x: 0, y: 0, width: 320, height: 100 })
+    var sectionStack = new UISectionCarousel({ model: categoryList, x: 0, y: 0, width: 320, height: 106 })
     var navigationStack = new UINavigationStack()
     
     var splitView = new UISplitView({ master: sectionStack, detail: navigationStack })

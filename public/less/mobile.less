@@ -78,7 +78,11 @@ ul, ol, li {
 }
 
 div.section {
-    background-color: @paper-color;
+    background-color: transparent;
+    
+    .tappable-active {
+        background-color: transparent;
+    }
 
     section {
         font-weight: bold;
@@ -89,8 +93,8 @@ div.section {
         }
         
         .image {
-            width: 100px;
-            height: 120px;
+/*             width: 100px; */
+/*             height: 120px; */
             
             img {
                 width: 100%;
@@ -155,6 +159,8 @@ div.section {
         }    
 
     .header {
+        border-bottom: 1px solid @light-gray-color;
+    
         background-size: 120px 42px;
         background-repeat: no-repeat;
         background-position: 106px 0;
@@ -175,9 +181,9 @@ div.section {
         -webkit-touch-callout: none;        
 
         &.hidden {
-/*             visibility: hidden; */
+            visibility: hidden;
 /*             overflow: visible; */
-            display: none;
+/*             display: none; */
         }
         
         ul.list {               

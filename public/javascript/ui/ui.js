@@ -170,9 +170,9 @@ var UICarousel = Backbone.View.extend({
         
         this.pageOffset = 10        
         this.pageWidth = 100
-        this.pageHeight = this.height
+        this.pageHeight = this.height - (this.pageOffset * 2)
     
-        this.container = UILayer({ x: this.x, y: this.y, width: this.width, height: (this.pageHeight * 2), perspective: 1000, className: 'carousel', masksToBounds: true })
+        this.container = UILayer({ x: this.x, y: this.y, width: this.width, height: this.height, perspective: 1000, className: 'carousel', masksToBounds: true })
         
         self = this            
         
@@ -284,7 +284,7 @@ var UISplitView = Backbone.View.extend({
     expand: function() {
         this.master.scale = 1
         this.master.opacity = 1
-        this.detail.frame.y = 140
+        this.detail.frame.y = this.master.frame.height
         this.expanded = true
     },
     
