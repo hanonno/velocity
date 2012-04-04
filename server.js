@@ -209,9 +209,6 @@ app.get('/:locale/categories.js', [fetchCategories], function(req, res) {
             callback(null, category)
         })
     }, function(error, fixed_categories) {
-    
-        console.log(fixed_categories)
-    
         res.contentType('application/javascript')
         res.render("mobile/categories.hogan", {
             locals: {
