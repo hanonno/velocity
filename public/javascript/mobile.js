@@ -1,7 +1,7 @@
 $('document').ready(function() {
     
-/*     var host = 'http://hanno.hyves.org' */
-    var host = 'http://light.hyveshq:3000'
+    var host = 'http://hanno.hyves.org'
+/*     var host = 'http://light.hyveshq:3000' */
     
     var Article = Backbone.Model.extend({
         idAttribute: 'article_id'
@@ -226,7 +226,7 @@ $('document').ready(function() {
 
     var categoryList = new CategoryList(categories)
 
-    var sectionStack = new UISectionCarousel({ model: categoryList, x: 0, y: 0, width: 320, height: 106 })
+    var sectionStack = new UISectionCarousel({ model: categoryList, x: 0, y: 0, width: 320, height: 150 })
     var navigationStack = new UINavigationStack()
     
     var splitView = new UISplitView({ master: sectionStack, detail: navigationStack })
@@ -249,7 +249,7 @@ $('document').ready(function() {
 
         categories: function() {
             this.category('volkskrant_frontpage')
-/*             splitView.expand() */
+            splitView.expand()
         },
 
         category: function(category) {
