@@ -3,6 +3,7 @@ var categories = [
     {   
         name:'{{name}}',
         display_name:'{{display_name}}',
+        display_name_short:'{{display_name_short}}',
         locale:'{{locale}}',
         image_url:'{{image_url}}'
     },

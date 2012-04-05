@@ -21,7 +21,7 @@ app.configure(function(){
     app.register('.hogan', hulk)
 })
 
-categories = require('./config/volkskrant.js')
+categories = require('./config/telegraaf.js')
 sorts = [
     { 
         'name': 'velocity',

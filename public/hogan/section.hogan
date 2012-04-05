@@ -1,6 +1,6 @@
 <section class="nav" data-name="{{name}}">
     <div class="image">
-        <header>{{display_name}}</header>    
+        <header>{{display_name_short}}</header>    
         <img src="{{image_url}}">
     </div>
 </section>

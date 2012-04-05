@@ -83,7 +83,7 @@ article {
         
         > .media {
             float: right;
-            width: 69px;
+            width: 51px;
             
             > p {
                 display: none;                
@@ -165,22 +165,51 @@ article {
                 }
             }
         }
+        
+        section {
+            p {
+                color: @white-color;
+            }
+        }
     }
     
     &.condensed {
         > header {
             margin: 0;
+            
+            > h1 {
+                font-size: @header-font-size-small;
+            }
         
             > .media {
                 margin: 0 0 0 10px;                
             }
             
             > p {
-                margin-top: 4px;
+                margin-top: 0;
             }
         }
     
-        > section { display: none; }
+        > section { 
+            p {
+                font-size: @body-text-font-size-small;            
+                font-weight: normal;
+                display: none; 
+                
+                &:first-of-type {
+                    margin: 2px 0 0 0;
+                
+                    display: block;
+                    
+                	text-overflow: ellipsis;
+                	overflow: hidden;
+                	white-space: pre-line;
+                    
+                    max-height: 38px;                    
+                }
+            }
+        }
+        
         > footer { display: none; }
     }
     

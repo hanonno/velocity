@@ -19,7 +19,7 @@ process.addListener("uncaughtException", function (error) {
     console.trace();
 });
 
-var categories = require('./config/volkskrant.js')
+var categories = require('./config/telegraaf.js')
 
 var active_category = argv.cat
 
@@ -87,16 +87,25 @@ async.forEach(categories, function(category, category_parsed) {
                             
                             if(article.enclosures.length > 0) {
                                 if(article.enclosures[0].type == 'image/png' || article.enclosures[0].type == 'image/jpeg') {
+                                
                                     article_item.image_url = article.enclosures[0].url
-                                    
+
+                                    // Parse telegraaf media                                    
                                     var components = article_item.image_url.split('/')
-                                    var filename = components.pop().replace('media_s', 'media_xl')
+                                    var image_filename = components.pop()
+                                                                        
+                                    var large_image_url = components.join('/') + '/' + image_filename.replace('c.jpg', 'a.jpg')
                                     
+                                    if(large_image_url) { article_item.large_image_url = large_image_url }
+                                    
+                                    var square_image_url = components.join('/') + '/' + image_filename.replace('c.jpg', 'z.v4.jpg')
+                                    
+                                    if(square_image_url) { article_item.square_image_url = square_image_url }                                    
+
+                                    // Save an image for the category view                                    
                                     var category_image_key = article_item.category + ':image'
                                     
-                                    redis.set(category_image_key, article_item.image_url)
-
-                                    article_item.large_image_url = components.join('/') + '/' + filename
+                                    redis.set(category_image_key, article_item.square_image_url)
                                 }
                             } else {
                                 redis.hdel(article_key, 'image_url')

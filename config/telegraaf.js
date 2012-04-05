@@ -1,54 +1,51 @@
 module.exports = categories = [
     {
         'name': 'telegraaf_frontpage',
-        'display_name': 'Voorpagina',
+        'display_name': 'voorpagina',
+        'display_name_short': 'Voorpagina',
         'locale': 'nl',
         'feeds': [
-            'http://www.telegraaf.nl/rss/binnenland.xml',
-            'http://www.telegraaf.nl/rss/buitenland.xml'
+            'http://www.telegraaf.nl/index.jsp?view=rss&showimage=true&imageversion=c&showfulltext=true',
         ]
     }, {
         'name': 'telegraaf_business',
-        'display_name': 'DFT',        
+        'display_name': 'de financiële telegraaf',
+        'display_name_short': 'DFT',        
         'locale': 'nl',
         'feeds': [
-            'http://www.telegraaf.nl/rss/dft.xml',
-            'http://www.telegraaf.nl/rss/dft.stemming.damrak.xml',
-            'http://www.telegraaf.nl/rss/dft.goeroes.xml'
+            'http://www.telegraaf.nl/dft/index.jsp?view=rss&showimage=true&imageversion=c&showfulltext=true',
         ]
     }, {
         'name': 'telegraaf_tech',
-        'display_name': 'Digitaal',
+        'display_name': 'digitaal',
+        'display_name_short': 'Digitaal',        
         'locale': 'nl',
         'feeds': [
-            'http://www.telegraaf.nl/rss/digitaal.xml',
-            'http://www.telegraaf.nl/rss/digitaal.games.xml'
+            'http://www.telegraaf.nl/digitaal/index.jsp?view=rss&showimage=true&imageversion=c&showfulltext=true',
         ]
     }, {
         'name': 'telegraaf_prive',
-        'display_name': 'Prive',
+        'display_name': 'privé',
+        'display_name_short': 'Privé',
         'locale': 'nl',
         'feeds': [
-            'http://www.telegraaf.nl/rss/prive.xml'
+            'http://www.telegraaf.nl/prive/index.jsp?view=rss&showimage=true&imageversion=c&showfulltext=true'
         ]
     }, {
         'name': 'telegraaf_sports',
-        'display_name': 'Telesport',
+        'display_name': 'telesport',
+        'display_name_short': 'Telesport',
         'locale': 'nl',
         'feeds': [
-            'http://www.telegraaf.nl/rss/telesport.xml',
-            'http://www.telegraaf.nl/rss/telesport.voetbal.xml',
-            'http://www.telegraaf.nl/rss/telesport.tennis.xml',
-            'http://www.telegraaf.nl/rss/telesport.wielersport.xml'
+            'http://www.telegraaf.nl/telesport/index.jsp?view=rss&showimage=true&imageversion=c&showfulltext=true',
         ]
     }, {
         'name': 'telegraaf_woman',
-        'display_name': 'Vrouw',
+        'display_name': 'vrouw',
+        'display_name_short': 'Vrouw',        
         'locale': 'nl',
         'feeds': [
-            'http://www.telegraaf.nl/rss/vrouw.xml',
-            'http://www.telegraaf.nl/rss/vrouw.actueel.xml',
-            'http://www.telegraaf.nl/rss/vrouw.columns.xml',            
+            'http://www.telegraaf.nl/vrouw/index.jsp?view=rss&showimage=true&imageversion=c&showfulltext=true',
         ]
     }
 ]
