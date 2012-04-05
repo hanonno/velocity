@@ -249,7 +249,7 @@ $('document').ready(function() {
 
         categories: function() {
             this.category('volkskrant_frontpage')
-            splitView.expand()
+/*             splitView.expand() */
         },
 
         category: function(category) {
