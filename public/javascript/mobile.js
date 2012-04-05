@@ -2,18 +2,6 @@ $('document').ready(function() {
     
     var host = 'http://hanno.hyves.org'
 /*     var host = 'http://light.hyveshq:3000' */
-
-    var Category = Backbone.Model.extend({
-        idAttribute: 'name'
-    })
-    
-    var CategoryList = Backbone.Collection.extend({
-        model: Category,
-        
-        url: function() {
-            return host + '/api/nl/categories'
-        }
-    })
     
     var Article = Backbone.Model.extend({
         idAttribute: 'article_id'
@@ -48,6 +36,18 @@ $('document').ready(function() {
             this.reset()
             this.page = 0
             this.fetch()
+        }
+    })
+    
+    var Category = Backbone.Model.extend({
+        idAttribute: 'name'
+    })
+    
+    var CategoryList = Backbone.Collection.extend({
+        model: Category,
+        
+        url: function() {
+            return host + '/api/nl/categories'
         }
     })
     
@@ -235,7 +235,7 @@ $('document').ready(function() {
     
     splitView.collapse()
     
-    $('#screen').append(splitView.el)
+    $('#viewporter').append(splitView.el)
 
     window.articleListViews = []
     window.articleListView = null
