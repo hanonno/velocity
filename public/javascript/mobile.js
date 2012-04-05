@@ -233,7 +233,7 @@ $('document').ready(function() {
     
     splitView.collapse()
     
-    $('#viewporter').append(splitView.el)
+    $('#screen').append(splitView.el)
 
     window.articleListViews = []
     window.articleListView = null

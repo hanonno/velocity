@@ -6,6 +6,6 @@
         </div>
         {{/image_url}}    
         <h1>{{title}}</h1>
-        <p>{{relative_date}}<!--  in <a>{{category}}</a> --><!--  via {{source_name}}</p> -->
+        <p>{{relative_date}}<!--  in <a>{{category}}</a> via {{source_name}}</p> -->
     </header>
 </article>
