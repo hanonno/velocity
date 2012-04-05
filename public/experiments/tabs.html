@@ -1,5 +1,10 @@
+<!DOCTYPE html>
 <html>
-	<head>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+        <meta name="viewport" content="width=320,initial-scale=1.0,user-scalable=no" />
 		<title></title>
 <!--
         <link rel="stylesheet/less" type="text/css" href="../public/less/light.less">
@@ -41,7 +46,7 @@
             }
             
             .grid > section {
-                background-color: hsla(0, 0%, 90%, 0.5);
+                background-color: hsla(0, 0%, 96%, 0.5);
                 overflow: hidden;
             }
             
@@ -52,7 +57,7 @@
                 width: 600px;
                 min-height: 60px;
                 
-                background-color: hsla(0, 0%, 99%, 0.5);
+/*                 background-color: hsla(0, 0%, 99%, 0.5); */
                 
                 float: left;
                 
@@ -90,12 +95,15 @@
             .grid > section.single > article {
                 width: 600px;
             }
-            
+                            
                 .grid > section.single > article > header > .media {
-                    width: 120px;
                     float: left;
                     margin: 0 10px 0 0;
-                }            
+                }
+                
+                .grid > section.single > article > section > p {
+                    display: block;
+                }                
             
             .grid > section.double > article {
                 width: 300px;
@@ -138,23 +146,51 @@
 
             /* Small */
             @media only screen and (max-width: 480px) {
+            
+                h1 {
+                    font-size: 14px;
+                }
+                
+                p {
+                    font-size: 13px;
+                }
+            
                 .grid {
-                    width: 320px;
+                    width: 300px;
+                    padding: 0;
+                }
+                
+                .grid article:last-of-type {
+                    border-right: none;
                 }
                 
                 .grid > section.single > article {
                     width: 300px;
+                    
+                    border-right: none;                    
                 }
                 
                     .grid > section.single > article > header > .media {
                         width: 120px;
                         float: left;
                         margin: 0 10px 0 0;
-                    }                
+                    }
+                    
+                    .grid > section.single > article > section > p {
+                        display: none;
+                    }
+                    
+                        .grid > section.single > article > section > p:first-of-type {
+                            display: block;
+                        }                        
 
                 .grid > section.double > article {
                     width: 150px;
                 }
+
+                    .grid > section.double > article > header > .media {
+                        margin: 0 0 10px 0;
+                    }
                 
                 .grid > section.double.condensed > article > header > .media {
                     display: none;
@@ -162,16 +198,19 @@
                 
                 .grid > section.triple > article {
                     width: 300px;
-                    height: 120px;
+                    height: 80px;
+                    
+                    border-right: none;
                 }
                 
                     .grid > section.triple > article > header > .media {
+                        width: 60px;
                         float: right;
                         margin: 0 0 0 10px;
                     }
                     
                     .grid > section.triple > article > section > p {
-                        max-height: 56px;
+                        max-height: 21px;
                     }
             }
             
@@ -284,7 +323,6 @@
                 <article class="nav condensed" data-article-id="article:070833e4d5f466cd3408921f37ade99b7feff33d" data-category="volkskrant_frontpage">
                     <header>
                         <div class="media">
-                            <img src="">
                         </div>
                         <h1>Surinaams parlement stemt in met amnestiewet</h1>
                         <!-- <p>8 uur geleden in <a>volkskrant_frontpage</a> via www.volkskrant.nl</p> -->
@@ -336,7 +374,6 @@
                 <article class="nav condensed" data-article-id="article:070833e4d5f466cd3408921f37ade99b7feff33d" data-category="volkskrant_frontpage">
                     <header>
                         <div class="media">
-                            <img src="">
                         </div>
                         <h1>Surinaams parlement stemt in met amnestiewet</h1>
                         <!-- <p>8 uur geleden in <a>volkskrant_frontpage</a> via www.volkskrant.nl</p> -->
@@ -348,7 +385,6 @@
                 <article class="nav condensed" data-article-id="article:02a6f0721ab851c2417cba6ec985e812935c6b4e" data-category="telegraaf_prive">
                     <header>
                         <div class="media">
-                            <img src="">
                         </div>
                         <h1>Frans Bauer bang voor stotteren</h1>
                         <!-- <p>4 uur geleden in <a>telegraaf_prive</a> via www.telegraaf.nl</p> -->
