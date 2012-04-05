@@ -7,6 +7,8 @@ redis = require('redis').createClient()
 rss = require('rss')
 argv = require('optimist').argv
 
+moment.lang('nl')
+
 Feedparser = require('feedparser')
 
 app.configure(function(){

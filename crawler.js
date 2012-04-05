@@ -100,7 +100,7 @@ async.forEach(categories, function(category, category_parsed) {
                                     
                                     var square_image_url = components.join('/') + '/' + image_filename.replace('c.jpg', 'z.v4.jpg')
                                     
-                                    if(square_image_url) { article_item.square_image_url = square_image_url }                                    
+                                    if(square_image_url) { article_item.square_image_url = square_image_url }
 
                                     // Save an image for the category view                                    
                                     var category_image_key = article_item.category + ':image'

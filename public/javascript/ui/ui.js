@@ -41,13 +41,13 @@ var UINavigationStack = Backbone.View.extend({
             var self = this            
          
             var back = UILayer({ x: 0, y: 0, width: 160, height: 42, className: 'left' })
-            $(back.element).html('<span class="button button-back">Back</span>')
+            $(back.element).html('<span class="button button-back">Terug</span>')
         
             page.header.addSublayer(back)
         }
         
         var toggle = UILayer({ x: 160, y: 0, width: 160, height: 42, className: 'right' })
-        $(toggle.element).html('<span class="button button-toggle">Sections</span>')
+        $(toggle.element).html('<span class="button button-toggle">Secties</span>')
         
         page.header.addSublayer(toggle)
 

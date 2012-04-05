@@ -1,7 +1,7 @@
 $('document').ready(function() {
     
-    var host = 'http://hanno.hyves.org'
-/*     var host = 'http://light.hyveshq:3000' */
+/*     var host = 'http://hanno.hyves.org' */
+    var host = 'http://light.hyveshq:3000'
     
     var Article = Backbone.Model.extend({
         idAttribute: 'article_id'
@@ -104,7 +104,7 @@ $('document').ready(function() {
             this.$('.articles').append(view.el)
             
             this.scrollview.pullToRefreshEnd()
-            this.$('.load-more').text("Load more..")
+            this.$('.load-more').text("Meer artikelen..")
         },
         
         removeArticle: function(article) {
@@ -116,7 +116,7 @@ $('document').ready(function() {
         },
         
         loadMore: function() {
-            this.$('.load-more').text("Loading..")
+            this.$('.load-more').text("Laden..")
             this.model.fetch({ add: true })
         },
         
@@ -140,7 +140,7 @@ $('document').ready(function() {
                 
             }
             
-            $(this.el).html("<section><header>" + category_name + "<span class='date'></span></header></section><div class='scroll-view has-header'><div class='pull-to-refresh'><div class='ptr-icon'></div></div><ul class='articles list scrollover-scrollable condensed'></ul><div class='load-more'>Load more..</div></div>")
+            $(this.el).html("<section><header>" + category_name + "<span class='date'></span></header></section><div class='scroll-view has-header'><div class='pull-to-refresh'><div class='ptr-icon'></div></div><ul class='articles list scrollover-scrollable condensed'></ul><div class='load-more'>Meer artikelen..</div></div>")
             
             var self = this
             
