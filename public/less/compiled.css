@@ -511,7 +511,7 @@ article > header > h1 {
 }
 article > header > .media {
   float: right;
-  width: 69px;
+  width: 51px;
 }
 article > header > .media > p {
   display: none;
@@ -573,17 +573,33 @@ article.tappable-active header p {
 article.tappable-active header p a {
   color: #ffffff;
 }
+article.tappable-active section p {
+  color: #ffffff;
+}
 article.condensed > header {
   margin: 0;
+}
+article.condensed > header > h1 {
+  font-size: 14px;
 }
 article.condensed > header > .media {
   margin: 0 0 0 10px;
 }
 article.condensed > header > p {
-  margin-top: 4px;
+  margin-top: 0;
 }
-article.condensed > section {
+article.condensed > section p {
+  font-size: 13px;
+  font-weight: normal;
   display: none;
+}
+article.condensed > section p:first-of-type {
+  margin: 2px 0 0 0;
+  display: block;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: pre-line;
+  max-height: 38px;
 }
 article.condensed > footer {
   display: none;
