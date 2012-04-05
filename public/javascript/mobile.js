@@ -1,7 +1,7 @@
 $('document').ready(function() {
     
-    var host = 'http://hanno.hyves.org'
-/*     var host = 'http://light.hyveshq:3000' */
+/*     var host = 'http://hanno.hyves.org' */
+    var host = 'http://light.hyveshq:3000'
     
     var Article = Backbone.Model.extend({
         idAttribute: 'article_id'
@@ -146,8 +146,6 @@ $('document').ready(function() {
             
             var element = this.$('.scroll-view')[0]
             
-            console.log(element)
-            
             this.scrollview = ScrollOver(element, {
                 onPullToRefresh: function() {
                     self.refresh()
@@ -259,9 +257,7 @@ $('document').ready(function() {
             
             var sort = 'recent'
             
-            if(category == 'overview') { sort = 'velocity' }
-            
-            console.log(category)
+            if(category == 'overview') { sort = 'velocity' }    
 
             if(!articleListView) {
                 articleList = new ArticleList({ category: category, sort: sort })
