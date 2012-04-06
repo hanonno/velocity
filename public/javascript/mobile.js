@@ -210,25 +210,13 @@ $('document').ready(function() {
             this.screen.layer.addSublayer(this.splitView.container)
             
             $('body').append(this.screen.el)
+            
+            this.sizeToScreen()
 
             var self = this
 
             $('body').on('orientationchange', function(event) {
-                var width = $(window).width()
-                var height = $(window).height()
-            
-                self.screen.layer.frame.width = width                
-                self.screen.layer.frame.height = height
-                
-                if(width > height) {
-                    $(self.screen.layer.element).addClass('landscape')
-                    $(self.screen.layer.element).removeClass('portrait')                    
-                } else {
-                    $(self.screen.layer.element).addClass('portrait')
-                    $(self.screen.layer.element).removeClass('landscape')                
-                }
-                
-                self.navigationStack.recalculateLayout(false)
+                self.sizeToScreen()
             })
             
             tappable('.button-back', {
@@ -291,6 +279,24 @@ $('document').ready(function() {
             this.activeArticleView = new ArticleView({ model: this.activeArticle })
             
             this.navigationStack.push(this.activeArticleView)
+        },
+        
+        sizeToScreen: function() {
+            var width = $(window).width()
+            var height = $(window).height()
+        
+            this.screen.layer.frame.width = width                
+            this.screen.layer.frame.height = height
+            
+            if(width > height) {
+                $(this.screen.layer.element).addClass('landscape')
+                $(this.screen.layer.element).removeClass('portrait')                    
+            } else {
+                $(this.screen.layer.element).addClass('portrait')
+                $(this.screen.layer.element).removeClass('landscape')                
+            }
+            
+            this.navigationStack.recalculateLayout(false)        
         }
     })
 
