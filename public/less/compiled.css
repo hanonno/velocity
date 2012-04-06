@@ -488,10 +488,7 @@ section > header .date {
   font-variant: normal;
   float: right;
 }
-div.article {
-  padding: 10px;
-}
-ul.articles {
+div.articles {
   min-height: 390px;
 }
 article {
@@ -500,6 +497,8 @@ article {
 
   overflow: hidden;
   padding: 10px;
+  -webkit-user-select: none;
+  border-bottom: 1px solid #d4d4d4;
 }
 article > header {
   margin: 0 0 10px 0;
@@ -632,7 +631,7 @@ article.expanded > section p {
   -webkit-transform: translatez(0);
 }
 .scrollover-wrapper.has-header {
-  top: 30px;
+  top: 72px;
 }
 .scrollover-wrapper.has-footer {
   bottom: 0px;
@@ -873,10 +872,10 @@ div.section section.tappable-active .image header {
   border-color: #3280c9;
   background-color: #3280c9;
 }
-.page .right .button {
+.page .button.right {
   float: right;
 }
-.page .left .button {
+.page .button.left {
   float: left;
 }
 .page .header {
@@ -896,8 +895,8 @@ div.section section.tappable-active .image header {
   -webkit-border-top-right-radius: 8px;
 }
 .page .content {
-  height: 420px;
   -webkit-touch-callout: none;
+  overflow: hidden;
 }
 .page .content.hidden {
   visibility: hidden;
@@ -905,8 +904,4 @@ div.section section.tappable-active .image header {
 
   /*             display: none; */
 
-}
-.page .content ul.list li {
-  -webkit-user-select: none;
-  border-bottom: 1px solid #d4d4d4;
 }
