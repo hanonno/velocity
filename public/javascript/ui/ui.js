@@ -21,38 +21,21 @@ var UIScreen = UIView.extend({
 var UINavigationStack = Backbone.View.extend({
 
     initialize: function() {
-        this.container = new UILayer({ x: 0, y: 0, width: 320, height: 460, className: 'navigationStack', masksToBounds: true })
+        this.container = new UILayer({ x: 0, y: 0, anchor: { left:0, bottom: 0, right: 0 }, className: 'navigationStack', masksToBounds: true })
         this.el = this.container.element
-
+        
         this.createPage()
     },
     
-    push: function(view, animated) {
+    push: function(view, animated) {    
         var layers = this.container.sublayers
-        var page = layers[layers.length - 1]
+        var layer = layers[layers.length - 1]
         
-        page.view = view
-        page.content.html(view.el)
-        
-        page.header.removeAllSublayers()
-        
-        if(layers.length > 1) {
-        
-            var self = this            
-         
-            var back = UILayer({ x: 0, y: 0, width: 160, height: 42, className: 'left' })
-            $(back.element).html('<span class="button button-back">Terug</span>')
-        
-            page.header.addSublayer(back)
-        }
-        
-        var toggle = UILayer({ x: 160, y: 0, width: 160, height: 42, className: 'right' })
-        $(toggle.element).html('<span class="button button-toggle">Secties</span>')
-        
-        page.header.addSublayer(toggle)
+        layer.view = view
+        $(layer.element).html(view.el)
 
-        this.container.addSublayer(page)
-        this.createPage()
+        this.container.addSublayer(layer)
+        this.createPage()        
         this.recalculateLayout(animated)
     },
     
@@ -60,12 +43,12 @@ var UINavigationStack = Backbone.View.extend({
         var layers = this.container.sublayers
         
         layers[layers.length-1].removeFromSuperlayer()
+
         this.recalculateLayout() 
     },
     
     clear: function() {
         _.each(this.container.sublayers, function(layer, index) {
-
             if(index > 0) {
                 layer.removeFromSuperlayer()
             }
@@ -74,43 +57,22 @@ var UINavigationStack = Backbone.View.extend({
         this.recalculateLayout(false)
     },
     
-    createPage: function() {
-        var page = new UILayer({ x: 320, y: 0, width: 320, height: 460, animated: true, className: 'page' })
-        var header = new UILayer({ x: 0, y: 0, width: 320, height: 42, className: 'header' })
+    createPage: function() {    
+        var page = new UILayer({ x: $(this.container.element).width(), y: 0, anchor: { left: 0, top: 0, right: 0, bottom: 0 }, animated: true, className: 'page' })
         
-/*
-        var header = $("<div class=\'header\'></div>")
-        
-        page.header = header; $(page.element).append(header)
-*/
-
-        page.header = header
-        page.addSublayer(header)
-        
-        var content = new UILayer({ x: 0, y: 42, width: 320, height: 418, className: 'content' })
-
-        page.content = $(content.element)
-        page.addSublayer(content)
-
-/*
-        var content = $("<div class=\'content\'></div>")
-
-        page.content = content; $(page.element).append(content)
-*/
         page.animationTimingFunction = "ease-out"
         
         page.on('webkitTransitionEnd', function() {
             switch(page.role) {
                 case 'placeholder': 
-                    break
+                break
 
                 case 'content':
-/*                     page.content.addClass('scroll') */
                     page.view.viewDidAppear()
-                    break
+                break
                 
                 case 'history':
-                    break
+                break
             }
         })
 
@@ -118,15 +80,14 @@ var UINavigationStack = Backbone.View.extend({
     },
 
     recalculateLayout: function(animated) {
-    
         if (typeof animated == "undefined") {
-            animated = true            
+            animated = true
         }
-    
+        
         var layers = this.container.sublayers
         var count = layers.length
 
-        _.each(layers, function(layer, index) {
+        _.each(layers, function(layer, index, container) {
 
             var position = count - index
 
@@ -139,25 +100,23 @@ var UINavigationStack = Backbone.View.extend({
             }
 
             if(position == 1) {
-                layer.frame.x = 320
+                layer.frame.x = $(layer.element).width()
                 layer.scale = 1
-                layer.content.addClass('hidden')
-/*                 layer.content.removeClass('scroll') */
+                $(layer.element).addClass('hidden')
                 layer.role = 'placeholder'
             } else if (position == 2) {
                 layer.view.viewWillAppear()
                 layer.frame.x = 0
                 layer.scale = 1
-                layer.content.removeClass('hidden')
+                $(layer.element).removeClass('hidden')
                 layer.role = 'content'
             } else if (position > 2) {
                 layer.frame.x = 0
                 layer.scale = 0.9
                 layer.role = 'history'
-                layer.content.addClass('hidden')
-/*                 layer.content.removeClass('scroll') */
+                $(layer.element).addClass('hidden')
             }
-        })
+        }, this)
     }
 })
 
@@ -172,7 +131,7 @@ var UICarousel = Backbone.View.extend({
         this.pageWidth = 100
         this.pageHeight = this.height - (this.pageOffset * 2)
     
-        this.container = UILayer({ x: this.x, y: this.y, width: this.width, height: this.height, perspective: 1000, className: 'carousel', masksToBounds: true })
+        this.container = UILayer({ x: this.x, y: this.y, anchor: params.anchor, height: this.height, perspective: 1000, className: 'carousel', masksToBounds: true })
         
         self = this            
         
@@ -256,11 +215,15 @@ var UICarousel = Backbone.View.extend({
 
 var UISplitView = Backbone.View.extend({
     initialize: function(params) {
-        this.container = new UILayer({ x: 0, y: 0, width: 320, height: 460, masksToBounds: true, className: 'splitView' })
+/*         this.container = new UILayer({ x: 64, y: 32, width: 640, height: 960, masksToBounds: true, className: 'splitView' }) */
+/*         this.container = new UILayer({ x: 0, y: 0, width: 320, height: 460, masksToBounds: true, className: 'splitView' }) */
+        this.container = new UILayer({ x: 0, y: 0, width: 768, height: 1024, masksToBounds: true, className: 'splitView' })
         this.el = this.container.element
         
         this.master = params.master.container
         this.detail = params.detail.container
+        
+        this.detail.frame.height = this.container.frame.height
         
         this.master.animated = true
         this.master.animationDuration = 200 

@@ -1,0 +1,15 @@
+<div class="header">
+    <div class="button button-toggle right">Secties</div>
+</div>
+<section>
+    <header>name<span class='date'></span></header>
+</section>    
+<div class="content">
+    <div class='scroll-view has-header'>
+        <div class='pull-to-refresh'>
+            <div class='ptr-icon'></div>
+        </div>
+        <ul class='articles list scrollover-scrollable condensed'></ul>
+        <div class='load-more'>Meer artikelen..</div>
+    </div>
+</div>

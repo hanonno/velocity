@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+        <meta name="viewport" content="width=320,initial-scale=1.0,user-scalable=no" />
+		<title></title>
+<!--
+        <link rel="stylesheet/less" type="text/css" href="../public/less/light.less">
+
+-->
+        <script src="../javascript/library/less/less-1.2.1.min.js" type="text/javascript"></script>
+        <script src="../javascript/library/zepto/zepto.min.js" type="text/javascript"></script>
+        <script src="../javascript/library/uilayer/move.min.js" type="text/javascript"></script>
+        <script src="../javascript/library/uilayer/uilayer.min.js" type="text/javascript"></script>
+<!--         <script src="../javascript/ui/ui.js" type="text/javascript"></script> -->
+        <script>
+        
+        $('document').ready(function() {
+        
+                
+            UILayer = Move.require('UILayer')
+            
+            UILayer.debug = true
+            
+            var root = new UILayer({ x: 0, y: 0, width: 320, height: 480 })
+            
+            root.animated = true
+            
+            root.on('click', function() {
+                root.frame.width = 640
+            })
+            
+            var header = new UILayer({ anchor: { left: 0, top: 20, right: 0 }, height: 100 })
+            
+            
+            root.addSublayer(header)
+            
+            
+            $('#screen').html(root.element)
+        })
+        
+        </script>
+        <style type="text/css">
+                
+        </style>
+	</head>
+	<body>
+	   <div id="screen"></div>
+	</body>
+</html>

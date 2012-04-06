@@ -1,7 +1,7 @@
 $('document').ready(function() {
     
-    var host = 'http://hanno.hyves.org'
-/*     var host = 'http://light.hyveshq:3000' */
+/*     var host = 'http://hanno.hyves.org' */
+    var host = 'http://light.hyveshq:3000'
     
     var Article = Backbone.Model.extend({
         idAttribute: 'article_id'
@@ -70,13 +70,15 @@ $('document').ready(function() {
         tagName: 'div',
 
         initialize: function() {
+            this.template = new Hogan.Template(Templates['article_list'])        
+        
             this.model.bind('reset', this.resetArticles, this)
             this.model.bind('add', this.addArticle, this)
             this.model.bind('remove', this.removeArticle, this)
             this.model.bind('complete', this.completed, this)
             
 /*             $(this.el).attr('id', 'article-scroll-view') */
-            $(this.el).html('<div class="loading">Loading…</div>')
+/*             $(this.el).html('<div class="loading">Loading…</div>') */
             
             this.render()
         },
@@ -131,7 +133,9 @@ $('document').ready(function() {
         
         render: function() {
         
-            var category = categoryList.get(this.model.category) 
+            /* TODO: articles should be in sections */
+        
+            var category = application.categoryList.get(this.model.category) 
             var category_name = 'voorpagina'
 
             if(category != undefined) {
@@ -139,8 +143,10 @@ $('document').ready(function() {
             } else {
                 
             }
+
+            $(this.el).html(this.template.render())
             
-            $(this.el).html("<section><header>" + category_name + "<span class='date'></span></header></section><div class='scroll-view has-header'><div class='pull-to-refresh'><div class='ptr-icon'></div></div><ul class='articles list scrollover-scrollable condensed'></ul><div class='load-more'>Meer artikelen..</div></div>")
+/*             $(this.el).html("<section><header>" + category_name + "<span class='date'></span></header></section><div class='scroll-view has-header'><div class='pull-to-refresh'><div class='ptr-icon'></div></div><ul class='articles list scrollover-scrollable condensed'></ul><div class='load-more'>Meer artikelen..</div></div>") */
             
             var self = this
             
@@ -178,9 +184,11 @@ $('document').ready(function() {
         },
         
         render: function() {
-            $(this.el).append(this.template.render(this.model.toJSON()))
+            $(this.el).html(this.template.render(this.model.toJSON()))
             
-            this.scrollview = ScrollOver(this.el, {
+            var element = this.$('.scroll-view')[0]
+            
+            this.scrollview = ScrollOver(element, {
                 onPullToRefresh: function() {
                     alert('test')
                 }
@@ -223,17 +231,43 @@ $('document').ready(function() {
             this.model.each(this.addSection, this)
         }
     })
+    
+    var UIApplication = Backbone.Model.extend({
+        initialize: function(params) {
+            this.categoryList = new CategoryList(categories) 
+            
+            this.sectionCarousel = new UISectionCarousel({ model: this.categoryList, x: 0, y: 0, anchor: { left: 0, top: 0, right: 0 }, height: 150 })
+            this.navigationStack = new UINavigationStack()
 
-    var categoryList = new CategoryList(categories)
+            this.splitView = new UISplitView({ master: this.sectionCarousel, detail: this.navigationStack })
+            this.splitView.collapse()
+            
+            $('body').append(this.splitView.el)
+        },
+        
+        showCategory: function(category) {
+            this.splitView.collapse()
+                        
+            window.articleListView = window.articleListViews[category]
+            
+            var sort = 'recent'
+            
+            if(category == 'overview') { sort = 'velocity' }    
 
-    var sectionStack = new UISectionCarousel({ model: categoryList, x: 0, y: 0, width: 320, height: 150 })
-    var navigationStack = new UINavigationStack()
-    
-    var splitView = new UISplitView({ master: sectionStack, detail: navigationStack })
-    
-    splitView.collapse()
-    
-    $('#screen').append(splitView.el)
+            if(!articleListView) {
+                articleList = new ArticleList({ category: category, sort: sort })
+                window.articleListView = new ArticleListView({ model: articleList })
+                window.articleListViews[category] = window.articleListView
+            }
+
+            this.navigationStack.clear()
+            this.navigationStack.push(window.articleListView, false)
+            
+            window.articleListView.viewDidAppear()
+        }
+    })
+
+    var application = new UIApplication()
 
     window.articleListViews = []
     window.articleListView = null
@@ -243,13 +277,10 @@ $('document').ready(function() {
             '': 'categories',
             ':category': 'category',
             ':category/:article_id': 'article',
-            'expand': 'expand',
-            'collapse': 'collapse'
         },
 
         categories: function() {
             this.category('volkskrant_frontpage')
-/*             splitView.expand() */
         },
 
         category: function(category) {
@@ -265,8 +296,8 @@ $('document').ready(function() {
                 window.articleListViews[category] = window.articleListView
             }
 
-            navigationStack.clear()
-            navigationStack.push(window.articleListView, false)
+/*             application.navigationStack.clear() */
+            application.navigationStack.push(window.articleListView, false)
             
             window.articleListView.viewDidAppear()
         },
@@ -282,32 +313,21 @@ $('document').ready(function() {
             
             articleView = new ArticleView({ model: article })
             
-            navigationStack.push(articleView)
-        },
-        
-        expand: function() {
-            splitView.expand()
-        },
-        
-        collapse: function() {
-            splitView.collapse()
-        },
-        
-        pop: function() {
-        }
+            application.navigationStack.push(articleView)
+        }        
     })
     
     tappable('.button-back', {
         noScroll: true,
         onTap: function(event, target) {
-            navigationStack.pop()
+            application.navigationStack.pop()
         }
     })
 
     tappable('.button-toggle', {
         noScroll: true,
         onTap: function(event, target) {
-            splitView.toggle()
+            application.splitView.toggle()
         }
     })
     
@@ -315,8 +335,7 @@ $('document').ready(function() {
         activeClassDelay: 60,
         inactiveClassDelay: 300,    
         onTap: function(event, target) {
-            splitView.collapse()        
-            applicationRouter.navigate('#' + $(target).data('name'), { trigger: true })
+            application.showCategory($(target).data('name'))
         }
     })
     
