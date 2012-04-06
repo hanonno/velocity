@@ -58,15 +58,18 @@ section {
     }    
 }
 
-ul.articles {
+div.articles {
     min-height: 390px;
 }
 
 article {
-
     -webkit-transform: translateZ(0); /* This prevents the list from flickering when loading more articles */
     overflow: hidden;
     padding: 10px;
+
+    -webkit-user-select: none;            
+    border-bottom: 1px solid #d4d4d4;
+
 
     > header {
         margin: 0 0 10px 0;

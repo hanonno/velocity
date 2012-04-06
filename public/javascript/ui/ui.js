@@ -9,6 +9,15 @@ var UIView = Backbone.View.extend({
     }
 })
 
+
+var UIScreen = UIView.extend({
+    initialize: function(params) {
+        params.className = 'screen'
+        
+        UIView.prototype.initialize.call(this, params)
+    }
+})
+
 /*
 var UIScreen = UIView.extend({
     initialize: function() {
@@ -110,12 +119,17 @@ var UINavigationStack = Backbone.View.extend({
                 layer.scale = 1
                 $(layer.element).removeClass('hidden')
                 layer.role = 'content'
+
+                if(!animated) {
+                    layer.view.viewDidAppear()                    
+                }
+                
             } else if (position > 2) {
                 layer.frame.x = 0
                 layer.scale = 0.9
                 layer.role = 'history'
                 $(layer.element).addClass('hidden')
-            }
+            }            
         }, this)
     }
 })
@@ -198,7 +212,6 @@ var UICarousel = Backbone.View.extend({
     },
     
     recalculateLayout: function(t) {
-    
         self = this
 
         _.forEach(this.container.sublayers, function(page, index, pages) {
@@ -214,10 +227,13 @@ var UICarousel = Backbone.View.extend({
 })
 
 var UISplitView = Backbone.View.extend({
-    initialize: function(params) {
+    initialize: function(params, layer) {
+    
+        layer.className = 'splitView'
+    
 /*         this.container = new UILayer({ x: 64, y: 32, width: 640, height: 960, masksToBounds: true, className: 'splitView' }) */
-/*         this.container = new UILayer({ x: 0, y: 0, width: 320, height: 460, masksToBounds: true, className: 'splitView' }) */
-        this.container = new UILayer({ x: 0, y: 0, width: 768, height: 1024, masksToBounds: true, className: 'splitView' })
+        this.container = new UILayer(layer)
+/*         this.container = new UILayer({ x: 0, y: 0, width: 768, height: 1024, masksToBounds: true, className: 'splitView' }) */
         this.el = this.container.element
         
         this.master = params.master.container
