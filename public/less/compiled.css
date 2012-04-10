@@ -442,6 +442,11 @@ table {
   border-collapse: collapse;
   border-spacing: 0;
 }
+* {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
 .media {
   max-width: 100%;
   height: auto;
@@ -489,7 +494,72 @@ section > header .date {
   float: right;
 }
 div.articles {
-  min-height: 390px;
+  min-height: 101%;
+}
+#ipad {
+  /*
+    div.articles {
+        article {
+            max-width: 235px;
+            border-right: 1px solid @light-gray-color;
+            border: none;
+            float: left;
+            
+            height: 260px;
+             
+            &.condensed {
+                > header > .media {
+                    width: 100px;
+                }
+                
+                > section > p {
+                    max-height: 220px;
+                }
+            }
+            
+            &:nth-child(1) {
+                max-width: 491px;
+                width: 491px;
+                
+                > header {
+                    > h1 {
+                        font-size: 24px;
+                        line-height: 30px;
+                    }
+                    
+                    > .media {
+                        width: 150px;
+                    }
+                }
+            }
+            
+            &:nth-child(7) {
+                max-width: 491px;            
+                width: 491px;
+                
+                > header > .media {
+                    float: left;
+                    width: 150px;
+                    
+                    margin: 0 10px 0 0;
+                }
+                
+            }            
+        }
+    }
+*/
+
+  /*
+    div.article {
+        article {
+            padding: 20px 160px;
+        }
+    }
+*/
+
+}
+#ipad div.header {
+  background-position: 318px 0;
 }
 article {
   -webkit-transform: translatez(0);
@@ -567,7 +637,7 @@ article.tappable-active header h1 {
   color: #ffffff;
 }
 article.tappable-active header p {
-  color: #ffffff;
+  color: #ffffff !important;
 }
 article.tappable-active header p a {
   color: #ffffff;
@@ -612,6 +682,85 @@ article.expanded > header > .media > p {
 }
 article.expanded > section p {
   display: block;
+}
+.grid {
+  width: 768px;
+  margin: 0 auto;
+  padding: 0;
+}
+.grid > section {
+  overflow: hidden;
+  margin: 10px 0 0 0;
+}
+.grid > section > article {
+  border: none;
+  border-top: 1px solid #cccccc;
+  border-right: 1px solid #cccccc;
+  width: 768px;
+  height: 160px;
+  float: left;
+  padding: 10px;
+  overflow: hidden;
+  /*
+    &:hover {
+        background-color: hsl(0, 0%, 86%);    
+    }
+*/
+
+}
+.grid > section > article section p:first-of-type {
+  max-height: 120px;
+}
+.grid > section.single > article {
+  width: 758px;
+  margin: 0 10px 0 0;
+  height: 180px;
+}
+.grid > section.single > article > header h1 {
+  font-size: 32px;
+  line-height: 40px;
+}
+.grid > section.single > article > header .media {
+  width: 167px;
+  float: left;
+  margin: 0 10px 0 0;
+}
+.grid > section.single > article section p {
+  display: block;
+}
+.grid > section.single > article section p:first-of-type {
+  max-height: none;
+}
+.grid > section.double > article {
+  margin: 0 10px 0 0;
+}
+.grid > section.double > article > header > .media {
+  float: left;
+  width: 140px;
+  max-width: 140px;
+  margin: 0 10px 0 0;
+}
+.grid > section.double:nth-child(even) > article:nth-child(1) {
+  width: 324px;
+}
+.grid > section.double:nth-child(even) > article:nth-child(2) {
+  width: 424px;
+}
+.grid > section.double:nth-child(odd) > article:nth-child(1) {
+  width: 424px;
+}
+.grid > section.double:nth-child(odd) > article:nth-child(2) {
+  width: 324px;
+}
+.grid > section.triple > article {
+  width: 246px;
+  margin: 0 10px 0 0;
+}
+.grid > section.quadruple > article {
+  width: 192px;
+}
+.grid > section.quadruple > article > header > .media {
+  display: none;
 }
 .hidden .scrollover-wrapper {
   overflow: hidden;
@@ -853,6 +1002,9 @@ div.section section .image header:first-letter {
 }
 div.section section.tappable-active .image header {
   color: #3280c9;
+}
+.modal {
+  background-color: rgba(0, 0, 0, 0.8);
 }
 .page {
   background-color: #fcfcfc;

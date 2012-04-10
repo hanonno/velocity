@@ -6,12 +6,10 @@ var UIView = Backbone.View.extend({
         this.el = this.layer.element
 
         $(this.el).attr('id', params.name)
-        
-        
+
         Backbone.View.prototype.initialize.call(this, params)
     }
 })
-
 
 var UIScreen = UIView.extend({
     initialize: function(params, layer) {
@@ -20,15 +18,6 @@ var UIScreen = UIView.extend({
         UIView.prototype.initialize.call(this, params, layer)
     }
 })
-
-/*
-var UIScreen = UIView.extend({
-    initialize: function() {
-        this.layer = new UILayer({ x: 0, y: 0, width: screen.width, height: screen.height, className: 'screen' })
-        this.el = this.layer.element
-    }
-})
-*/
 
 var UINavigationStack = Backbone.View.extend({
 

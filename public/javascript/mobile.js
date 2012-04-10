@@ -396,7 +396,6 @@ $('document').ready(function() {
         
         showArticle: function(article_id) {
             this.activeArticle =  this.activeCategory.articles.get(article_id)
-            
             this.activeArticleView = new ArticleView({ model: this.activeArticle })
             
             switch(this.name) {
@@ -431,7 +430,13 @@ $('document').ready(function() {
         }
     })
 
-    var iPhoneApplication = new UIApplication({ name: 'iphone' }, { x: 0, y: 0, width: 320, height: 460 })
-    var iPadApplication = new UIApplication({ name: 'ipad' }, { x: 340, y: 0, width: 768, height: 1024 })
+    if(window.location.search.indexOf('ipad') > 0) {
+        var iPadApplication = new UIApplication({ name: 'ipad' }, { x: 0, y: 0, width: 768, height: 1024 })    
+    } else if (window.location.search.indexOf('test') > 0) {
+        var iPhoneApplication = new UIApplication({ name: 'iphone' }, { x: 0, y: 0, width: 320, height: 460 })    
+        var iPadApplication = new UIApplication({ name: 'ipad' }, { x: 340, y: 0, width: 768, height: 1024 })            
+    } else {
+        var iPhoneApplication = new UIApplication({ name: 'iphone' }, { x: 0, y: 0, width: 320, height: 460 })        
+    }
     
 })
