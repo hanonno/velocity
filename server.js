@@ -13,7 +13,7 @@ Feedparser = require('feedparser')
 
 app.configure(function(){
 	app.use(express.static(__dirname + '/public'))
-	app.use(express.logger());
+/* 	app.use(express.logger()); */
 	app.use(express.bodyParser())
 	app.use(express.cookieParser())
 	app.use(app.router)
@@ -221,6 +221,23 @@ app.get('/:locale/categories.js', [fetchCategories], function(req, res) {
     })
 })
 
+app.get('/api/layout/:locale/:category/:sort', [fetchArticles], function(req, res) {
+
+    var layout = {
+        breaking: [1, 3, 2, 2, 3]
+    }
+    
+    console.log(layout.breaking)
+
+    var response = {
+        'pager': req.pager, 
+        'result': req.articles
+    }
+
+    res.send(response)
+})
+
+
 app.get('/api/:locale/:category/:sort', [fetchArticles], function(req, res) {
 
     var response = {
@@ -230,6 +247,7 @@ app.get('/api/:locale/:category/:sort', [fetchArticles], function(req, res) {
 
     res.send(response)
 })
+
 
 app.get('/rss/:locale/:category/:sort', [fetchArticles], function(req, res) {
     

@@ -1,9 +1,12 @@
 var UILayer = Move.require('UILayer')
 
 var UIView = Backbone.View.extend({
-    initialize: function(params) {
-        this.layer = new UILayer({x: params.x, y: params.y, width: params.width, height: params.height, className: params.className })
+    initialize: function(params, layer) {
+        this.layer = new UILayer(layer)
         this.el = this.layer.element
+
+        $(this.el).attr('id', params.name)
+        
         
         Backbone.View.prototype.initialize.call(this, params)
     }
@@ -11,10 +14,10 @@ var UIView = Backbone.View.extend({
 
 
 var UIScreen = UIView.extend({
-    initialize: function(params) {
-        params.className = 'screen'
+    initialize: function(params, layer) {
+        layer.className = 'screen'
         
-        UIView.prototype.initialize.call(this, params)
+        UIView.prototype.initialize.call(this, params, layer)
     }
 })
 
@@ -123,13 +126,12 @@ var UINavigationStack = Backbone.View.extend({
                 if(!animated) {
                     layer.view.viewDidAppear()                    
                 }
-                
             } else if (position > 2) {
                 layer.frame.x = 0
                 layer.scale = 0.9
                 layer.role = 'history'
                 $(layer.element).addClass('hidden')
-            }            
+            }
         }, this)
     }
 })

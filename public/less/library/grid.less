@@ -1,0 +1,175 @@
+.grid {
+    width: 640px;
+    
+    margin: 0 auto;
+    padding: 0 10px;
+}
+
+.grid > section {
+    background-color: hsla(0, 0%, 96%, 0.5);
+    overflow: hidden;
+}
+
+.grid > section > article {
+    border-top: 1px solid hsl(0, 0%, 80%);
+    border-right: 1px solid hsl(0, 0%, 80%);
+
+    width: 600px;
+    min-height: 60px;
+    
+/* background-color: hsla(0, 0%, 99%, 0.5); */
+    
+    float: left;
+    
+    padding: 10px;
+    
+    overflow: hidden;
+}
+
+.grid > section > article:hover {
+    background-color: hsl(0, 0%, 86%);
+}            
+            
+.grid > section > article > header > .media {
+    max-width: 100%;
+}
+
+.grid > section > article > header > .media img {
+    max-width: 100%;
+    max-height: 100%;
+}            
+
+.grid > section > article > section > p {
+    display: none;
+    margin: 8px 0;
+}            
+
+.grid > section > article > section > p:first-of-type {
+    display: block;
+    max-height: 74px;
+    
+    overflow: hidden;
+}
+
+/* Large */
+.grid > section.single > article {
+    width: 600px;
+}
+                
+    .grid > section.single > article > header > .media {
+        float: left;
+        margin: 0 10px 0 0;
+    }
+    
+    .grid > section.single > article > section > p {
+        display: block;
+    }                
+
+.grid > section.double > article {
+    width: 300px;
+}
+
+.grid > section.triple > article {
+    width: 200px;
+}
+
+/* Medium */
+@media only screen and (max-width: 640px) {
+    .grid {
+        width: 500px;
+    }
+    
+    .grid > section.single > article {
+        width: 480px;
+    }
+    
+        .grid > section.single > article > header > .media {
+            width: 180px;
+            float: left;
+            margin: 0 10px 0 0;
+        }                
+
+    .grid > section.double > article {
+        width: 240px;
+    }
+
+        .grid > section.double > article > header > .media {
+            max-width: 120px;
+            float: right;
+            margin: 0 0 10px 10px;
+        }                
+    
+    .grid > section.triple > article {
+        width: 160px;
+    }                
+}
+
+/* Small */
+@media only screen and (max-width: 480px) {
+
+    h1 {
+        font-size: 14px;
+    }
+    
+    p {
+        font-size: 13px;
+    }
+
+    .grid {
+        width: 300px;
+        padding: 0;
+    }
+    
+    .grid article:last-of-type {
+        border-right: none;
+    }
+    
+    .grid > section.single > article {
+        width: 300px;
+        
+        border-right: none;                    
+    }
+    
+        .grid > section.single > article > header > .media {
+            width: 120px;
+            float: left;
+            margin: 0 10px 0 0;
+        }
+        
+        .grid > section.single > article > section > p {
+            display: none;
+        }
+        
+            .grid > section.single > article > section > p:first-of-type {
+                display: block;
+            }                        
+
+    .grid > section.double > article {
+        width: 150px;
+    }
+
+        .grid > section.double > article > header > .media {
+            margin: 0 0 10px 0;
+        }
+    
+    .grid > section.double.condensed > article > header > .media {
+        display: none;
+    }                
+    
+    .grid > section.triple > article {
+        width: 300px;
+        height: 80px;
+        
+        border-right: none;
+    }
+    
+        .grid > section.triple > article > header > .media {
+            width: 60px;
+            float: right;
+            margin: 0 0 0 10px;
+        }
+        
+        .grid > section.triple > article > section > p {
+            max-height: 21px;
+        }
+}

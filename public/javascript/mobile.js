@@ -1,7 +1,7 @@
 $('document').ready(function() {
     
-    var host = 'http://hanno.hyves.org'
-/*     var host = 'http://light.hyveshq:3000' */
+/*     var host = 'http://hanno.hyves.org' */
+    var host = 'http://light.hyveshq:3000'
     
     var Article = Backbone.Model.extend({
         idAttribute: 'article_id'
@@ -14,7 +14,7 @@ $('document').ready(function() {
             this.category = options.category
             this.sort = options.sort
             this.page = 0
-            this.per_page = 10
+            this.per_page = 20
         },
         
         url: function() {        
@@ -160,8 +160,8 @@ $('document').ready(function() {
     })
     
     var UISectionView = UIView.extend({        
-        initialize: function(params) {
-            UIView.prototype.initialize.call(this, params)
+        initialize: function(params, layer) {
+            UIView.prototype.initialize.call(this, params, layer)
         
             this.template = new Hogan.Template(Templates['section'])        
             this.model.bind('change', this.render, this)
@@ -183,7 +183,7 @@ $('document').ready(function() {
         },
         
         addSection: function(section) {
-            var sectionView = new UISectionView({ model: section, className: 'section' })
+            var sectionView = new UISectionView({ model: section }, { className: 'section' })
             
             sectionView.render()
         
@@ -196,7 +196,7 @@ $('document').ready(function() {
     })
     
     var UIApplication = Backbone.Model.extend({
-        initialize: function(params) {
+        initialize: function(params, layer) {
             this.categoryList = new Categories(categories)
             
             this.sectionCarousel = new UISectionCarousel({ model: this.categoryList, x: 0, y: 0, anchor: { left: 0, top: 0, right: 0 }, height: 150 })
@@ -205,13 +205,13 @@ $('document').ready(function() {
             this.splitView = new UISplitView({ master: this.sectionCarousel, detail: this.navigationStack }, { anchor: { left: 0, top: 0, right: 0, bottom: 0 }})
             this.splitView.collapse()
             
-            this.screen = new UIScreen({ x: params.x, y: params.y, width: params.width, height: params.height })
+            this.screen = new UIScreen(params, layer)
             
             this.screen.layer.addSublayer(this.splitView.container)
             
             $('body').append(this.screen.el)
             
-            this.sizeToScreen()
+/*             this.sizeToScreen() */
 
             var self = this
 
@@ -285,6 +285,8 @@ $('document').ready(function() {
             var width = $(window).width()
             var height = $(window).height()
         
+            this.screen.layer.frame.x = 0
+            this.screen.layer.frame.y = 0            
             this.screen.layer.frame.width = width                
             this.screen.layer.frame.height = height
             
@@ -300,7 +302,7 @@ $('document').ready(function() {
         }
     })
 
-    var iPhoneApplication = new UIApplication({ x: 0, y: 0, width: 320, height: 460 })
-/*     var iPadApplication = new UIApplication({ x: 340, y: 0, width: 768, height: 1024 }) */
+/*     var iPhoneApplication = new UIApplication({ name: 'iphone' }, { x: 0, y: 0, width: 320, height: 460 }) */
+    var iPadApplication = new UIApplication({ name: 'ipad' }, { x: 340, y: 0, width: 768, height: 1024 })
     
 })
