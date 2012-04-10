@@ -33,9 +33,14 @@ var UIScreen = UIView.extend({
 var UINavigationStack = Backbone.View.extend({
 
     initialize: function() {
+        this.layer = new UILayer({ x: 0, y: 0, anchor: { left: 0, top: 0, right: 0, bottom: 0 }, className: 'stack' })
         this.container = new UILayer({ x: 0, y: 0, anchor: { left:0, bottom: 0, right: 0 }, className: 'navigationStack', masksToBounds: true })
-        this.el = this.container.element
         
+        this.layer.addSublayer(this.container)
+        
+        this.el = this.layer.element
+        
+        this.createModal()
         this.createPage()
     },
     
@@ -57,6 +62,52 @@ var UINavigationStack = Backbone.View.extend({
         layers[layers.length-1].removeFromSuperlayer()
 
         this.recalculateLayout() 
+    },
+    
+    presentModal: function(view, animated) {
+    
+        var page = new UILayer({ x: 100, y: 100, width: $(this.container.element).width() - 200, height: $(this.container.element).height() - 200, animated: true, className: 'page' })
+/*         var page = new UILayer({ anchor: { left: 100, top: 100, right: 100, bottom: 100 }, animated: true, className: 'page' }) */
+
+        page.view = view
+        
+        view.viewWillAppear()
+
+/*         view.viewDidAppear() */
+        
+        $(page.element).html(view.el)
+        
+        this.modal.addSublayer(page)        
+
+        this.modal.animated = false
+
+        this.modal.frame.x = 0
+        this.modal.frame.y = $(this.container.element).height()       
+        this.modal.frame.width = $(this.container.element).width()
+        this.modal.frame.height = $(this.container.element).height()
+
+        this.modal.animationDuration = 200
+
+        this.modal.frame.y = 0
+        
+        self = this
+        
+/*
+        page.animated = true;
+        page.animationDuration = 2000;
+        page.frame.y = 100
+*/
+    
+/*         console.log('present modal') */
+    },
+    
+    dismissModal: function(view, animated) {
+        this.modal.frame.y = $(this.container.element).height()
+    },
+    
+    createModal: function() {
+        this.modal = new UILayer({ y: 1000, width: 100, height: 100, animated: false, className: 'modal' })
+        this.layer.addSublayer(this.modal)
     },
     
     clear: function() {
@@ -147,7 +198,7 @@ var UICarousel = Backbone.View.extend({
         this.pageWidth = 100
         this.pageHeight = this.height - (this.pageOffset * 2)
     
-        this.container = UILayer({ x: this.x, y: this.y, anchor: params.anchor, height: this.height, perspective: 1000, className: 'carousel', masksToBounds: true })
+        this.layer = UILayer({ x: this.x, y: this.y, anchor: params.anchor, height: this.height, perspective: 1000, className: 'carousel', masksToBounds: true })
         
         self = this            
         
@@ -157,27 +208,27 @@ var UICarousel = Backbone.View.extend({
 
         this.scroller.setDimensions(0, 0, 960, (this.pageHeight * 2) + (this.pageOffset * 2))
                         
-        this.container.on('touchstart', function(event) {
+        this.layer.on('touchstart', function(event) {
             event.preventDefault()
             self.scroller.doTouchStart([{ pageX: event.pageX, pageY: event.pageY}], event.timeStamp)
         })
 
-        this.container.on('touchmove', function(event) {
+        this.layer.on('touchmove', function(event) {
             event.preventDefault()            
             self.scroller.doTouchMove([{ pageX: event.pageX, pageY: event.pageY}], event.timeStamp)
         })
 
-        this.container.on('touchend', function(event) {
+        this.layer.on('touchend', function(event) {
             event.preventDefault()            
             self.scroller.doTouchEnd(event.timeStamp)
         })
         
-        this.container.on('mouseup', function(event) {
+        this.layer.on('mouseup', function(event) {
             event.preventDefault()            
             self.scroller.doTouchEnd(event.timeStamp)
         })
 
-        this.container.on('mouseout', function(event) {
+        this.layer.on('mouseout', function(event) {
             event.preventDefault()            
             self.scroller.doTouchEnd(event.timeStamp)
         })
@@ -188,10 +239,10 @@ var UICarousel = Backbone.View.extend({
         view.layer.frame.width = this.pageWidth
         view.layer.frame.height = this.pageHeight
     
-        this.container.addSublayer(view.layer)
+        this.layer.addSublayer(view.layer)
                     
         this.recalculateLayout(0)
-        this.scroller.setDimensions(0, 0, (this.container.sublayers.length * (self.pageWidth + self.pageOffset)) - 310, this.pageHeight + (this.pageOffset * 2))
+        this.scroller.setDimensions(0, 0, (this.layer.sublayers.length * (self.pageWidth + self.pageOffset)) - 310, this.pageHeight + (this.pageOffset * 2))
         
         return view
     },
@@ -216,7 +267,7 @@ var UICarousel = Backbone.View.extend({
     recalculateLayout: function(t) {
         self = this
 
-        _.forEach(this.container.sublayers, function(page, index, pages) {
+        _.forEach(this.layer.sublayers, function(page, index, pages) {
             var delta = t - (index * (self.pageWidth + self.pageOffset))
         
             self.updatePosition(page, delta)
@@ -238,8 +289,8 @@ var UISplitView = Backbone.View.extend({
 /*         this.container = new UILayer({ x: 0, y: 0, width: 768, height: 1024, masksToBounds: true, className: 'splitView' }) */
         this.el = this.container.element
         
-        this.master = params.master.container
-        this.detail = params.detail.container
+        this.master = params.master.layer
+        this.detail = params.detail.layer
         
         this.detail.frame.height = this.container.frame.height
         

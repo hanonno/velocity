@@ -1,0 +1,15 @@
+<div class="header">
+    <div class="button button-toggle right">Secties</div>
+</div>
+<section>
+    <header>{{category.display_name}}<span class='date'></span></header>
+</section>    
+<div class="content">
+    <div class='scroll-view has-header'>
+        <div class='pull-to-refresh'>
+            <div class='ptr-icon'></div>
+        </div>
+        <div class='articles grid scrollover-scrollable condensed'></div>
+        <div class='load-more'>Meer artikelen..</div>
+    </div>
+</div>

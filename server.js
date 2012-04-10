@@ -132,15 +132,13 @@ function fetchArticles(req, res, next) {
                         'per_page': per_page
                     }
 
-                    var paged_articles = sorted_articles.slice(start, end)
-                    
-                    // Show the first article expanded
-/*
-                    if(paged_articles.length > 0) {
-                        paged_articles[0].template = 'article_expanded'
+                    paged_articles = sorted_articles.slice(start, end)
+
+                    layout = {
+                        breaking: [4, 1, 2, 4, 3, 3, 2, 3]
                     }
-*/
                     
+                    req.layout = layout.breaking
                     req.articles = paged_articles
                     
                     next()
@@ -221,27 +219,11 @@ app.get('/:locale/categories.js', [fetchCategories], function(req, res) {
     })
 })
 
-app.get('/api/layout/:locale/:category/:sort', [fetchArticles], function(req, res) {
-
-    var layout = {
-        breaking: [1, 3, 2, 2, 3]
-    }
-    
-    console.log(layout.breaking)
-
-    var response = {
-        'pager': req.pager, 
-        'result': req.articles
-    }
-
-    res.send(response)
-})
-
-
 app.get('/api/:locale/:category/:sort', [fetchArticles], function(req, res) {
 
     var response = {
-        'pager': req.pager, 
+        'pager': req.pager,
+        'layout': req.layout,
         'result': req.articles
     }
 

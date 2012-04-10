@@ -18,12 +18,13 @@ $('document').ready(function() {
         },
         
         url: function() {        
-            return host + '/api/nl/' + this.category + '/' + this.sort + '?page=' + this.page + '&per_page=' + this.per_page
+            return host + '/api/nl/' + this.category + '/' + this.sort + '?page=' + this.page + '&per_page=' + this.per_page + '&layout=true'
         },
         
         parse: function(response) {
             this.page = response.pager.page + 1
             this.per_page = response.pager.per_page
+            this.layout = response.layout
             
             if(response.result.length < response.pager.per_page) {
                 this.trigger('complete')
@@ -43,8 +44,7 @@ $('document').ready(function() {
         idAttribute: 'name',
         
         initialize: function() {
-            this.articles = new Articles({ category: this.get('name'), sort: 'recent' })        
-
+            this.articles = new Articles({ category: this.get('name'), sort: 'recent' })
         }
     })
     
@@ -54,6 +54,109 @@ $('document').ready(function() {
         url: function() {
             return host + '/api/nl/categories'
         }
+    })
+    
+    var ArticleGridView = Backbone.View.extend({
+        tagName: 'div',
+        
+        initialize: function() {
+            this.template = new Hogan.Template(Templates['article_grid'])        
+        
+            this.model.articles.bind('reset', this.resetArticles, this)
+            this.model.articles.bind('complete', this.completed, this)
+            
+            this.render()            
+        },
+        
+        viewWillAppear: function() {
+        
+        },
+        
+        viewDidAppear: function() {
+            if(this.isLoaded) { return }
+        
+            this.model.articles.fetch()
+            this.isLoaded = true
+        },
+        
+        completed: function() {
+            this.$('.load-more').remove()
+        },
+
+/*
+        addArticle: function(article) {
+            var templateName = article.get('template')
+            var template = new Hogan.Template(Templates[templateName])        
+
+            this.$('.articles').append(template.render(article.toJSON()))
+            
+            this.scrollview.pullToRefreshEnd()
+            this.$('.load-more').text("Meer artikelen..")
+        },
+*/
+        
+        refresh: function() {
+            this.model.refresh()
+        },
+        
+        loadMore: function() {
+            this.$('.load-more').text("Laden..")
+            this.model.articles.fetch({ add: true })
+        },
+
+        resetArticles: function() {
+            console.log('======')
+            console.log(this.model.articles.layout)
+            console.log('======')
+            
+            var container = this.$('.articles')
+        
+            container.empty()
+            
+            var layout = this.model.articles.layout
+            var k = 0
+            
+            for(i = 0; i < layout.length; i++) {
+            
+                var className = ''
+            
+                if(layout[i] == 1) { className = 'single' }
+                else if(layout[i] == 2) { className = 'double' }
+                else if(layout[i] == 3) { className = 'triple' }
+                else if(layout[i] == 4) { className = 'quadruple' }                
+            
+                var section = $("<section class=" + className + "></section>")
+                
+                container.append(section)
+            
+                for(j = 0; j < layout[i]; j++) {
+                    console.log(k)
+
+                    var article = this.model.articles.at(k)
+                    
+                    var template = new Hogan.Template(Templates[article.get('template')])
+                    
+                    section.append(template.render(article.toJSON()))
+                    
+                    k++
+                }
+            }
+/*             this.model.articles.each(this.addArticle, this) */
+        },
+        
+        render: function() {
+            $(this.el).html(this.template.render({ category: this.model.toJSON(), articles: this.model.articles.toJSON() }))
+            
+            var self = this
+            
+            var element = this.$('.scroll-view')[0]
+            
+            this.scrollview = ScrollOver(element, {
+                onPullToRefresh: function() {
+                    self.refresh()
+                }
+            })
+        }  
     })
     
     var ArticleListView = Backbone.View.extend({
@@ -84,8 +187,8 @@ $('document').ready(function() {
         completed: function() {
             this.$('.load-more').remove()
         },
-        
-        addArticle: function(article, index) {
+
+        addArticle: function(article) {
             var templateName = article.get('template')
             var template = new Hogan.Template(Templates[templateName])        
 
@@ -109,6 +212,10 @@ $('document').ready(function() {
         },
 
         resetArticles: function() {
+            console.log('======')
+            console.log(this.model.articles.layout)
+            console.log('======')
+        
             this.$('.articles').empty()
             this.model.articles.each(this.addArticle, this)
         },
@@ -197,6 +304,7 @@ $('document').ready(function() {
     
     var UIApplication = Backbone.Model.extend({
         initialize: function(params, layer) {
+            this.name = params.name
             this.categoryList = new Categories(categories)
             
             this.sectionCarousel = new UISectionCarousel({ model: this.categoryList, x: 0, y: 0, anchor: { left: 0, top: 0, right: 0 }, height: 150 })
@@ -222,7 +330,16 @@ $('document').ready(function() {
             tappable('.button-back', {
                 noScroll: true,
                 onTap: function(event, target) {
-                    self.navigationStack.pop()
+
+                    switch(self.name) {
+                        case 'iphone':
+                            self.navigationStack.pop()                
+                        break;
+                        
+                        case 'ipad':
+                            self.navigationStack.dismissModal()                
+                        break;
+                    }
                 }
             })
         
@@ -242,7 +359,7 @@ $('document').ready(function() {
             })
             
             tappable('article.nav', {
-                activeClassDelay: 60,    
+                activeClassDelay: 60,
                 inactiveClassDelay: 300,
                 onTap:function(event, target) {        
                     self.showArticle($(target).data('article-id'))
@@ -263,7 +380,11 @@ $('document').ready(function() {
             
             this.activeCategory = this.categoryList.get(category_name)
             
-            this.activeArticleListView = new ArticleListView({ model: this.activeCategory })
+            if(this.name == 'ipad') {
+                this.activeArticleListView = new ArticleGridView({ model: this.activeCategory })            
+            } else if(this.name == 'iphone') {
+                this.activeArticleListView = new ArticleListView({ model: this.activeCategory })            
+            }
                         
             this.navigationStack.clear()
             this.navigationStack.push(this.activeArticleListView, false)
@@ -278,7 +399,15 @@ $('document').ready(function() {
             
             this.activeArticleView = new ArticleView({ model: this.activeArticle })
             
-            this.navigationStack.push(this.activeArticleView)
+            switch(this.name) {
+                case 'iphone':
+                    this.navigationStack.push(this.activeArticleView)                
+                break;
+                
+                case 'ipad':
+                    this.navigationStack.presentModal(this.activeArticleView)                
+                break;
+            }
         },
         
         sizeToScreen: function() {
@@ -302,7 +431,7 @@ $('document').ready(function() {
         }
     })
 
-/*     var iPhoneApplication = new UIApplication({ name: 'iphone' }, { x: 0, y: 0, width: 320, height: 460 }) */
+    var iPhoneApplication = new UIApplication({ name: 'iphone' }, { x: 0, y: 0, width: 320, height: 460 })
     var iPadApplication = new UIApplication({ name: 'ipad' }, { x: 340, y: 0, width: 768, height: 1024 })
     
 })

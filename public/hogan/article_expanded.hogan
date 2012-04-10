@@ -14,7 +14,7 @@
                 <div class="media">
                     <img src="{{large_image_url}}" />
                 </div>
-                {{/large_image_url}}    
+                {{/large_image_url}}
                 <p>{{{description}}}</p>
             </section>
         <!--

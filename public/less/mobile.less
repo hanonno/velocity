@@ -1,5 +1,7 @@
 @import "library/normalize.less";
 
+* { -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box; }
+
 @header-font-size: 16px;
 @header-font-size-small: 14px;
 @body-text-font-size: 14px;
@@ -125,6 +127,10 @@ div.section {
             }
         }
     }
+}
+
+.modal {
+    background-color: hsla(0, 0%, 0%, 0.8);
 }
 
 .page {
