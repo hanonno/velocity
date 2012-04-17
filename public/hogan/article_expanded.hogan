@@ -4,7 +4,7 @@
 </div>
 <div class="content">
     <div class='scroll-view has-header'>
-        <article class="expanded {{type}} scrollover-scrollable" data-article-id="{{article_id}}" data-category="{{category}}">
+        <article class="expanded scrollover-scrollable" data-article-id="{{article_id}}" data-category="{{category}}">
             <header>
                 <p>{{relative_date}}<!-- in <a>{{category}}</a> via {{source_name}}</p> -->
                 <h1>{{title}}</h1>

@@ -460,8 +460,8 @@ table {
   height: auto;
 }
 .media > p {
-  font-family: "Georgia";
-  font-size: 14px;
+  font-family: "Arial";
+  font-size: 13px;
   margin: 0;
   padding: 3px 0 6px 4px;
 }
@@ -574,7 +574,9 @@ article > header {
   margin: 0 0 10px 0;
 }
 article > header > h1 {
+  font-family: "Arial";
   font-size: 16px;
+  color: #333333;
   line-height: 22px;
   margin: 0;
 }
@@ -596,8 +598,8 @@ article > header > p > a {
 }
 article > section {
   color: #1f1f1f;
-  font-family: "Georgia";
-  font-size: 14px;
+  font-family: "Arial";
+  font-size: 13px;
   line-height: 20px;
 }
 article > section img {
@@ -645,14 +647,27 @@ article.tappable-active header p a {
 article.tappable-active section p {
   color: #ffffff;
 }
+article.drama {
+  background-color: #333333;
+}
+article.drama header h1 {
+  color: #ffffff;
+}
+article.drama header p {
+  color: #ffffff;
+}
+article.drama section p {
+  color: #ffffff;
+}
 article.condensed > header {
   margin: 0;
 }
 article.condensed > header > h1 {
-  font-size: 14px;
+  font-size: 18px;
 }
 article.condensed > header > .media {
-  margin: 0 0 0 10px;
+  width: 120px;
+  margin: 0 0 10px 10px;
 }
 article.condensed > header > p {
   margin-top: 0;
@@ -665,10 +680,18 @@ article.condensed > section p {
 article.condensed > section p:first-of-type {
   margin: 2px 0 0 0;
   display: block;
-  text-overflow: ellipsis;
-  overflow: hidden;
-  white-space: pre-line;
-  max-height: 38px;
+  /*
+                    max-height: 38px;
+                	overflow: hidden;                    
+*/
+
+}
+article.condensed > section .media {
+  border: none;
+  padding: none;
+  float: right;
+  width: 120px;
+  margin: 0 0 10px 10px;
 }
 article.condensed > footer {
   display: none;
@@ -680,40 +703,49 @@ article.expanded > header > .media {
 article.expanded > header > .media > p {
   display: block;
 }
+article.expanded > section > .media {
+  max-width: 160px;
+  margin: 0 0 10px 10px;
+  float: right;
+}
 article.expanded > section p {
   display: block;
 }
 .grid {
-  width: 768px;
+  width: 600px;
   margin: 0 auto;
   padding: 0;
 }
 .grid > section {
   overflow: hidden;
-  margin: 10px 0 0 0;
+  padding: 6px 0 6px 0;
+  border-top: 1px solid #cccccc;
 }
 .grid > section > article {
   border: none;
-  border-top: 1px solid #cccccc;
-  border-right: 1px solid #cccccc;
+  /*
+    border-top: 1px solid hsl(0, 0%, 80%);
+    border-right: 1px solid hsl(0, 0%, 80%);
+*/
+
   width: 768px;
   height: 160px;
   float: left;
   padding: 10px;
   overflow: hidden;
-  /*
-    &:hover {
-        background-color: hsl(0, 0%, 86%);    
-    }
-*/
-
+}
+.grid > section > article > header > .media {
+  border: none;
+  padding: 0;
 }
 .grid > section > article section p:first-of-type {
   max-height: 120px;
 }
+.grid > section > article:hover {
+  background-color: #dbdbdb;
+}
 .grid > section.single > article {
-  width: 758px;
-  margin: 0 10px 0 0;
+  width: 600px;
   height: 180px;
 }
 .grid > section.single > article > header h1 {
@@ -732,7 +764,7 @@ article.expanded > section p {
   max-height: none;
 }
 .grid > section.double > article {
-  margin: 0 10px 0 0;
+  width: 300px;
 }
 .grid > section.double > article > header > .media {
   float: left;
@@ -740,24 +772,11 @@ article.expanded > section p {
   max-width: 140px;
   margin: 0 10px 0 0;
 }
-.grid > section.double:nth-child(even) > article:nth-child(1) {
-  width: 324px;
-}
-.grid > section.double:nth-child(even) > article:nth-child(2) {
-  width: 424px;
-}
-.grid > section.double:nth-child(odd) > article:nth-child(1) {
-  width: 424px;
-}
-.grid > section.double:nth-child(odd) > article:nth-child(2) {
-  width: 324px;
-}
 .grid > section.triple > article {
-  width: 246px;
-  margin: 0 10px 0 0;
+  width: 200px;
 }
 .grid > section.quadruple > article {
-  width: 192px;
+  width: 150px;
 }
 .grid > section.quadruple > article > header > .media {
   display: none;
