@@ -142,10 +142,11 @@ function fetchArticles(req, res, next) {
 
                     paged_articles = sorted_articles.slice(start, end)
                     
-                    if(paged_articles.length() > 2) {
+/*
+                    if(paged_articles.length > 2) {
                         paged_articles[1].type = 'drama'
                     }
-                    
+*/
 
                     layout = {
                         breaking: [4, 1, 2, 4, 3, 3, 2, 3]
