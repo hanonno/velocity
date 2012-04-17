@@ -4,18 +4,18 @@
 </div>
 <div class="content">
     <div class='scroll-view has-header'>
-        <article class="expanded scrollover-scrollable" data-article-id="{{article_id}}" data-category="{{category}}">
+        <article class="expanded {{type}} scrollover-scrollable" data-article-id="{{article_id}}" data-category="{{category}}">
             <header>
-                <h1>{{title}}</h1>
                 <p>{{relative_date}}<!-- in <a>{{category}}</a> via {{source_name}}</p> -->
+                <h1>{{title}}</h1>
             </header>
             <section>
                 {{#large_image_url}}
                 <div class="media">
                     <img src="{{large_image_url}}" />
                 </div>
-                {{/large_image_url}}
-                <p>{{{description}}}</p>
+                {{/large_image_url}}            
+                <p>{{{description}}}</p>                
             </section>
         <!--
             <footer>

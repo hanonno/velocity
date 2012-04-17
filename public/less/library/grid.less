@@ -1,5 +1,11 @@
+@grid-width: 600px;
+@cell-width-single: @grid-width;
+@cell-width-double: @grid-width / 2;
+@cell-width-triple: @grid-width / 3;
+@cell-width-quadruple: @grid-width / 4;
+
 .grid {
-    width: 768px;
+    width: @grid-width;
     
     margin: 0 auto;
     padding: 0;
@@ -8,13 +14,17 @@
 .grid > section {
     overflow: hidden;
     
-    margin: 10px 0 0 0;
+    padding: 6px 0 6px 0;
+
+    border-top: 1px solid hsl(0, 0%, 80%);
 }
 
 .grid > section > article {
     border: none;
+/*
     border-top: 1px solid hsl(0, 0%, 80%);
     border-right: 1px solid hsl(0, 0%, 80%);
+*/
 
     width: 768px;
     height: 160px;
@@ -25,22 +35,26 @@
     
     overflow: hidden;
     
+    > header {
+        > .media {
+            border: none;
+            padding: 0;
+        }
+    }
+    
     section p {    
         &:first-of-type {
             max-height: 120px;
         }
     }
     
-/*
     &:hover {
         background-color: hsl(0, 0%, 86%);    
     }
-*/
 }
 
 .grid > section.single > article {
-    width: 758px;
-    margin: 0 10px 0 0;
+    width: @cell-width-single;
     
     height: 180px;
     
@@ -67,10 +81,9 @@
 }
 
 .grid > section.double {
-
     > article {
-        margin: 0 10px 0 0;
-                
+        width: @cell-width-double;
+
         > header {
             > .media {
                 float: left;
@@ -79,40 +92,15 @@
                 margin: 0 10px 0 0;
             }
         }
-    }
-    
-    &:nth-child(even) {    
-        > article {
-            &:nth-child(1) {
-                width: 324px;
-            }
-
-            &:nth-child(2) {
-                width: 424px;
-            }
-        }
-    }
-
-    &:nth-child(odd) {    
-        > article {
-            &:nth-child(1) {
-                width: 424px;
-            }
-            
-            &:nth-child(2) {
-                width: 324px;
-            }
-        }
-    }
+    }    
 }
 
 .grid > section.triple > article {
-    width: 246px;
-    margin: 0 10px 0 0;
+    width: @cell-width-triple;
 }
 
 .grid > section.quadruple >  article {
-    width: 192px;
+    width: @cell-width-quadruple;
     
     > header {
         > .media {

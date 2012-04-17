@@ -141,7 +141,9 @@ article {
         margin: 0 0 10px 0;
     
         > h1 {
+            font-family: @header-font-family;
             font-size: @header-font-size;
+            color: @header-text-color;
             line-height: 22px;
             margin: 0;
         }
@@ -238,16 +240,37 @@ article {
         }
     }
     
+    &.drama {
+        background-color: @paper-black-color;
+    
+        header {
+            h1 {
+                color: @white-color;
+            }
+            
+            p {
+                color: @white-color;
+            }
+        }
+        
+        section {
+            p {
+                color: @white-color;
+            }
+        }
+    }
+    
     &.condensed {
         > header {
             margin: 0;
             
             > h1 {
-                font-size: @header-font-size-small;
+                font-size: @header-font-size-large;
             }
         
             > .media {
-                margin: 0 0 0 10px;                
+                width: 120px;
+                margin: 0 0 10px 10px;        
             }
             
             > p {
@@ -257,7 +280,7 @@ article {
     
         > section { 
             p {
-                font-size: @body-text-font-size-small;            
+                font-size: @body-text-font-size;            
                 font-weight: normal;
                 display: none; 
                 
@@ -266,12 +289,20 @@ article {
                 
                     display: block;
                     
-                	text-overflow: ellipsis;
-                	overflow: hidden;
-                	white-space: pre-line;
-                    
-                    max-height: 38px;                    
+/*
+                    max-height: 38px;
+                	overflow: hidden;                    
+*/
                 }
+            }
+            
+            .media {
+                border: none;
+                padding: none;
+            
+                float: right;
+                width: 120px;
+                margin: 0 0 10px 10px;
             }
         }
         
@@ -291,6 +322,12 @@ article {
         }
     
         > section {
+            > .media {
+                max-width: 160px;
+                margin: 0 0 10px 10px;
+                float: right;
+            }
+            
             p {
                 display: block;                    
             }

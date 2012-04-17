@@ -5,6 +5,8 @@ var async = require('async')
 var sha1 = require('sha1')
 var request = require('request')
 
+var image = require('imagemagick')
+
 var moment = require('moment')
 var argv = require('optimist').argv
 
@@ -19,7 +21,13 @@ process.addListener("uncaughtException", function (error) {
     console.trace();
 });
 
-var categories = require('./config/telegraaf.js')
+category_name = 'telegraaf'
+
+if(argv.category) {
+    category_name = argv.category
+}
+
+var categories = require('./config/' + category_name + '.js')
 
 var active_category = argv.cat
 
@@ -89,11 +97,18 @@ async.forEach(categories, function(category, category_parsed) {
                                 if(article.enclosures[0].type == 'image/png' || article.enclosures[0].type == 'image/jpeg') {
                                 
                                     article_item.image_url = article.enclosures[0].url
+                                    
+/*
+                                    image.identify(article_item.image_url, function(error, result) {
+                                        console.log(error)
+                                        console.log(result)
+                                    })
+*/
 
                                     // Parse telegraaf media                                    
                                     var components = article_item.image_url.split('/')
                                     var image_filename = components.pop()
-                                                                        
+
                                     var large_image_url = components.join('/') + '/' + image_filename.replace('c.jpg', 'a.jpg')
                                     
                                     if(large_image_url) { article_item.large_image_url = large_image_url }

@@ -1,8 +1,8 @@
-<article class="nav condensed" data-article-id="{{article_id}}" data-category="{{category}}">
+<article class="nav {{type}} condensed" data-article-id="{{article_id}}" data-category="{{category}}">
     <header>
         {{#image_url}}
         <div class="media">
-            <img src="{{square_image_url}}" />
+            <img src="{{large_image_url}}" />
         </div>
         {{/image_url}}    
         <h1>{{title}}</h1>

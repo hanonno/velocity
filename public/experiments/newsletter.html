@@ -1,0 +1,152 @@
+<html>
+	<head>
+		<title></title>
+        <link rel="stylesheet/less" type="text/css" href="./public/less/library/normalize.less">
+        <script src="./public/javascript/library/less/less-1.2.1.min.js" type="text/javascript"></script>
+        
+        <style type="text/css">
+        
+            * { -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box; }
+                
+            body {
+                color: hsl(0, 0%, 0%);
+/*                 background-color: hsl(0, 0%, 12%); */
+                background-color: hsl(0, 0%, 98%);
+                
+                font-family: "Helvetica Neue";
+                font-size: 14px;
+                font-weight: lighter;
+            }
+            
+            .container {
+                width: 640px;
+                margin: 0px auto;
+                padding: 20px 80px;
+                
+                background-color: hsl(0, 0%, 96%);
+            }
+            
+            article {
+                margin: 60px 0;
+                padding: 20px;
+            }
+            
+                article:hover {
+                    background-color: hsl(0, 0%, 100%);
+                }
+            
+                article header p {
+                    font-size: 1.3em;
+                    font-weight: bold;
+                    
+                    margin: 6px 0 16px 0;
+                }
+
+                    article header p a {
+                        color: hsl(0, 0%, 20%);
+                        text-decoration: none;
+                    }
+                
+                    article header .source, article .author {
+                        font-size: 0.96em;
+                        color: hsl(0, 0%, 20%);
+                    }
+
+                        article header .source {
+                            font-style: italic;
+                            visibility: hidden;
+                        }
+                        
+                        article:hover header .source {
+                            visibility: visible;
+                        }
+                        
+                            article header .source .author, article header .source .name { 
+                                font-style: normal;
+                            }
+                            
+                article section {
+                    margin-left: 10px;
+                }
+                
+                    article section p {
+                        margin: 6px 0;
+                        line-height: 1.5em;
+                    }
+                    
+            .date {
+                color: hsl(0, 0%, 14%);
+            
+                padding: 0 20px;
+            }
+        
+        </style>
+        
+	</head>
+	<body>
+	
+        <div class="container">
+            <article>
+                <header>
+                    <div class="source"><span class="author">Chris Sauve</span> for <span class="name">pxldot.com</span></div>
+                    <p><a href="#">iOS Ebb and Flow</a></p>
+                </header>
+                <section>
+                    <blockquote>
+                        <p>I expect major-new-version adoption rates for iOS to get even better now that Apple has implemented over-the-air software updates.
+                        <p class="author">&mdash; John Gruber</p>
+                    </blockquote>
+                </section>
+            </article>
+            
+            <article>
+                <header>
+                    <div class="source"><span class="author">Ed Bott</span> for <span class="name">edbott.com</span></div>
+                    <p><a href="#">At Google, advertising is crowding out search results</a></p>
+                </header>
+                <section>
+                    <p>Actual search results are falling below the fold.</p>
+                    <span class="author">&mdash; Rands</span>
+                </section>
+            </article>
+            
+            <div class="date">WEDNESDAY, MARCH 21</div>
+
+            <article>
+                <header>
+                    <div class="source"><span class="author">Chris Dixon</span> for <span class="name">cdixon.org</span></div>
+                    <p><a href="#">The problem with investing based on pattern recognition</a></p>
+                </header>
+                <section>
+                    <p>Great investors are the ones who recognize the new patterns first.</p>
+                    <span class="author">&mdash; Erick Schonfeld</span>
+                </section>
+            </article>
+
+            
+            <article>
+                <header>
+                    <div class="source"><span class="author">Andrew Webster</span> for <span class="name">The Verge</span></div>
+                    <p><a href="#">Nokia details history of 41-megapixel 808 PureView, image sensor inspired by satellites</a></p>
+                </header>
+                <section>
+                    <p>They've been working on this for 4 years.</p>
+                    <span class="author">&mdash; Hanno</span>
+                </section>
+            </article>
+            
+            <article>
+                <header>
+                    <div class="source"><span class="author">Chris Sauve</span> for <span class="name">pxldot.com</span></div>
+                    <p><a href="#">iOS Ebb and Flow</a></p>
+                </header>
+                <section>
+                    <p>I expect major-new-version adoption rates for iOS to get even better now that Apple has implemented over-the-air software updates.</p>
+                    <span class="author">&mdash; John Gruber</span>
+                </section>
+            </article>            
+            
+        </div>
+	
+	</body>
+</html>

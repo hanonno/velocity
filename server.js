@@ -13,6 +13,7 @@ Feedparser = require('feedparser')
 
 app.configure(function(){
 	app.use(express.static(__dirname + '/public'))
+/*     app.use(express.compiler({ src: __dirname + '/public', enable: ['less'] })) */
 	app.use(express.logger());
 	app.use(express.bodyParser())
 	app.use(express.cookieParser())
@@ -23,14 +24,21 @@ app.configure(function(){
     app.register('.hogan', hulk)
 })
 
-categories = require('./config/telegraaf.js')
+
+category_name = 'telegraaf'
+
+if(argv.category) {
+    category_name = argv.category
+}
+
+categories = require('./config/' + category_name + '.js')
 sorts = [
     { 
         'name': 'velocity',
         'display_name': 'Velocity'
     }, { 
         'name': 'popular',
-        'display_name': 'Popular'        
+        'display_name': 'Popular'
     }, { 
         'name': 'recent',
         'display_name': 'Recent'        
@@ -133,6 +141,8 @@ function fetchArticles(req, res, next) {
                     }
 
                     paged_articles = sorted_articles.slice(start, end)
+                    
+                    paged_articles[1].type = 'drama'
 
                     layout = {
                         breaking: [4, 1, 2, 4, 3, 3, 2, 3]

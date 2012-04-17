@@ -1,7 +1,7 @@
-$('document').ready(function() {
+$('document').ready(function() {    
     
     var host = 'http://hanno.hyves.org'
-/*     var host = 'http://light.hyveshq:3000' */
+    var host = 'http://light.hyveshq:3000'
     
     var Article = Backbone.Model.extend({
         idAttribute: 'article_id'
@@ -14,7 +14,7 @@ $('document').ready(function() {
             this.category = options.category
             this.sort = options.sort
             this.page = 0
-            this.per_page = 20
+            this.per_page = 10
         },
         
         url: function() {        
@@ -104,11 +104,7 @@ $('document').ready(function() {
             this.model.articles.fetch({ add: true })
         },
 
-        resetArticles: function() {
-            console.log('======')
-            console.log(this.model.articles.layout)
-            console.log('======')
-            
+        resetArticles: function() {            
             var container = this.$('.articles')
         
             container.empty()
@@ -119,7 +115,7 @@ $('document').ready(function() {
             for(i = 0; i < layout.length; i++) {
             
                 var className = ''
-            
+
                 if(layout[i] == 1) { className = 'single' }
                 else if(layout[i] == 2) { className = 'double' }
                 else if(layout[i] == 3) { className = 'triple' }
@@ -130,11 +126,9 @@ $('document').ready(function() {
                 container.append(section)
             
                 for(j = 0; j < layout[i]; j++) {
-                    console.log(k)
-
                     var article = this.model.articles.at(k)
                     
-                    var template = new Hogan.Template(Templates[article.get('template')])
+                    var template = new Hogan.Template(Templates['article_condensed'])
                     
                     section.append(template.render(article.toJSON()))
                     
@@ -163,8 +157,8 @@ $('document').ready(function() {
         tagName: 'div',
 
         initialize: function() {
-            this.template = new Hogan.Template(Templates['article_list'])        
-        
+            this.template = new Hogan.Template(Templates['article_list'])
+
             this.model.articles.bind('reset', this.resetArticles, this)
             this.model.articles.bind('add', this.addArticle, this)
             this.model.articles.bind('remove', this.removeArticle, this)
@@ -180,7 +174,7 @@ $('document').ready(function() {
         viewDidAppear: function() {
             if(this.isLoaded) { return }
         
-            this.model.articles.fetch()
+            this.model.articles.refresh()
             this.isLoaded = true
         },
         
@@ -203,7 +197,7 @@ $('document').ready(function() {
         },
         
         refresh: function() {
-            this.model.refresh()
+            this.model.articles.refresh()
         },
         
         loadMore: function() {
@@ -211,17 +205,12 @@ $('document').ready(function() {
             this.model.articles.fetch({ add: true })
         },
 
-        resetArticles: function() {
-            console.log('======')
-            console.log(this.model.articles.layout)
-            console.log('======')
-        
+        resetArticles: function() {        
             this.$('.articles').empty()
             this.model.articles.each(this.addArticle, this)
         },
         
         render: function() {
-
             $(this.el).html(this.template.render({ category: this.model.toJSON(), articles: this.model.articles.toJSON() }))
             
             var self = this
@@ -379,7 +368,7 @@ $('document').ready(function() {
             this.splitView.collapse()
             
             this.activeCategory = this.categoryList.get(category_name)
-            
+                        
             if(this.name == 'ipad') {
                 this.activeArticleListView = new ArticleGridView({ model: this.activeCategory })            
             } else if(this.name == 'iphone') {
