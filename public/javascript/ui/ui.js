@@ -8,7 +8,10 @@ var UIView = Backbone.View.extend({
         $(this.el).attr('id', params.name)
 
         Backbone.View.prototype.initialize.call(this, params)
-    }
+    },
+    
+    viewWillAppear: function() {},
+    viewDidAppear: function() {}
 })
 
 var UIScreen = UIView.extend({
@@ -176,18 +179,20 @@ var UINavigationStack = Backbone.View.extend({
     }
 })
 
-var UICarousel = Backbone.View.extend({
-    initialize: function(params) {
-        this.x = params.x
-        this.y = params.y
-        this.width = params.width
-        this.height = params.height
+var UICarousel = UIView.extend({
+    initialize: function(params, layer) {
         
-        this.pageOffset = 10        
+        this.pageOffset = 10
         this.pageWidth = 100
         this.pageHeight = this.height - (this.pageOffset * 2)
+        
+        layer.className = 'ui-carousel'
+
+        console.log(layer)
+        
+        UIView.prototype.initialize.call(this, params, layer)        
     
-        this.layer = UILayer({ x: this.x, y: this.y, anchor: params.anchor, height: this.height, perspective: 1000, className: 'carousel', masksToBounds: true })
+/*         this.layer = UILayer({ x: this.x, y: this.y, anchor: params.anchor, height: this.height, perspective: 1000, className: 'carousel', masksToBounds: true }) */
         
         self = this            
         
@@ -268,30 +273,39 @@ var UICarousel = Backbone.View.extend({
     }
 })
 
-var UISplitView = Backbone.View.extend({
-    initialize: function(params, layer) {
-    
-        layer.className = 'splitView'
-    
-/*         this.container = new UILayer({ x: 64, y: 32, width: 640, height: 960, masksToBounds: true, className: 'splitView' }) */
-        this.container = new UILayer(layer)
-/*         this.container = new UILayer({ x: 0, y: 0, width: 768, height: 1024, masksToBounds: true, className: 'splitView' }) */
-        this.el = this.container.element
+var UISplitView = UIView.extend({
+    initialize: function(params, layer) {    
+        layer.className = 'ui-split-view'
+        
+        UIView.prototype.initialize.call(this, params, layer)
         
         this.master = params.master.layer
         this.detail = params.detail.layer
         
-        this.detail.frame.height = this.container.frame.height
+        this.detail.frame.height = this.layer.frame.height
         
         this.master.animated = true
-        this.master.animationDuration = 200 
+        this.master.animationDuration = 200
+
         this.detail.animated = true
         this.detail.animationDuration = 200
         
-        this.container.addSublayer(this.master)
-        this.container.addSublayer(this.detail)
+        this.layer.addSublayer(this.master)
+        this.layer.addSublayer(this.detail)
+        
+/*
+        self = this
+        
+        $(this.el).on('mousemove', function(event, target) {
+            self.recalculateLayout(event.y)
+        })
+*/
         
         this.expand()
+    },
+    
+    recalculateLayout: function(t) {
+        this.detail.frame.y = this.master.frame.height * t
     },
     
     toggle: function() {

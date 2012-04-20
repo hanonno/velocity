@@ -1,0 +1,85 @@
+div.container {
+    margin: 60px auto;
+
+    width: 460px;
+}
+
+@paper-color: hsl(0, 0%, 98%);
+
+@dark-gray: hsl(0, 0%, 20%);
+@light-gray: hsl(0, 0%, 60%);
+
+body {
+    color: hsl(0, 0%, 20%);
+    font-size: 14px;
+    line-height: 20px;    
+    
+    background-color: @paper-color;
+}
+
+a {
+    text-decoration: none;
+    
+    &:hover {
+        text-decoration: underline;
+    }
+}
+
+div.date {
+    margin: 0 0 60px 0;
+    
+    font-size: 12px;
+}
+
+hr {
+    border: none;
+    display: block;
+
+    &::after {
+        content: "··•··";
+        letter-spacing: 2em;
+        text-align: center;
+    }
+}
+
+article {
+    margin: 80px 0 80px 0;
+
+    header {    
+        h1 {
+            font-size: 16px;
+            line-height: 22px;
+            margin: 2px 0 0 0;
+            
+            a {
+                color: @dark-gray;
+            }
+        }
+        
+        .source {
+            color: @light-gray;
+            font-size: 12px;
+
+            a {
+                color: @light-gray;
+            }        
+            
+            .author, .name {
+                font-style: italic;
+            }
+        }
+        
+    }
+    
+    p, blockquote {
+        margin: 10px 0;
+        font-family: "Georgia";
+    }
+    
+    blockquote {
+        padding: 0 0 0 10px;
+        margin: 0;
+        
+        border-left: 1px solid @dark-gray;
+    }
+}

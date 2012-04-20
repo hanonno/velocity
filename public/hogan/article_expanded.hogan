@@ -12,7 +12,7 @@
             <section>
                 {{#large_image_url}}
                 <div class="media">
-                    <img src="{{large_image_url}}" />
+                    <img class="nav" src="{{large_image_url}}" />
                 </div>
                 {{/large_image_url}}            
                 <p>{{{description}}}</p>                

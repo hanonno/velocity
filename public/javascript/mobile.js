@@ -1,7 +1,7 @@
 $('document').ready(function() {    
     
     var host = 'http://hanno.hyves.org'
-/*     var host = 'http://light.hyveshq:3000' */
+    var host = 'http://light.hyveshq:3000'
     
     var Article = Backbone.Model.extend({
         idAttribute: 'article_id'
@@ -255,6 +255,53 @@ $('document').ready(function() {
         }
     })
     
+    var UIImageView = UIView.extend({
+        className: 'ui-image-view',
+    
+        initialize: function(params) {
+            this.image_url = params.url
+            
+            this.render()
+            
+            this.scroller = new Scroller(function(left, top, zoom) {
+                console.log(left)
+            })
+    
+            this.scroller.setDimensions(0, 0, 320, 480)
+            
+            self = this
+                            
+            $(this.el).on('touchstart', function(event) {
+                event.preventDefault()
+                self.scroller.doTouchStart([{ pageX: event.pageX, pageY: event.pageY}], event.timeStamp)
+            })
+    
+            $(this.el).on('touchmove', function(event) {
+                event.preventDefault()            
+                self.scroller.doTouchMove([{ pageX: event.pageX, pageY: event.pageY}], event.timeStamp)
+            })
+    
+            $(this.el).on('touchend', function(event) {
+                event.preventDefault()            
+                self.scroller.doTouchEnd(event.timeStamp)
+            })
+            
+            $(this.el).on('mouseup', function(event) {
+                event.preventDefault()            
+                self.scroller.doTouchEnd(event.timeStamp)
+            })
+    
+            $(this.el).on('mouseout', function(event) {
+                event.preventDefault()            
+                self.scroller.doTouchEnd(event.timeStamp)
+            })
+        },
+        
+        render: function() {
+            $(this.el).html('<img src="' + this.image_url + '" />')
+        }
+    })
+    
     var UISectionView = UIView.extend({        
         initialize: function(params, layer) {
             UIView.prototype.initialize.call(this, params, layer)
@@ -269,8 +316,8 @@ $('document').ready(function() {
     })
     
     var UISectionCarousel = UICarousel.extend({
-        initialize: function(params) {
-            UICarousel.prototype.initialize.call(this, params)
+        initialize: function(params, layer) {
+            UICarousel.prototype.initialize.call(this, params, { x: 0, y: 0, anchor: { left: 0, top: 0, right: 0 }, height: 150, masksToBounds: true })
             
             this.model.bind('add', this.addSection, this)
             this.model.bind('reset', this.resetSections, this)
@@ -295,8 +342,8 @@ $('document').ready(function() {
         initialize: function(params, layer) {
             this.name = params.name
             this.categoryList = new Categories(categories)
-            
-            this.sectionCarousel = new UISectionCarousel({ model: this.categoryList, x: 0, y: 0, anchor: { left: 0, top: 0, right: 0 }, height: 150 })
+
+            this.sectionCarousel = new UISectionCarousel({ model: this.categoryList })
             this.navigationStack = new UINavigationStack()
 
             this.splitView = new UISplitView({ master: this.sectionCarousel, detail: this.navigationStack }, { anchor: { left: 0, top: 0, right: 0, bottom: 0 }})
@@ -304,7 +351,7 @@ $('document').ready(function() {
             
             this.screen = new UIScreen(params, layer)
             
-            this.screen.layer.addSublayer(this.splitView.container)
+            this.screen.layer.addSublayer(this.splitView.layer)
             
             $('body').append(this.screen.el)
             
@@ -350,13 +397,19 @@ $('document').ready(function() {
             tappable('article.nav', {
                 activeClassDelay: 60,
                 inactiveClassDelay: 300,
-                onTap:function(event, target) {        
+                onTap: function(event, target) {        
                     self.showArticle($(target).data('article-id'))
+                }
+            })
+            
+            tappable('img.nav', {
+                onTap: function(event, target) {
+                    self.showImage(target.src)
                 }
             })
 
             tappable('.load-more', {
-                onTap:function(event, target) {
+                onTap: function(event, target) {
                     self.loadMore()
                 }
             })
@@ -396,6 +449,12 @@ $('document').ready(function() {
                     this.navigationStack.presentModal(this.activeArticleView)                
                 break;
             }
+        },
+        
+        showImage: function(image_url) {
+            this.activeImage = new UIImageView({ url: image_url })
+            
+            this.navigationStack.push(this.activeImage)
         },
         
         sizeToScreen: function() {
