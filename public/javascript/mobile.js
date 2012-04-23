@@ -438,7 +438,7 @@ $('document').ready(function() {
         loadMore: function() {
             this.activeArticleListView.loadMore()
             
-            _gaq.push(['_trackPageview', '/' + this.activeCategory.name + '/more']);
+            _gaq.push(['_trackPageview', '/' + this.activeCategory.get('name') + '/more']);
         },
         
         showArticle: function(article_id) {
@@ -455,7 +455,7 @@ $('document').ready(function() {
                 break;
             }
             
-            _gaq.push(['_trackPageview', '/' + this.activeCategory.get('name') + '/article']);            
+            _gaq.push(['_trackPageview', '/' + this.activeCategory.get('name') + '/article']);
         },
         
         showImage: function(image_url) {
