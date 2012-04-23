@@ -14,7 +14,7 @@ Feedparser = require('feedparser')
 app.configure(function(){
 	app.use(express.static(__dirname + '/public'))
 /*     app.use(express.compiler({ src: __dirname + '/public', enable: ['less'] })) */
-	app.use(express.logger());
+/* 	app.use(express.logger()); */
 	app.use(express.bodyParser())
 	app.use(express.cookieParser())
 	app.use(app.router)
@@ -24,15 +24,9 @@ app.configure(function(){
     app.register('.hogan', hulk)
 })
 
+var sets = require('./config/feeds.js')
 
-category_name = 'telegraaf'
-
-if(argv.category) {
-    category_name = argv.category
-}
-
-categories = require('./config/' + category_name + '.js')
-sorts = [
+var sorts = [
     { 
         'name': 'velocity',
         'display_name': 'Velocity'
@@ -45,7 +39,7 @@ sorts = [
     }
 ]
 
-locales = [
+var locales = [
     {
         'display_name': 'Nederland',
         'locale': 'nl'
@@ -57,7 +51,6 @@ locales = [
 ]
 
 function fetchArticles(req, res, next) {
-
     var page = 0
     var per_page = 200
     
@@ -131,7 +124,7 @@ function fetchArticles(req, res, next) {
                     }
                 
                 }, function(error, sorted_articles) {
-                                                    
+
                     var start = page * per_page
                     var end = start + per_page
                                         
@@ -163,10 +156,11 @@ function fetchArticles(req, res, next) {
 }
 
 function fetchCategories(req, res, next) {
+    var active_set = req.param('set')
     var active_category = req.param('category')
     var active_locale = req.param('locale')
     
-    async.filter(categories, function(category, filter) {
+    async.filter(sets[active_set], function(category, filter) {
         category.active = (category.name == active_category) ? 'active' : 'inactive'
         filter(category.locale == active_locale)  
     
@@ -211,7 +205,7 @@ app.get('/api/:locale/categories', [fetchCategories], function(req, res) {
     res.send(req.categories)
 })
 
-app.get('/:locale/categories.js', [fetchCategories], function(req, res) {
+app.get('/:set/:locale/categories.js', [fetchCategories], function(req, res) {
 
     async.map(req.categories, function(category, callback) {
     
@@ -316,10 +310,15 @@ app.get('/:locale/:category/:sort', [fetchCategories, fetchSorts, fetchLocales, 
 })
 
 app.get('/mobile', function(req, res) {
+    locale = req.param('locale') || 'nl'
+    set = req.param('set') || 'telegraaf'
+
     res.render('mobile/index.hogan', {
         layout: 'mobile/layout.hogan',
         locals: {
-            title: 'Telegraaf'
+            title: set,
+            locale: locale,
+            set: set
         }
     })
 })

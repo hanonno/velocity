@@ -1,7 +1,7 @@
-$('document').ready(function() {    
+$('document').ready(function() {
     
     var host = 'http://hanno.hyves.org'
-    var host = 'http://light.hyveshq:3000'
+/*     var host = 'http://light.hyveshq:3000' */
     
     var Article = Backbone.Model.extend({
         idAttribute: 'article_id'
@@ -17,7 +17,7 @@ $('document').ready(function() {
             this.per_page = 10
         },
         
-        url: function() {        
+        url: function() {
             return host + '/api/nl/' + this.category + '/' + this.sort + '?page=' + this.page + '&per_page=' + this.per_page + '&layout=true'
         },
         
@@ -414,13 +414,16 @@ $('document').ready(function() {
                 }
             })
             
-            this.showCategory('telegraaf_frontpage')
+            this.showCategory(categories[0].name)
         },
         
         showCategory: function(category_name) {
             this.splitView.collapse()
             
             this.activeCategory = this.categoryList.get(category_name)
+            
+            console.log(category_name)
+            console.log(this.categoryList)
                         
             if(this.name == 'ipad') {
                 this.activeArticleListView = new ArticleGridView({ model: this.activeCategory })            
@@ -477,8 +480,20 @@ $('document').ready(function() {
             this.navigationStack.recalculateLayout(false)        
         }
     })
+    
+    function getParameterByName(name)
+    {
+      name = name.replace(/[\[]/, "\\\[").replace(/[\]]/, "\\\]");
+      var regexS = "[\\?&]" + name + "=([^&#]*)";
+      var regex = new RegExp(regexS);
+      var results = regex.exec(window.location.search);
+      if(results == null)
+        return "";
+      else
+        return decodeURIComponent(results[1].replace(/\+/g, " "));
+    }
 
-    if(window.location.search.indexOf('ipad') > 0) {
+    if(getParameterByName('ipad')) {
         var iPadApplication = new UIApplication({ name: 'ipad' }, { x: 0, y: 0, width: 768, height: 1024 })    
     } else if (window.location.search.indexOf('test') > 0) {
         var iPhoneApplication = new UIApplication({ name: 'iphone' }, { x: 0, y: 0, width: 320, height: 460 })    
