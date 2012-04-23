@@ -433,10 +433,14 @@ $('document').ready(function() {
                         
             this.navigationStack.clear()
             this.navigationStack.push(this.activeArticleListView, false)
+            
+            _gaq.push(['_trackPageview', '/' + category_name]);
         },
         
         loadMore: function() {
             this.activeArticleListView.loadMore()
+            
+            _gaq.push(['_trackPageview', '/' + this.activeCategory.name + '/more']);
         },
         
         showArticle: function(article_id) {
@@ -452,6 +456,8 @@ $('document').ready(function() {
                     this.navigationStack.presentModal(this.activeArticleView)                
                 break;
             }
+            
+            _gaq.push(['_trackPageview', '/' + this.activeCategory.name + '/article']);            
         },
         
         showImage: function(image_url) {
