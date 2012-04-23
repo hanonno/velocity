@@ -1,7 +1,5 @@
 $('document').ready(function() {
-    
-    var host = 'http://hanno.hyves.org'
-/*     var host = 'http://light.hyveshq:3000' */
+    var host = window.location.origin
     
     var Article = Backbone.Model.extend({
         idAttribute: 'article_id'
@@ -457,7 +455,7 @@ $('document').ready(function() {
                 break;
             }
             
-            _gaq.push(['_trackPageview', '/' + this.activeCategory.name + '/article']);            
+            _gaq.push(['_trackPageview', '/' + this.activeCategory.get('name') + '/article']);            
         },
         
         showImage: function(image_url) {
