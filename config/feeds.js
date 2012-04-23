@@ -63,7 +63,7 @@ module.exports = feeds = {
         }, {
             'name': 'telegraaf_woman',
             'display_name': 'vrouw',
-            'display_name_short': 'Vrouw',        
+            'display_name_short': 'Vrouw',
             'locale': 'nl',
             'feeds': [
                 'http://www.telegraaf.nl/vrouw/index.jsp?view=rss&showimage=true&imageversion=c&showfulltext=true',
@@ -75,6 +75,7 @@ module.exports = feeds = {
         {
             'name': 'volksktrant_frontpage',
             'display_name': 'voorpagina',
+            'display_name_short': 'Voorpagina',
             'locale': 'nl',
             'feeds': [
                 'http://www.volkskrant.nl/rss.xml'
@@ -82,6 +83,7 @@ module.exports = feeds = {
         }, {
             'name': 'volkskrant_culture',
             'display_name': 'cultuur',
+            'display_name_short': 'Cultuur',            
             'locale': 'nl',
             'feeds': [
                 'http://www.volkskrant.nl/cultuur/rss.xml'
@@ -89,6 +91,7 @@ module.exports = feeds = {
         }, {
             'name': 'volkskrant_sport',
             'display_name': 'sport',
+            'display_name_short': 'Sport',            
             'locale': 'nl',
             'feeds': [
                 'http://www.volkskrant.nl/sport/rss.xml'
@@ -96,6 +99,7 @@ module.exports = feeds = {
         }, {
             'name': 'volkskrant_economie',
             'display_name': 'economie',
+            'display_name_short': 'Economie',            
             'locale': 'nl',
             'feeds': [
                 'http://www.volkskrant.nl/economie/rss.xml'
@@ -103,6 +107,7 @@ module.exports = feeds = {
         }, {
             'name': 'volkskrant_travel',
             'display_name': 'reizen',
+            'display_name_short': 'Reizen',            
             'locale': 'nl',
             'feeds': [
                 'http://www.volkskrant.nl/reizen/rss.xml'
@@ -110,6 +115,7 @@ module.exports = feeds = {
         }, {
             'name': 'volkskrant_opinion',
             'display_name': 'opinie',
+            'display_name_short': 'Opinie',            
             'locale': 'nl',
             'feeds': [
                 'http://www.volkskrant.nl/opinie/rss.xml',
@@ -121,14 +127,17 @@ module.exports = feeds = {
         {  
             'name': 'overview',
             'display_name': 'Voorpagina',
+            'display_name_short': 'Voorpagina',            
             'locale': 'nl'
         }, {
             'name': 'overview',
             'display_name': 'Overview',
+            'display_name_short': 'Overview',            
             'locale': 'us'
         }, {
             'name': 'news',
-            'display_name': 'Nieuws',        
+            'display_name': 'Nieuws',
+            'display_name_short': 'Nieuws',            
             'locale': 'nl',
             'feeds': [
                 'http://news.google.com/news?pz=1&cf=all&ned=nl_nl&hl=nl&output=rss',
@@ -149,6 +158,7 @@ module.exports = feeds = {
         }, {
             'name': 'tech',
             'display_name': 'Technologie',
+            'display_name_short': 'Technologie',
             'locale': 'nl',
             'feeds': [
                 'http://news.google.com/news?pz=1&cf=all&ned=nl_nl&hl=nl&topic=t&output=rss',
@@ -161,31 +171,37 @@ module.exports = feeds = {
         }, {
             'name': 'tech',
             'display_name': 'Tech',
+            'display_name_short': 'Tech',
             'locale': 'us',
             'feeds': [ 'http://www.techmeme.com/feed.xml', 'http://www.engadget.com/rss.xml', 'http://feeds.feedburner.com/TechCrunch/', 'http://www.theverge.com/rss/index.xml', 'http://pandodaily.com/feed/', 'http://www.mondaynote.com/feed/' ]
         }, {
             'name': 'apple',
             'display_name': 'Apple',
+            'display_name_short': 'Apple',
             'locale': 'us',
             'feeds': [ 'http://reverttosaved.com/feed', 'http://daringfireball.net/index.xml', 'http://feeds.feedburner.com/shawnblanc/', 'http://feeds.feedburner.com/loopinsight/KqJb', 'http://feeds.feedburner.com/Asymco/', 'http://inspiredbyapple.tumblr.com/rss' ]    
         }, {
             'name': 'design',
             'display_name': 'Design',
+            'display_name_short': 'Design',            
             'locale': 'us',
             'feeds': [ 'http://adaptivepath.com/rss', 'http://feeds.feedburner.com/FunctioningForm', 'http://littlebigdetails.com/rss', 'http://dribbble.com/hanonno/shots/following.rss', 'http://feeds.feedburner.com/mdo', 'http://blog.yummygum.com/rss', 'http://rss.businessweek.com/bw_rss/nussbaumondesign', 'http://feeds.feedburner.com/iosicongallery' ]
         }, {
             'name': 'html5',
             'display_name': 'HTML5',
+            'display_name_short': 'HTML5',            
             'locale': 'us',
             'feeds': [ 'http://feeds.feedburner.com/SenchaBlog', 'http://feeds.webkitbits.com/WebKitBits', 'http://tjholowaychuk.com/rss', 'http://feeds.feedburner.com/thechangelog' ]            
         }, {
             'name': 'comics',
             'display_name': 'Comics',
+            'display_name_short': 'Comics',            
             'locale': 'us',
             'feeds': [ 'http://xkcd.com/rss.xml', 'http://feeds.feedburner.com/oatmealfeed/', 'http://feed.dilbert.com/dilbert/daily_strip', 'http://yelpingwithcormac.tumblr.com/rss' ]    
         }, {
             'name': 'vc',
             'display_name': 'Venture Capital',
+            'display_name_short': 'Venture Capital',            
             'locale': 'us',
             'feeds': [ 
                 'http://www.aaronsw.com/2002/feeds/pgessays.rss',
@@ -209,6 +225,7 @@ module.exports = feeds = {
         }, {
             'name': 'business',
             'display_name': 'Economie',
+            'display_name_short': 'Economie',            
             'locale': 'nl',
             'feeds': [
                 'http://news.google.com/news?pz=1&cf=all&ned=nl_nl&hl=nl&topic=b&output=rss',
@@ -217,7 +234,8 @@ module.exports = feeds = {
             ]
         }, {
             'name': 'music',
-            'display_name': 'Muziek',        
+            'display_name': 'Muziek',
+            'display_name_short': 'Muziek',              
             'locale': 'nl',
             'feeds': [
                 'http://blog.22tracks.com/feed/',
@@ -253,7 +271,8 @@ module.exports = feeds = {
         } ,
     */ {
             'name': 'sports',
-            'display_name': 'Sport',        
+            'display_name': 'Sport',
+            'display_name_short': 'Sport',
             'locale': 'nl',
             'feeds': [
                 'http://news.google.com/news?pz=1&cf=all&ned=nl_nl&hl=nl&topic=s&output=rss',
@@ -275,7 +294,8 @@ module.exports = feeds = {
             ]
         } , {
             'name': 'fun',
-            'display_name': 'Fun',        
+            'display_name': 'Fun',
+            'display_name_short': 'Fun',            
             'locale': 'nl',
             'feeds': [
                 'http://www.dumpert.nl/rss.xml.php',
@@ -299,7 +319,8 @@ module.exports = feeds = {
             ]
         } , {
             'name': 'entertainment',
-            'display_name': 'Entertainment',        
+            'display_name': 'Entertainment',
+            'display_name_short': 'Entertainment',            
             'locale': 'nl',
             'feeds': [
                 'http://news.google.com/news?pz=1&cf=all&ned=nl_nl&hl=nl&topic=e&output=rss',
@@ -314,7 +335,8 @@ module.exports = feeds = {
             ]
         } , {
             'name': 'games',
-            'display_name': 'Games',        
+            'display_name': 'Games',
+            'display_name_short': 'Games',            
             'locale': 'nl',
             'feeds': [
                 'http://www.nu.nl/feeds/rss/games.rss',
@@ -326,7 +348,8 @@ module.exports = feeds = {
             ]
         } , {
             'name': 'cars',
-            'display_name': 'Auto',        
+            'display_name': 'Auto',
+            'display_name_short': 'Auto',            
             'locale': 'nl',
             'feeds': [
                 'http://www.infonu.nl/rss/rss-auto-en-vervoer.rss',
