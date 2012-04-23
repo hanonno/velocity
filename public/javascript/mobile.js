@@ -374,6 +374,8 @@ $('document').ready(function() {
                             self.navigationStack.dismissModal()                
                         break;
                     }
+                    
+                    _gaq.push(['_trackEvent', 'Navigation', 'Back', this.activeCategory.get('name')]);
                 }
             })
         
@@ -381,6 +383,7 @@ $('document').ready(function() {
                 noScroll: true,
                 onTap: function(event, target) {
                     self.splitView.toggle()
+                    _gaq.push(['_trackEvent', 'Navigation', 'Sections', this.activeCategory.get('name')]);
                 }
             })
             
@@ -459,9 +462,10 @@ $('document').ready(function() {
         },
         
         showImage: function(image_url) {
-            this.activeImage = new UIImageView({ url: image_url })
-            
+/*
+            this.activeImage = new UIImageView({ url: image_url })            
             this.navigationStack.push(this.activeImage)
+*/
         },
         
         sizeToScreen: function() {
