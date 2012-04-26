@@ -1,5 +1,11 @@
 $('document').ready(function() {
-    var host = window.location.origin
+    var host = 'http://hanno.hyves.org'
+    
+    if(window.location.origin) {
+        host = window.location.origin
+    }
+    
+    console.log(host)
     
     var Article = Backbone.Model.extend({
         idAttribute: 'article_id'
