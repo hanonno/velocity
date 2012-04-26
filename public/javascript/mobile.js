@@ -1,7 +1,7 @@
 $('document').ready(function() {
     var host = 'http://hanno.hyves.org'
     
-    if(window.location.origin) {
+    if(window.location.origin != 'file://') {
         host = window.location.origin
     }
     
