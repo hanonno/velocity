@@ -5,8 +5,6 @@ $('document').ready(function() {
         host = window.location.origin
     }
     
-    alert(host)
-    
     var Article = Backbone.Model.extend({
         idAttribute: 'article_id'
     })
