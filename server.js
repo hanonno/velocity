@@ -269,6 +269,26 @@ app.get('/rss/:locale/:category/:sort', [fetchArticles], function(req, res) {
     })
 })
 
+app.get('/:set/:locale/:category/:sort', [fetchCategories, fetchSorts, fetchLocales, fetchArticles], function(req, res) {
+
+    var active_category = req.param('category')
+    var active_sort = req.param('sort')
+    var active_locale = req.param('locale')
+
+    res.render("article/list.hogan", {
+        locals: {
+            'title': "Velocity",
+            'articles': req.articles,
+            'categories': req.categories,
+            'active_category': active_category,
+            'sorts': req.sorts,
+            'active_sort': active_sort,
+            'locales': req.locales,
+            'active_locale': active_locale
+        }
+    })
+})
+
 app.get('/table/:locale/:category/:sort', [fetchCategories, fetchSorts, fetchLocales, fetchArticles], function(req, res) {
     var active_category = req.param('category')
     var active_sort = req.param('sort')

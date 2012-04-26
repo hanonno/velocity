@@ -114,7 +114,7 @@ async.forEach(set_keys, function(set_key, set_parsed) {
                 
                                 redis.hmset(article_key, article_item, function(error, result) {
     
-                                    redis.expire(article_key, 60 * 60 * 24 * 7)
+                                    redis.expire(article_key, 60 * 60 * 24 * 2) //2 days
     
                                     var day = Math.floor(article_published / (1000 * 60 * 60 * 24))
                                     var hour = Math.floor(article_published / (1000 * 60 * 60))
