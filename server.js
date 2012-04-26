@@ -205,6 +205,10 @@ app.get('/api/:locale/categories', [fetchCategories], function(req, res) {
     res.send(req.categories)
 })
 
+app.get('/:locale/categories.js', function(req, res) {
+    res.redirect('/telegraaf/nl/categories.js')
+})
+
 app.get('/:set/:locale/categories.js', [fetchCategories], function(req, res) {
 
     async.map(req.categories, function(category, callback) {
