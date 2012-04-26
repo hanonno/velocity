@@ -333,6 +333,10 @@ app.get('/:locale/:category/:sort', [fetchCategories, fetchSorts, fetchLocales, 
     })
 })
 
+app.get('/boot', function(req, res) {
+    res.redirect('/mobile')
+})
+
 app.get('/mobile', function(req, res) {
     locale = req.param('locale') || 'nl'
     set = req.param('set') || 'telegraaf'

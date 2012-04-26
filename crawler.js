@@ -25,8 +25,17 @@ var killswitch = setTimeout(function() {
 
 var sets = require('./config/feeds.js')
 var set_keys = Object.keys(sets)
+var active_set = 'telegraaf'
+
+if(argv.set) {
+    active_set = argv.set
+}
     
 async.forEach(set_keys, function(set_key, set_parsed) {
+
+    if(active_set != set_key) {
+        set_parsed(); return
+    }
     
     async.forEach(sets[set_key], function(category, category_parsed) {
     
