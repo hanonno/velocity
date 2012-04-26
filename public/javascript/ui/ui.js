@@ -187,8 +187,6 @@ var UICarousel = UIView.extend({
         this.pageHeight = this.height - (this.pageOffset * 2)
         
         layer.className = 'ui-carousel'
-
-        console.log(layer)
         
         UIView.prototype.initialize.call(this, params, layer)        
     

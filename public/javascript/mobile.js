@@ -319,7 +319,7 @@ $('document').ready(function() {
     
     var UISectionCarousel = UICarousel.extend({
         initialize: function(params, layer) {
-            UICarousel.prototype.initialize.call(this, params, { x: 0, y: 0, anchor: { left: 0, top: 0, right: 0 }, height: 150, masksToBounds: true })
+            UICarousel.prototype.initialize.call(this, params, { x: 0, y: 0, anchor: { left: 0, top: 0, right: 0 }, height: 150, perspective: 1600, masksToBounds: true })
             
             this.model.bind('add', this.addSection, this)
             this.model.bind('reset', this.resetSections, this)
