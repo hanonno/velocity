@@ -21,16 +21,16 @@
             <ul id="navigation">
                 <li><h3>Categories</h3></li>
             {{#categories}}
-                <li class="{{active}}"><a href="/{{active_locale}}/{{name}}/{{active_sort}}">{{display_name}}</a></li>
+                <li class="{{active}}"><a href="/velocity/{{active_locale}}/{{name}}/{{active_sort}}">{{display_name}}</a></li>
             {{/categories}}
                 <li><h3>Sort</h3></li>
             {{#sorts}}
-                <li class="{{active}}"><a href="/{{active_locale}}/{{active_category}}/{{name}}">{{display_name}}</a></li>
+                <li class="{{active}}"><a href="/velocity/{{active_locale}}/{{active_category}}/{{name}}">{{display_name}}</a></li>
             {{/sorts}}
-                <li><h3>Country</h3></li>
+<!--                 <li><h3>Country</h3></li>
             {{#locales}}
-                <li class="{{active}}"><a href="/{{locale}}/{{active_category}}/{{active_sort}}">{{display_name}}</a></li>
-            {{/locales}}            
+                <li class="{{active}}"><a href="/velocity/{{locale}}/{{active_category}}/{{active_sort}}">{{display_name}}</a></li>
+            {{/locales}} -->
 <!--
                 <li><a href="/{{active_category}}/velocity">Velocity</a></li>
                 <li><a href="/{{active_category}}/popular">Popular</a></li>

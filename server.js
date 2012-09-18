@@ -198,7 +198,7 @@ function fetchLocales(req, res, next) {
 app.get('/templates.js', hulk.templates)
 
 app.get('/', function(req, res) {
-    res.redirect('/nl/overview/recent')
+    res.redirect('/velocity/nl/overview/velocity')
 })
 
 app.get('/api/:locale/categories', [fetchCategories], function(req, res) {
@@ -273,13 +273,13 @@ app.get('/rss/:locale/:category/:sort', [fetchArticles], function(req, res) {
     })
 })
 
-app.get('/:set/:locale/:category/:sort', [fetchCategories, fetchSorts, fetchLocales, fetchArticles], function(req, res) {
-
+app.get('/table/:locale/:category/:sort', [fetchCategories, fetchSorts, fetchLocales, fetchArticles], function(req, res) {
     var active_category = req.param('category')
     var active_sort = req.param('sort')
     var active_locale = req.param('locale')
 
-    res.render("article/list.hogan", {
+    res.render("article/table.hogan", {
+        layout: 'bootstrap.hogan',
         locals: {
             'title': "Velocity",
             'articles': req.articles,
@@ -293,13 +293,13 @@ app.get('/:set/:locale/:category/:sort', [fetchCategories, fetchSorts, fetchLoca
     })
 })
 
-app.get('/table/:locale/:category/:sort', [fetchCategories, fetchSorts, fetchLocales, fetchArticles], function(req, res) {
+app.get('/:set/:locale/:category/:sort', [fetchCategories, fetchSorts, fetchLocales, fetchArticles], function(req, res) {
+
     var active_category = req.param('category')
     var active_sort = req.param('sort')
     var active_locale = req.param('locale')
 
-    res.render("article/table.hogan", {
-        layout: 'bootstrap.hogan',
+    res.render("article/list.hogan", {
         locals: {
             'title': "Velocity",
             'articles': req.articles,

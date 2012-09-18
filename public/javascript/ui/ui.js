@@ -3,6 +3,9 @@ var UILayer = Move.require('UILayer')
 var UIView = Backbone.View.extend({
     initialize: function(params, layer) {
         this.layer = new UILayer(layer)
+        
+        // ANDROID BREAKS HERE
+
         this.el = this.layer.element
 
         $(this.el).attr('id', params.name)
@@ -187,19 +190,17 @@ var UICarousel = UIView.extend({
         this.pageHeight = this.height - (this.pageOffset * 2)
         
         layer.className = 'ui-carousel'
+
+        UIView.prototype.initialize.call(this, params, layer)
         
-        UIView.prototype.initialize.call(this, params, layer)        
-    
-/*         this.layer = UILayer({ x: this.x, y: this.y, anchor: params.anchor, height: this.height, perspective: 1000, className: 'carousel', masksToBounds: true }) */
-        
-        self = this            
+        self = this 
         
         this.scroller = new Scroller(function(left, top, zoom) {
             self.recalculateLayout(left)                    
-        })
+        })        
 
         this.scroller.setDimensions(0, 0, 960, (this.pageHeight * 2) + (this.pageOffset * 2))
-                        
+      
         this.layer.on('touchstart', function(event) {
             event.preventDefault()
             self.scroller.doTouchStart([{ pageX: event.pageX, pageY: event.pageY}], event.timeStamp)

@@ -1,6 +1,6 @@
 <div class="header">
     <div class="button button-back left">Terug</div>
-<!--     <div class="button button-toggle right">Secties</div> -->
+    <div class="button button-app right">Install</div>
 </div>
 <div class="content">
     <div class='scroll-view has-header'>

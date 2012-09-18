@@ -11,6 +11,27 @@ module.exports = feeds = {
         }        
     ],
 
+    'amsterdam': [
+        {
+            'name': 'amsterdam_overview',
+            'display_name': 'Amsterdam',
+            'display_name_short': 'Amsterdam',
+            'locale': 'nl',
+            'feeds': [
+                'http://feeds.feedburner.com/DamStyle',
+                'http://www.mijnamsterdamblog.nl/feed/',
+                'http://blog.amsterdammuseum.nl/?feed=rss2',
+                'http://feeds.feedburner.com/SpqaAmsterdam?format=xml',
+                'http://www.casadimaggio.nl/1/feed',
+                'http://d66blog.nl/amsterdam/feed/',
+                'http://brigitteschapendonk.wordpress.com/feed/',
+                'http://fietsersbondamsterdam.nl/feed.php',
+                'http://www.amsterdamfoodie.nl/feed/',
+                'http://feeds.feedburner.com/MastersOfMedia'
+            ]
+        }        
+    ],
+
     'telegraaf': [
         {
             'name': 'telegraaf_frontpage',

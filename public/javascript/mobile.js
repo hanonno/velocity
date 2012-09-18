@@ -289,7 +289,7 @@ $('document').ready(function() {
             })
             
             $(this.el).on('mouseup', function(event) {
-                event.preventDefault()            
+                event.preventDefault()
                 self.scroller.doTouchEnd(event.timeStamp)
             })
     
@@ -319,7 +319,7 @@ $('document').ready(function() {
     
     var UISectionCarousel = UICarousel.extend({
         initialize: function(params, layer) {
-            UICarousel.prototype.initialize.call(this, params, { x: 0, y: 0, anchor: { left: 0, top: 0, right: 0 }, height: 150, perspective: 1600, masksToBounds: true })
+            UICarousel.prototype.initialize.call(this, params, { x: 0, y: 0, anchor: { left: 0, top: 0, right: 0 }, height: 150, perspective: 800, masksToBounds: true })
             
             this.model.bind('add', this.addSection, this)
             this.model.bind('reset', this.resetSections, this)
@@ -327,7 +327,7 @@ $('document').ready(function() {
             this.resetSections()
         },
         
-        addSection: function(section) {
+        addSection: function(section) {       
             var sectionView = new UISectionView({ model: section }, { className: 'section' })
             
             sectionView.render()
@@ -349,9 +349,9 @@ $('document').ready(function() {
             this.navigationStack = new UINavigationStack()
 
             this.splitView = new UISplitView({ master: this.sectionCarousel, detail: this.navigationStack }, { anchor: { left: 0, top: 0, right: 0, bottom: 0 }})
-            this.splitView.collapse()
+            this.splitView.collapse() 
             
-            this.screen = new UIScreen(params, layer)
+            this.screen = new UIScreen(params, layer)  
             
             this.screen.layer.addSublayer(this.splitView.layer)
             
@@ -419,7 +419,15 @@ $('document').ready(function() {
                 }
             })
             
-            this.showCategory(categories[0].name)
+            console.log(window.location)
+            
+            active_category = categories[0].name
+            
+            if(getParameterByName('category')) {            
+                active_category = getParameterByName('category')
+            }
+            
+            this.showCategory(active_category)
         },
         
         showCategory: function(category_name) {
@@ -510,7 +518,7 @@ $('document').ready(function() {
     } else if (window.location.search.indexOf('test') > 0) {
         var iPhoneApplication = new UIApplication({ name: 'iphone' }, { x: 0, y: 0, width: 320, height: 460 })    
         var iPadApplication = new UIApplication({ name: 'ipad' }, { x: 340, y: 0, width: 768, height: 1024 })            
-    } else {
+    } else {    
         var iPhoneApplication = new UIApplication({ name: 'iphone' }, { x: 0, y: 0, width: 320, height: 460 })        
     }
     
