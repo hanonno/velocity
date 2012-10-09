@@ -33,9 +33,9 @@ if(argv.set) {
     
 async.forEach(set_keys, function(set_key, set_parsed) {
 
-    if(active_set != set_key) {
-        set_parsed(); return
-    }
+//    if(active_set != set_key) {
+//        set_parsed(); return
+//    }
     
     async.forEach(sets[set_key], function(category, category_parsed) {
     
